@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile | MED-SEG ALPHA</title>
+<style>
+  body { font-family: sans-serif; background: #111; color: #ddd; margin: 0; padding: 0; }
+  nav { padding: 12px 20px; background: #222; display: flex; justify-content: space-between; align-items: center; }
+  nav a { color: #ddd; text-decoration: none; margin-left: 15px; }
+  main { padding: 40px 20px; max-width: 900px; margin: 0 auto; }
+  .profile-header { display: flex; gap: 24px; align-items: flex-start; margin-bottom: 40px; }
+  .profile-header img { width: 120px; height: 120px; object-fit: cover; }
+  .stats { display: flex; gap: 16px; margin-bottom: 40px; flex-wrap: wrap; }
+  .stat-card { background: #222; padding: 16px; min-width: 180px; }
+  .stat-card p { margin: 0 0 4px; color: #aaa; font-size: 11px; text-transform: uppercase; }
+  .stat-card h3 { margin: 0; font-size: 1.8rem; }
+  .badges { margin-bottom: 40px; }
+  .badges-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-top: 12px; }
+  .badge { background: #222; padding: 16px; text-align: center; }
+  .badge p { margin: 4px 0 0; font-size: 12px; color: #aaa; }
+  .badge.locked { opacity: 0.4; }
+  .activity { }
+  .activity-row { display: flex; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #333; }
+  .activity-row img { width: 48px; height: 48px; object-fit: cover; }
+  .activity-info { flex: 1; }
+  .activity-info h4 { margin: 0 0 4px; font-size: 14px; }
+  .activity-info p { margin: 0; font-size: 11px; color: #aaa; text-transform: uppercase; }
+  .activity-xp { text-align: right; }
+  .activity-xp p { margin: 0; font-size: 12px; }
+  footer { padding: 24px 20px; background: #111; border-top: 1px solid #333; text-align: center; color: #666; font-size: 12px; }
+</style>
+</head>
+<body>
+<nav>
+  <strong>MED-SEG ALPHA</strong>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Leaderboard</a>
+    <a href="#">Profile</a>
+  </div>
+</nav>
+<main>
+  <section class="profile-header">
+    <img alt="User Avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwkuY2xbL_hE-6lloyVmgXWZPa8MrCpHFPdK_nepmL1lDRHibhFrkDjCHRFG-gRzj7mF_ss_Q_68Sgv0VnGbKu8g5OKSemMBubJVqvwyli1ok-aL9txO5vcqlbMzdJxg8UHqSnd1tR2n1PA52GtU7U6fjdwUuIl3HGAJEMgDyShAMhcGv9Ks_pP6aXN6AgvshmjGQsqM3xchW1vATamciWQeV4sK5CaVpcV6I0oVO5xnpAbR1eNFl_g-CJzyqKQJDSpJyPE9a3EDs"/>
+    <div>
+      <h1>DR. ELARA VANCE</h1>
+      <p>Level 42 Lead Pathologist</p>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat-card">
+      <p>Segmentation Accuracy</p>
+      <h3>99.4%</h3>
+    </div>
+    <div class="stat-card">
+      <p>Total Segments</p>
+      <h3>14,802</h3>
+      <small>+240 this week</small>
+    </div>
+    <div class="stat-card">
+      <p>Platform XP</p>
+      <h3>84,200</h3>
+    </div>
+  </section>
+
+  <section class="badges">
+    <h2>Medical Badges</h2>
+    <div class="badges-grid">
+      <div class="badge">
+        <div>🧠</div>
+        <strong>Neural Master</strong>
+        <p>1,000 Brain Scans</p>
+      </div>
+      <div class="badge">
+        <div>❤️</div>
+        <strong>Cardio Precision</strong>
+        <p>99% Valve Accuracy</p>
+      </div>
+      <div class="badge">
+        <div>🧬</div>
+        <strong>DNA Weaver</strong>
+        <p>Sequence Completion</p>
+      </div>
+      <div class="badge locked">
+        <div>🔒</div>
+        <strong>Radiology Pro</strong>
+        <p>Locked</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="activity">
+    <h2>Recent Activity</h2>
+    <div class="activity-row">
+      <img alt="MRI Scan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuOkN8A1v3pONKAoRDKSwIjVBlY39mSBXZDOBHNwSy7BktQ-8IShbj0mYPD_-XJlhABzhozrDHJMchyW8c-pdikrFT334SNK-2ibDKXmaNDD3VCIlyYNwKmpLTHHvHdXju70DaKXtVXnHb2NcbehQzbT4NnDb6pNvWpMFzm9XANK8kbHHJIiYs4WiwsR5M46V6uZn87MPGyiyTj8T3R6LaLWQtWFs9OzyT18qGgfPmCb2Lai_8jEAxJVw8l4k8zbOTURs8nqSMmRo"/>
+      <div class="activity-info">
+        <h4>Cerebral Cortex #892</h4>
+        <p>Validated by Alpha-System</p>
+      </div>
+      <div class="activity-xp">
+        <p style="color:#0d0; font-weight:bold;">+450 XP</p>
+        <p style="color:#666;">2h ago</p>
+      </div>
+    </div>
+    <div class="activity-row">
+      <img alt="CT Scan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClb41q2w0BM5mWSvHDhin4P1SXdD5y1ydmPW0LDSrGisaSZgEG-r-aLJ4L1lXC4LTkWGI76IAk6T8_wH0t8rA_nc8u0k7FFVloOHBrxFwZNxafNeZ0RqD41P8Zv8NT9DMCp4HlkRaYGpX9PDlThqGs5hvZd4FT-l_1wkp85bYWmpR9TJ_S0hQtyv74N-KZPs_2xBqF8Jhf-ByG1iticpfZBj1zQ3katq0t9Kn9IyG4IOX3f31kyypwKb4kYvEcYt8mOivnacD2QCk"/>
+      <div class="activity-info">
+        <h4>Pulmonary Nodule Map</h4>
+        <p>Multi-Pass Complete</p>
+      </div>
+      <div class="activity-xp">
+        <p style="color:#0d0; font-weight:bold;">+820 XP</p>
+        <p style="color:#666;">5h ago</p>
+      </div>
+    </div>
+    <div class="activity-row">
+      <img alt="X-Ray" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcq6jOj7ukLockau62_nmdTCEseY0D00z0Et2du-s-R80zTrquPUHUMtByW3txsHo5CfnqsnFKjuE2LWhu20VCea7_Ue9dT_GPGwmuqMcJxnnavinaBHmkjC72RraiQdIxkguKuZ1xQ2VP41aO0TUz2xNbkkpFMElohNcoCET4tQXtgd8G1AgEd5TTkBO_VM_YTiGFBDCsCLTHG8jqTuaDAgQ1wxmSaIUw7N5pRiI4J8ipwbDf-dPvdlZwgtnzus7W91rl9TY_-I4"/>
+      <div class="activity-info">
+        <h4>Fracture Density Set</h4>
+        <p>Batch Processing</p>
+      </div>
+      <div class="activity-xp">
+        <p style="color:#0d0; font-weight:bold;">+120 XP</p>
+        <p style="color:#666;">Yesterday</p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <a href="#" style="color:#666; margin-right:16px;">Privacy Policy</a>
+  <a href="#" style="color:#666;">Institutional Access</a>
+  <span style="margin-left:16px;">© 2026 ALL RIGHTS RESERVED.</span>
+</footer>
+</body>
+</html>
