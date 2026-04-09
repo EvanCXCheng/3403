@@ -1,17 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-    <link rel="stylesheet" href="External Sheets/basic.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MED-SEG ALPHA</title>
+<style>
+  body { font-family: sans-serif; background: #111; color: #ddd; margin: 0; padding: 0; }
+  nav { padding: 12px 20px; background: #222; display: flex; justify-content: space-between; align-items: center; }
+  nav a { color: #ddd; text-decoration: none; margin-left: 15px; }
+  nav a:hover { color: #fff; }
+  main { padding: 40px 20px; max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 2.5rem; margin-bottom: 16px; }
+  .hero-actions { margin: 24px 0; display: flex; gap: 12px; }
+  button { padding: 12px 24px; cursor: pointer; }
+  .btn-primary { background: #0aa; color: #000; border: none; font-weight: bold; }
+  .btn-secondary { background: transparent; color: #ddd; border: 1px solid #555; }
+  .quests { margin-top: 40px; }
+  .quest { border: 1px solid #333; padding: 16px; margin-bottom: 12px; }
+  .quest h3 { margin: 0 0 8px; }
+  .quest p { margin: 0; color: #aaa; font-size: 0.9rem; }
+  footer { padding: 24px 20px; background: #111; border-top: 1px solid #333; text-align: center; color: #666; font-size: 12px; }
+</style>
 </head>
 <body>
-    <div class = central>
-        <h1> Welcome Back {User} </h1>
-        <br>
-        <p> Here's some stats or whatever</p>
-        <a href="leaderboard.html">View Leaderboard</a>
-        <a href="game.html">Play Game</a>
+<nav>
+  <strong>MED-SEG ALPHA</strong>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Leaderboard</a>
+    <a href="#">Profile</a>
+  </div>
+</nav>
+<main>
+  <div style="margin: 60px 0;">
+    <h1>PRECISION SAVES LIVES.</h1>
+    <p>Enter the frontlines of medical diagnostics. Segment real clinical data, master anatomical structures, and train the next generation of AI surgeons through immersive gameplay.</p>
+    <div class="hero-actions">
+      <button class="btn-primary">PLAY NOW</button>
+      <button class="btn-secondary">OPERATIONS MANUAL</button>
     </div>
+  </div>
+
+  <section>
+    <h2>HOW TO OPERATE</h2>
+    <ol>
+      <li><strong>IDENTIFY ANOMALIES</strong> – Scan cross-sectional slices to find tumors, nodules, or structural irregularities.</li>
+      <li><strong>SEGMENT &amp; MAP</strong> – Use precision tools to outline boundaries and train AI models.</li>
+      <li><strong>VALIDATE RESEARCH</strong> – Submit your segmentation to the consensus pool and earn clinical credits.</li>
+    </ol>
+  </section>
+
+  <section class="quests">
+    <h2>ACTIVE QUESTS</h2>
+    <div class="quest">
+      <h3>Lung Nodule Hunter</h3>
+      <p>Search through high-resolution CT scans to identify and isolate early-stage pulmonary nodules.</p>
+      <p><em>Difficulty: Medium</em></p>
+      <a href="#">DEPLOY</a>
+    </div>
+    <div class="quest">
+      <h3>Brain Scan Specialist</h3>
+      <p>Complex white-matter tractography segmentation. Requires anatomical mastery of the cerebral cortex.</p>
+      <p><em>Difficulty: Hard</em></p>
+      <a href="#">DEPLOY</a>
+    </div>
+    <div class="quest">
+      <h3>Cardiac Rhythm Mapper</h3>
+      <p>Map the left ventricle across cardiac cycles. Essential for calculating ejection fraction in AI models.</p>
+      <p><em>Difficulty: Easy</em></p>
+      <a href="#">DEPLOY</a>
+    </div>
+  </section>
+
+  <section style="margin-top: 40px;">
+    <h2>CONTRIBUTE TO SCIENCE</h2>
+    <p>Your contributions aren't just for high scores. Every accurate segmentation improves clinical workflows in 14 partner hospitals worldwide.</p>
+  </section>
+</main>
+<footer>
+  <a href="#" style="color:#666; margin-right:16px;">Privacy Policy</a>
+  <a href="#" style="color:#666; margin-right:16px;">Institutional Access</a>
+  <span>© 2026 ALL RIGHTS RESERVED.</span>
+</footer>
 </body>
 </html>
