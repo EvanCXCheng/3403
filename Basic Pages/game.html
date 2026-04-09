@@ -1,15 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Medical Segmentation Game</title>
-    <link rel="stylesheet" href="External Sheets/basic.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Segmentation Tool | MED-SEG ALPHA</title>
+<style>
+  body { font-family: sans-serif; background: #111; color: #ddd; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
+  nav { padding: 12px 20px; background: #222; display: flex; justify-content: space-between; align-items: center; }
+  nav a { color: #ddd; text-decoration: none; margin-left: 15px; }
+  .workspace { display: flex; flex: 1; margin-top: 0; }
+  .toolbar { width: 60px; background: #1a1a1a; padding: 12px; display: flex; flex-direction: column; gap: 8px; border-right: 1px solid #333; }
+  .toolbar button { width: 40px; height: 40px; background: #333; border: none; color: #ddd; cursor: pointer; font-size: 12px; }
+  .toolbar button.active { background: #0aa; color: #000; }
+  .toolbar button:hover { background: #444; }
+  .canvas-area { flex: 1; background: #0a0a0a; display: flex; align-items: center; justify-content: center; position: relative; }
+  .canvas-area img { max-width: 100%; max-height: 100%; object-fit: contain; opacity: 0.8; }
+  .canvas-label { position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.7); padding: 6px 12px; font-size: 11px; color: #0aa; }
+  .info-panel { width: 280px; background: #1a1a1a; padding: 20px; display: flex; flex-direction: column; gap: 20px; border-left: 1px solid #333; }
+  .info-panel h2 { margin: 0 0 8px; font-size: 14px; color: #aaa; text-transform: uppercase; }
+  .objective { background: #222; padding: 12px; border-left: 3px solid #aaa; }
+  .progress-bar { height: 8px; background: #333; border-radius: 4px; overflow: hidden; margin-top: 8px; }
+  .progress-fill { height: 100%; background: #0aa; width: 68%; }
+  .data-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333; font-size: 13px; }
+  .data-row span:last-child { color: #ddd; font-family: monospace; }
+  .actions { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+  .btn-submit { padding: 14px; background: #0d0; color: #000; border: none; font-weight: bold; cursor: pointer; }
+  .btn-review { padding: 10px; background: transparent; color: #aaa; border: 1px solid #555; cursor: pointer; }
+  footer { padding: 12px 20px; background: #111; border-top: 1px solid #333; text-align: center; color: #666; font-size: 12px; }
+</style>
 </head>
 <body>
-    <div class = central>
-        <h1>Select game type</h1>
-        <br>
-        <p> Insert Game Here</p>
+<nav>
+  <strong>MED-SEG ALPHA</strong>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Leaderboard</a>
+    <a href="#">Profile</a>
+  </div>
+</nav>
+<div class="workspace">
+  <div class="toolbar">
+    <button class="active" title="Brush">B</button>
+    <button title="Polyline">P</button>
+    <button title="Eraser">E</button>
+    <hr style="border-color:#333; width:80%;"/>
+    <button title="Zoom In">+</button>
+    <button title="Pan">✋</button>
+    <button title="Undo">↩</button>
+  </div>
+  <div class="canvas-area">
+    <img alt="CT Scan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlIhwMcEDqBcOvAgCS_HEvhw5U6C9rT5_ZnOoVOZzKjTkZpYmi5rz-wK9yeie2Oj1ZK8GhTHRDIZmN8Bz8JLSEIbOOdIMy78qJVr6CJQV7H0nRpU8h0uAbrp167rB6GUKbJdt6VFGDikSJQ7hztAkrAika3hSvMH1VBcYA-zN3F9IhSzQyg6t0OfSGG73gt3W9WKalSgBPCFSI_4sKYpUg0p_cqsAf98xUN8_s59W1eI2IuxeX_QN6aoInntT7Hio27JbVVCotfvw"/>
+    <div class="canvas-label">Active Canvas: MRI_SEC_882</div>
+  </div>
+  <div class="info-panel">
+    <div>
+      <h2>Current Objective</h2>
+      <div class="objective">
+        Segment the <strong>hepatic liver mass</strong> and identify potential arterial vascularization points.
+      </div>
     </div>
+    <div>
+      <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px;">
+        <span style="color:#aaa; text-transform:uppercase; font-size:11px;">Task Progress</span>
+        <strong>68%</strong>
+      </div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+      <p style="font-size:11px; color:#666; margin-top:6px; font-style:italic;">Estimated precision: 0.94 Dice Coefficient</p>
+    </div>
+    <div>
+      <h2>Clinical Data Points</h2>
+      <div class="data-row"><span>Patient ID</span><span>#PX-9921</span></div>
+      <div class="data-row"><span>Scan Date</span><span>2024-10-24</span></div>
+      <div class="data-row" style="border:none;"><span>Tissue Type</span><span style="color:#0d0;">Malignant Suspect</span></div>
+    </div>
+    <div class="actions">
+      <button class="btn-submit">✓ Submit Analysis</button>
+      <button class="btn-review">Request Review</button>
+    </div>
+  </div>
+</div>
+<footer>
+  <a href="#" style="color:#666; margin-right:16px;">Privacy Policy</a>
+  <a href="#" style="color:#666;">Institutional Access</a>
+  <span style="margin-left:16px;">© 2026 ALL RIGHTS RESERVED.</span>
+</footer>
 </body>
 </html>
