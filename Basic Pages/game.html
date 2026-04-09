@@ -3,39 +3,17 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="stylesheet" href="External Sheets/general.css">
+<link rel="stylesheet" href="External Sheets/game.css">
 <title>Segmentation Tool | MED-SEG ALPHA</title>
-<style>
-  body { font-family: sans-serif; background: #111; color: #ddd; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
-  nav { padding: 12px 20px; background: #222; display: flex; justify-content: space-between; align-items: center; }
-  nav a { color: #ddd; text-decoration: none; margin-left: 15px; }
-  .workspace { display: flex; flex: 1; margin-top: 0; }
-  .toolbar { width: 60px; background: #1a1a1a; padding: 12px; display: flex; flex-direction: column; gap: 8px; border-right: 1px solid #333; }
-  .toolbar button { width: 40px; height: 40px; background: #333; border: none; color: #ddd; cursor: pointer; font-size: 12px; }
-  .toolbar button.active { background: #0aa; color: #000; }
-  .toolbar button:hover { background: #444; }
-  .canvas-area { flex: 1; background: #0a0a0a; display: flex; align-items: center; justify-content: center; position: relative; }
-  .canvas-area img { max-width: 100%; max-height: 100%; object-fit: contain; opacity: 0.8; }
-  .canvas-label { position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.7); padding: 6px 12px; font-size: 11px; color: #0aa; }
-  .info-panel { width: 280px; background: #1a1a1a; padding: 20px; display: flex; flex-direction: column; gap: 20px; border-left: 1px solid #333; }
-  .info-panel h2 { margin: 0 0 8px; font-size: 14px; color: #aaa; text-transform: uppercase; }
-  .objective { background: #222; padding: 12px; border-left: 3px solid #aaa; }
-  .progress-bar { height: 8px; background: #333; border-radius: 4px; overflow: hidden; margin-top: 8px; }
-  .progress-fill { height: 100%; background: #0aa; width: 68%; }
-  .data-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333; font-size: 13px; }
-  .data-row span:last-child { color: #ddd; font-family: monospace; }
-  .actions { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
-  .btn-submit { padding: 14px; background: #0d0; color: #000; border: none; font-weight: bold; cursor: pointer; }
-  .btn-review { padding: 10px; background: transparent; color: #aaa; border: 1px solid #555; cursor: pointer; }
-  footer { padding: 12px 20px; background: #111; border-top: 1px solid #333; text-align: center; color: #666; font-size: 12px; }
-</style>
 </head>
 <body>
 <nav>
   <strong>MED-SEG ALPHA</strong>
   <div>
-    <a href="#">Home</a>
-    <a href="#">Leaderboard</a>
-    <a href="#">Profile</a>
+    <a href="#homepage.html">Home</a>
+    <a href="#leaderboard.html">Leaderboard</a>
+    <a href="#profile.html">Profile</a>
   </div>
 </nav>
 <div class="workspace">
