@@ -1,7 +1,23 @@
-# Medical Segmentation Game
+# MED-SEG-ALPHA: medical segmentation game
 
-An online game where users compete in making the most accurate segmentations on medical images. 
+An online game where users compete to create the most accurate segmentations on medical images.
 
-Medical students can sharpen their anatomy and medical imaging skills, general public can learn more about anatomy and medical segmentation in this fun and interactive game. 
+Medical students can sharpen their anatomy and medical imaging skills, while the general public can learn more about anatomy and medical segmentation through a fun and interactive experience.
 
-The aim is to have high performing players complete segmentations on previouslt unlabelled data. This data that is now labelled can be used for the training/fine-tuning of medical segmenation models like CNN and transformer based models. Annotations can also be adapted for weakly supervised training due to their presumed non-clinical standard. This presents an exciting possibility of more readily available labelled medical training data for machine learning researcher not just for model training but also possibly for model testing. 
+---
+
+## Why This Matters
+
+High‑performing players will complete segmentations on previously unlabelled medical data.  
+These newly created annotations can then be used for:
+
+- **Training or fine‑tuning** medical segmentation models (CNNs, transformers, etc.)
+- **Weakly supervised learning**, since the labels are non‑clinical but still informative
+- **Expanding datasets** for researchers who often lack accessible labelled medical images
+- **Potential model testing**, depending on annotation quality
+
+This opens the door to more widely available labelled medical data for machine‑learning researchers.
+
+![medSAM medical segmenation image](https://github.com/user-attachments/assets/ef29667f-dd5a-48b4-b8ae-dc462ec163b5)
+*Source: Segment Anything in Medical Images 
+https://doi.org/10.48550/arXiv.2304.12306*

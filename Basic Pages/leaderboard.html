@@ -1,26 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Leaderboard</title>
-    <link rel="stylesheet" href="External Sheets/basic.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Leaderboard | MED-SEG ALPHA</title>
+<style>
+  body { font-family: sans-serif; background: #111; color: #ddd; margin: 0; padding: 0; }
+  nav { padding: 12px 20px; background: #222; display: flex; justify-content: space-between; align-items: center; }
+  nav a { color: #ddd; text-decoration: none; margin-left: 15px; }
+  main { padding: 40px 20px; max-width: 900px; margin: 0 auto; }
+  table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+  th { text-align: left; padding: 10px 12px; background: #222; color: #aaa; font-size: 0.75rem; text-transform: uppercase; }
+  td { padding: 10px 12px; border-bottom: 1px solid #333; }
+  .challenges { margin-top: 40px; }
+  .challenge { border: 1px solid #333; padding: 16px; margin-bottom: 12px; }
+  .challenge h3 { margin: 0 0 8px; }
+  .challenge p { margin: 0 0 12px; color: #aaa; font-size: 0.9rem; }
+  footer { padding: 24px 20px; background: #111; border-top: 1px solid #333; text-align: center; color: #666; font-size: 12px; }
+</style>
 </head>
 <body>
-    <div class = central>
-        <h1> Leaderboard </h1>
-        <a href="homepage.html">Back to Home</a>
-        <table>
-            <th>
-                <td> Person </td>
-                <td> Score </td>
-                <td> Streak </td>
-            </th>
-            <tr>
-                <td> J </td>
-                <td> 900 </td>
-                <td> 1  </td>
-            </tr>
-        </table>
+<nav>
+  <strong>MED-SEG ALPHA</strong>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Leaderboard</a>
+    <a href="#">Profile</a>
+  </div>
+</nav>
+<main>
+  <h1>Global Ranking</h1>
+  <p>Season 04: The Neural Network Challenge</p>
+
+  <div style="margin-bottom: 24px;">
+    <p><strong>Your Standing:</strong> Dr. Maverick_Alpha — Rank #14 — 12,450 XP — 98.2% Accuracy</p>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Segmenter</th>
+        <th>Score (XP)</th>
+        <th>Accuracy Rate</th>
+        <th>Cases Solved</th>
+        <th>Trend</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Neuro_Elite</td>
+        <td>42,980</td>
+        <td>99.8%</td>
+        <td>1,204</td>
+        <td>↑</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>PulseVector</td>
+        <td>38,120</td>
+        <td>99.4%</td>
+        <td>988</td>
+        <td>↑</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Synapse_RX</td>
+        <td>35,440</td>
+        <td>98.9%</td>
+        <td>842</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>BioHacker_01</td>
+        <td>29,800</td>
+        <td>97.2%</td>
+        <td>715</td>
+        <td>↑</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>CortexMapper</td>
+        <td>27,550</td>
+        <td>96.8%</td>
+        <td>640</td>
+        <td>↓</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <section class="challenges">
+    <h2>Active Challenges</h2>
+    <p>Complete specialized tasks to boost your ranking.</p>
+
+    <div class="challenge">
+      <h3>Neural Pathway Precision</h3>
+      <p>Segment 50 intricate neural fiber tracks with an average accuracy above 98.5% in 24 hours.</p>
+      <p><strong>Reward: +2,500 XP</strong> | 124 Participants</p>
+      <button>START NOW</button>
     </div>
+
+    <div class="challenge">
+      <h3>Cardiac Valve Mapping</h3>
+      <p>Identify micro-calcifications in cardiac valve ultrasound sequences. Requires high-speed precision.</p>
+      <p><strong>Reward: +1,800 XP</strong> | 4h 12m left</p>
+      <button>RESUME</button>
+    </div>
+
+    <div class="challenge">
+      <h3>Retinal Layer Scan</h3>
+      <p>Master the segmentation of OCT retinal layers in rare pathology cases. Expert level difficulty.</p>
+      <p><strong>Reward: +3,200 XP</strong> | COMPLETED</p>
+      <button disabled>LOCKED</button>
+    </div>
+  </section>
+</main>
+<footer>
+  <a href="#" style="color:#666; margin-right:16px;">Privacy Policy</a>
+  <a href="#" style="color:#666;">Institutional Access</a>
+  <span style="margin-left:16px;">© 2026 ALL RIGHTS RESERVED.</span>
+</footer>
 </body>
 </html>
