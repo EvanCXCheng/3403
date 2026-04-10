@@ -1,0 +1,116 @@
+.login-page {
+  min-height: calc(100vh - 116px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.login-panel {
+  width: 100%;
+  max-width: 440px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+.login-panel h1 {
+  margin: 0 0 12px;
+  font-size: 2rem;
+}
+
+.login-subtext {
+  margin: 0 0 24px;
+  color: #aaa;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-form label {
+  font-size: 12px;
+  color: #aaa;
+  text-transform: uppercase;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  background: #111;
+  border: 1px solid #333;
+  color: #ddd;
+  padding: 12px 14px;
+  font-size: 14px;
+  outline: none;
+}
+
+.login-form input[type="email"]:focus,
+.login-form input[type="password"]:focus {
+  border-color: #0aa;
+}
+
+.login-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 6px 0 10px;
+  gap: 12px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: none !important;
+  font-size: 13px !important;
+  color: #ddd !important;
+}
+
+.checkbox-row input {
+  accent-color: #0aa;
+}
+
+.muted-link {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.muted-link:hover {
+  color: #fff;
+}
+
+.login-btn {
+  margin-top: 4px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background: #0aa;
+  color: #000;
+  border: none;
+  font-weight: bold;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #ddd;
+  border: 1px solid #555;
+}
+
+.btn-secondary:hover,
+.btn-primary:hover {
+  opacity: 0.95;
+}
