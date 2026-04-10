@@ -1,10 +1,101 @@
-h1 { font-size: 2.5rem; margin-bottom: 16px; }
-.hero-actions { margin: 24px 0; display: flex; gap: 12px; }
-button { padding: 12px 24px; cursor: pointer; }
-.btn-primary { background: #0aa; color: #000; border: none; font-weight: bold; }
-.btn-secondary { background: transparent; color: #ddd; border: 1px solid #555; }
-.quests { margin-top: 40px; }
-.quest { border: 1px solid #333; padding: 16px; margin-bottom: 12px; }
-.quest h3 { margin: 0 0 8px; }
-.quest p { margin: 0; color: #aaa; font-size: 0.9rem; }
-footer { padding: 24px 20px; background: #111; border-top: 1px solid #333; text-align: center; color: #666; font-size: 12px; }
+.btn-primary,
+.btn-secondary {
+  padding: 14px 28px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  background: #0aa;
+  color: #000;
+  border: none;
+  font-weight: bold;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #ddd;
+  border: 1px solid #555;
+}
+
+.btn-primary:hover {
+  background: #0cc;
+}
+
+.btn-secondary:hover {
+  border-color: #0aa;
+  color: #fff;
+}
+
+.banner {
+  margin: 60px 0 48px;
+  min-height: 420px;
+  border: 1px solid #333;
+  background: linear-gradient(180deg, #0a0a0a, #111);
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #0aa;
+}
+
+.banner-content {
+  max-width: 760px;
+  padding: 56px 48px;
+}
+
+.banner-eyebrow {
+  margin: 0 0 14px;
+  color: #0aa;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.14em;
+}
+
+.banner h1 {
+  margin: 0 0 18px;
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.banner-text {
+  max-width: 720px;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #d0d0d0;
+  margin: 0 0 28px;
+}
+
+.banner-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.quests {
+  margin-top: 40px;
+}
+
+.quest {
+  border: 1px solid #333;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.quest h3 {
+  margin: 0 0 8px;
+}
+
+.quest p {
+  margin: 0 0 10px;
+  color: #aaa;
+  font-size: 0.95rem;
+}
