@@ -30,8 +30,7 @@
 .banner {
   margin: 60px 0 48px;
   min-height: 420px;
-  border: 1px solid #333;
-  background: linear-gradient(180deg, #0a0a0a, #111);
+  border: 1px solid;
   display: flex;
   align-items: center;
   position: relative;
@@ -86,10 +85,9 @@
 }
 
 .quest {
-  border: 1px solid #333;
+  border: 1px solid;
   padding: 20px;
   margin-bottom: 16px;
-  background: #111;
   transition: all 0.2s ease;
 }
 
@@ -103,7 +101,6 @@
 
 .quest p {
   margin: 0 0 10px;
-  color: #aaa;
   font-size: 0.95rem;
 }
 
@@ -137,8 +134,7 @@
 
 .operation-card {
   flex: 1 1 220px;
-  border: 1px solid #333;
-  background: #111;
+  border: 1px solid;
   padding: 20px;
   transition: all 0.2s ease;
 }
@@ -164,7 +160,6 @@
 
 .operation-card p {
   margin: 0;
-  color: #aaa;
   line-height: 1.6;
   font-size: 0.95rem;
 }
@@ -185,8 +180,7 @@
 }
 
 .science-panel {
-  border: 1px solid #333;
-  background: linear-gradient(180deg, #101010, #0b0b0b);
+  border: 1px solid;
   padding: 32px;
   position: relative;
 }
@@ -230,4 +224,4 @@ main {
   padding: 0 20px;
 }
 
-footer { padding: 24px 20px; background: #111; border-top: 1px solid #333; text-align: center; color: #666; font-size: 12px; }
+footer { padding: 24px 20px; border-top: 1px solid; text-align: center; font-size: 12px; }
