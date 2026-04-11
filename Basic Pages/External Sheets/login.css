@@ -10,7 +10,6 @@
 .login-panel {
   width: 100%;
   max-width: 440px;
-  background: #1a1a1a;
   border: 1px solid #333;
   padding: 32px;
   box-sizing: border-box;
@@ -23,7 +22,6 @@
 
 .login-subtext {
   margin: 0 0 24px;
-  color: #aaa;
   line-height: 1.5;
   font-size: 0.95rem;
 }
@@ -36,15 +34,12 @@
 
 .login-form label {
   font-size: 12px;
-  color: #aaa;
   text-transform: uppercase;
 }
 
 .login-form input[type="email"],
 .login-form input[type="password"] {
-  background: #111;
   border: 1px solid #333;
-  color: #ddd;
   padding: 12px 14px;
   font-size: 14px;
   outline: none;
@@ -69,7 +64,6 @@
   gap: 8px;
   text-transform: none !important;
   font-size: 13px !important;
-  color: #ddd !important;
 }
 
 .checkbox-row input {
@@ -77,7 +71,6 @@
 }
 
 .muted-link {
-  color: #aaa;
   text-decoration: none;
   font-size: 13px;
 }
@@ -99,14 +92,12 @@
 
 .btn-primary {
   background: #0aa;
-  color: #000;
   border: none;
   font-weight: bold;
 }
 
 .btn-secondary {
   background: transparent;
-  color: #ddd;
   border: 1px solid #555;
 }
 
