@@ -1,7 +1,0 @@
-:root {--bg-color: #0000; --text-color: #222222; }
-body.dark-mode {--bg-color: #111; --text-color: #f0f0f0;}
-body { font-family: sans-serif; background: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; }
-nav { padding: 12px 20px; background: var(--bg-color); display: flex; justify-content: space-between; align-items: center; }
-nav a { color: var(--text-color); text-decoration: none; margin-left: 15px; }
-nav a:hover { color: #fff; }
-main { padding: 40px 20px; max-width: 900px; margin: 0 auto; }
