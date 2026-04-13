@@ -30,7 +30,8 @@
 .banner {
   margin: 60px 0 48px;
   min-height: 420px;
-  border: 1px solid;
+  border: 1px solid #333;
+  background: linear-gradient(180deg, #0a0a0a, #111);
   display: flex;
   align-items: center;
   position: relative;
@@ -64,6 +65,7 @@
   font-size: clamp(3rem, 5vw, 5rem);
   line-height: 1;
   white-space: nowrap;
+  color: #f3f3f3;
 }
 
 .banner-text {
@@ -222,6 +224,42 @@ main {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+body:not(.dark-mode) .banner {
+  background: linear-gradient(180deg, #f7f7f7, #ececec);
+  border: 1px solid #bdbdbd;
+}
+
+body:not(.dark-mode) .banner h1 {
+  color: #111;
+}
+
+body:not(.dark-mode) .banner-text {
+  color: #444;
+}
+
+body:not(.dark-mode) .science-panel h2 {
+  color: #111;
+}
+
+body:not(.dark-mode) .science-panel p {
+  color: #444;
+}
+
+body:not(.dark-mode) .science-label {
+  color: #0aa;
+}
+
+body:not(.dark-mode) .banner .btn-secondary {
+  border: 1px solid #888;
+  color: #222;
+  background: transparent;
+}
+
+body:not(.dark-mode) .banner .btn-secondary:hover {
+  border-color: #0aa;
+  color: #0aa;
 }
 
 footer { padding: 24px 20px; border-top: 1px solid; text-align: center; font-size: 12px; }
