@@ -1,0 +1,8 @@
+table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+th { text-align: left; padding: 10px 12px; color: #aaa; font-size: 0.75rem; text-transform: uppercase; }
+td { padding: 10px 12px; border-bottom: 1px solid; }
+.challenges { margin-top: 40px; }
+.challenge { border: 1px solid; padding: 16px; margin-bottom: 12px; }
+.challenge h3 { margin: 0 0 8px; }
+.challenge p { margin: 0 0 12px; color: #aaa; font-size: 0.9rem; }
+footer { padding: 24px 20px; border-top: 1px solid; text-align: center; color: #666; font-size: 12px; }
