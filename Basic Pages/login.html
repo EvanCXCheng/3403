@@ -1,14 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="External Sheets/basic.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | MED-SEG ALPHA</title>
+  <link rel="stylesheet" href="External Sheets/general.css" />
+  <link rel="stylesheet" href="External Sheets/login.css" />
+  <script src="External Sheets/general.js" defer></script>
 </head>
 <body>
-    <div class = central>
-        <h1> Please login </h1>
-        <p> Idk what else </p>
+  <nav>
+    <strong>MED-SEG ALPHA</strong>
+    <div>
+      <a href="homepage.html">Home</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="profile.html">Profile</a>
+      <button onclick="toggleMode()">Toggle Dark/Light Mode</button>
     </div>
+  </nav>
+
+  <main class="login-page">
+    <section class="login-panel">
+      <h1>Sign In</h1>
+      <p class="login-subtext">
+        Access your MED-SEG ALPHA account.
+      </p>
+
+      <form class="login-form" action="#" method="post">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="example@domain.com" />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter password" />
+
+        <div class="login-row">
+          <label class="checkbox-row">
+            <input type="checkbox" name="remember" />
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="muted-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn-primary login-btn">Sign In</button>
+        <button type="button" class="btn-secondary">Create Account</button>
+      </form>
+    </section>
+  </main>
 </body>
 </html>

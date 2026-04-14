@@ -3,30 +3,20 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="stylesheet" href="External Sheets/general.css">
+<link rel="stylesheet" href="External Sheets/profile.css">
+<script src="External Sheets/general.js" defer></script>
 <title>Profile | MED-SEG ALPHA</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = { darkMode: 'class' }
-</script>
-<script>
-  function toggleMode() {
-    document.documentElement.classList.toggle('dark');
-    const isDark = document.documentElement.classList.contains('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  }
-  if (localStorage.getItem('theme') !== 'light') {
-    document.documentElement.classList.add('dark');
-  }
-</script>
+
 </head>
-<body class="bg-gray-950 text-gray-200 min-h-screen">
-<nav class="bg-gray-900 px-8 h-16 flex items-center justify-between border-b border-gray-800">
-  <span class="text-xl font-bold text-cyan-400">MED-SEG ALPHA</span>
-  <div class="flex items-center gap-6 text-sm">
-    <a class="text-gray-400 hover:text-gray-200" href="homepage.html">Home</a>
-    <a class="text-gray-400 hover:text-gray-200" href="leaderboard.html">Leaderboard</a>
-    <a class="text-cyan-400 border-b border-cyan-400 pb-0.5" href="profile.html">Profile</a>
-    <button onclick="toggleMode()" class="text-gray-400 hover:text-gray-200 border border-gray-600 px-3 py-1 rounded text-xs">Toggle Mode</button>
+<body>
+<nav>
+  <strong>MED-SEG ALPHA</strong>
+  <div>
+    <a href="homepage.html">Home</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="profile.html">Profile</a>
+    <button onclick="toggleMode()">Toggle Dark/Light Mode</button>
   </div>
 </nav>
 
