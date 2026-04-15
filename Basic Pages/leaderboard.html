@@ -1,26 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Leaderboard</title>
-    <link rel="stylesheet" href="External Sheets/basic.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="stylesheet" href="External Sheets/general.css">
+<link rel="stylesheet" href="External Sheets/leaderboard.css">
+<script src="External Sheets/general.js" defer></script>
+<title>Leaderboard | MED-SEG ALPHA</title>
 </head>
 <body>
-    <div class = central>
-        <h1> Leaderboard </h1>
-        <a href="homepage.html">Back to Home</a>
-        <table>
-            <th>
-                <td> Person </td>
-                <td> Score </td>
-                <td> Streak </td>
-            </th>
-            <tr>
-                <td> J </td>
-                <td> 900 </td>
-                <td> 1  </td>
-            </tr>
-        </table>
+<nav>
+  <strong>MED-SEG ALPHA</strong>
+  <div>
+    <a href="homepage.html">Home</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="profile.html">Profile</a>
+    <button onclick="toggleMode()">Toggle Dark/Light Mode</button>
+  </div>
+</nav>
+
+<main class="pt-16 pb-20 px-8 max-w-5xl mx-auto">
+  <header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div>
+      <h1 class="text-4xl font-bold mb-1">Global Ranking</h1>
+      <p class="text-gray-500 text-sm uppercase tracking-widest">Season 04: The Neural Network Challenge</p>
     </div>
+    <div class="flex gap-1 bg-gray-900 rounded-lg p-1">
+      <button class="px-4 py-1.5 rounded bg-gray-700 text-cyan-400 font-bold text-sm">GLOBAL</button>
+      <button class="px-4 py-1.5 text-gray-400 hover:text-gray-200 font-bold text-sm">INSTITUTIONAL</button>
+      <button class="px-4 py-1.5 text-gray-400 hover:text-gray-200 font-bold text-sm">FRIENDS</button>
+    </div>
+  </header>
+
+  <!-- Your standing -->
+  <div class="bg-gray-900 rounded-xl border-l-4 border-purple-400 p-6 mb-10 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div>
+      <p class="text-purple-400 text-xs uppercase tracking-widest font-bold mb-1">Your Current Standing</p>
+      <h2 class="text-2xl font-bold">Dr. Maverick_Alpha</h2>
+      <p class="text-gray-400 text-sm mt-1">12,450 XP &nbsp;|&nbsp; 98.2% Accuracy &nbsp;|&nbsp; Rank #14</p>
+    </div>
+    <div class="w-full md:w-64">
+      <div class="flex justify-between text-xs text-gray-400 mb-1">
+        <span>Next Rank: Tier 3 Master</span>
+        <span class="text-purple-400">550 XP Left</span>
+      </div>
+      <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+        <div class="h-full bg-purple-400 w-3/4"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="bg-gray-900 rounded-xl overflow-hidden mb-12">
+    <table class="w-full text-left">
+      <thead>
+        <tr class="bg-gray-800 text-gray-500 text-xs uppercase tracking-widest">
+          <th class="py-4 px-6">Rank</th>
+          <th class="py-4 px-4">Segmenter</th>
+          <th class="py-4 px-4 text-center">Score (XP)</th>
+          <th class="py-4 px-4 text-center">Accuracy Rate</th>
+          <th class="py-4 px-4 text-center">Cases Solved</th>
+          <th class="py-4 px-6 text-right">Trend</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-800">
+        <tr class="hover:bg-gray-800 transition-colors">
+          <td class="py-5 px-6"><span class="text-yellow-400 font-bold">🥇 1</span></td>
+          <td class="py-5 px-4 font-bold">Neuro_Elite</td>
+          <td class="py-5 px-4 text-center text-cyan-400 font-bold">42,980</td>
+          <td class="py-5 px-4 text-center"><span class="text-green-400 font-bold">99.8%</span></td>
+          <td class="py-5 px-4 text-center text-gray-400">1,204</td>
+          <td class="py-5 px-6 text-right text-green-400">↑</td>
+        </tr>
+        <tr class="hover:bg-gray-800 transition-colors">
+          <td class="py-5 px-6"><span class="text-gray-300 font-bold">🥈 2</span></td>
+          <td class="py-5 px-4 font-bold">PulseVector</td>
+          <td class="py-5 px-4 text-center text-cyan-400 font-bold">38,120</td>
+          <td class="py-5 px-4 text-center"><span class="text-green-400 font-bold">99.4%</span></td>
+          <td class="py-5 px-4 text-center text-gray-400">988</td>
+          <td class="py-5 px-6 text-right text-green-400">↑</td>
+        </tr>
+        <tr class="hover:bg-gray-800 transition-colors">
+          <td class="py-5 px-6"><span class="text-orange-400 font-bold">🥉 3</span></td>
+          <td class="py-5 px-4 font-bold">Synapse_RX</td>
+          <td class="py-5 px-4 text-center text-cyan-400 font-bold">35,440</td>
+          <td class="py-5 px-4 text-center"><span class="text-green-400 font-bold">98.9%</span></td>
+          <td class="py-5 px-4 text-center text-gray-400">842</td>
+          <td class="py-5 px-6 text-right text-gray-500">—</td>
+        </tr>
+        <tr class="hover:bg-gray-800 transition-colors">
+          <td class="py-5 px-6 text-center text-gray-400 font-bold">4</td>
+          <td class="py-5 px-4 font-bold">BioHacker_01</td>
+          <td class="py-5 px-4 text-center font-bold">29,800</td>
+          <td class="py-5 px-4 text-center"><span class="text-cyan-400 font-bold">97.2%</span></td>
+          <td class="py-5 px-4 text-center text-gray-400">715</td>
+          <td class="py-5 px-6 text-right text-green-400">↑</td>
+        </tr>
+        <tr class="hover:bg-gray-800 transition-colors">
+          <td class="py-5 px-6 text-center text-gray-400 font-bold">5</td>
+          <td class="py-5 px-4 font-bold">CortexMapper</td>
+          <td class="py-5 px-4 text-center font-bold">27,550</td>
+          <td class="py-5 px-4 text-center"><span class="text-cyan-400 font-bold">96.8%</span></td>
+          <td class="py-5 px-4 text-center text-gray-400">640</td>
+          <td class="py-5 px-6 text-right text-red-400">↓</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Challenges -->
+  <section>
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h2 class="text-2xl font-bold mb-1">Active Challenges</h2>
+        <p class="text-gray-500 text-sm uppercase tracking-widest">Complete specialized tasks to boost your ranking</p>
+      </div>
+      <a class="text-cyan-400 text-sm font-bold hover:text-cyan-300" href="#">VIEW ALL →</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="bg-gray-900 rounded-xl border-l-4 border-purple-400 p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex justify-between items-start mb-3">
+            <span class="text-2xl">🧠</span>
+            <span class="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-1 rounded-full">+2,500 XP</span>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Neural Pathway Precision</h3>
+          <p class="text-gray-400 text-sm mb-4">Segment 50 intricate neural fiber tracks with an average accuracy above 98.5% in 24 hours.</p>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-xs text-gray-500">124 Participants</span>
+          <button class="bg-cyan-400 text-gray-950 px-4 py-1.5 rounded font-bold text-sm">START NOW</button>
+        </div>
+      </div>
+      <div class="bg-gray-900 rounded-xl border-l-4 border-purple-400 p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex justify-between items-start mb-3">
+            <span class="text-2xl">❤️</span>
+            <span class="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-1 rounded-full">+1,800 XP</span>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Cardiac Valve Mapping</h3>
+          <p class="text-gray-400 text-sm mb-4">Identify micro-calcifications in cardiac valve ultrasound sequences. Requires high-speed precision.</p>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-xs text-gray-500">⏱ 4h 12m left</span>
+          <button class="bg-cyan-400 text-gray-950 px-4 py-1.5 rounded font-bold text-sm">RESUME</button>
+        </div>
+      </div>
+      <div class="bg-gray-900 rounded-xl border-l-4 border-purple-400 p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex justify-between items-start mb-3">
+            <span class="text-2xl">👁</span>
+            <span class="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-1 rounded-full">+3,200 XP</span>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Retinal Layer Scan</h3>
+          <p class="text-gray-400 text-sm mb-4">Master the segmentation of OCT retinal layers in rare pathology cases. Expert level difficulty.</p>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-xs text-green-400 font-bold uppercase">✓ COMPLETED</span>
+          <button disabled class="bg-gray-700 text-gray-500 px-4 py-1.5 rounded font-bold text-sm cursor-not-allowed">LOCKED</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-gray-950 border-t border-gray-800 py-10 px-8">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-4 max-w-5xl mx-auto">
+    <span class="text-gray-500 text-xs uppercase tracking-widest">© 2026 ALL RIGHTS RESERVED.</span>
+    <div class="flex gap-6">
+      <a class="text-gray-500 hover:text-cyan-400 text-xs uppercase tracking-widest" href="#">Privacy Policy</a>
+      <a class="text-gray-500 hover:text-cyan-400 text-xs uppercase tracking-widest" href="#">Institutional Access</a>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

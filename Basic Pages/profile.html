@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="stylesheet" href="External Sheets/general.css">
+<link rel="stylesheet" href="External Sheets/profile.css">
+<script src="External Sheets/general.js" defer></script>
+<title>Profile | MED-SEG ALPHA</title>
+
+</head>
+<body>
+<nav>
+  <strong>MED-SEG ALPHA</strong>
+  <div>
+    <a href="homepage.html">Home</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="profile.html">Profile</a>
+    <button onclick="toggleMode()">Toggle Dark/Light Mode</button>
+  </div>
+</nav>
+
+<main class="pt-16 pb-20 px-8 max-w-5xl mx-auto space-y-10">
+  <!-- Profile Header -->
+  <section class="flex flex-col md:flex-row gap-8 items-start">
+    <div class="flex flex-col items-center gap-3">
+      <div class="w-36 h-36 rounded-xl overflow-hidden bg-gray-800">
+        <img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwkuY2xbL_hE-6lloyVmgXWZPa8MrCpHFPdK_nepmL1lDRHibhFrkDjCHRFG-gRzj7mF_ss_Q_68Sgv0VnGbKu8g5OKSemMBubJVqvwyli1ok-aL9txO5vcqlbMzdJxg8UHqSnd1tR2n1PA52GtU7U6fjdwUuIl3HGAJEMgDyShAMhcGv9Ks_pP6aXN6AgvshmjGQsqM3xchW1vATamciWQeV4sK5CaVpcV6I0oVO5xnpAbR1eNFl_g-CJzyqKQJDSpJyPE9a3EDs"/>
+      </div>
+      <div class="text-center">
+        <h1 class="text-2xl font-bold">DR. ELARA VANCE</h1>
+        <p class="text-purple-400 text-sm uppercase tracking-widest">Level 42 Lead Pathologist</p>
+      </div>
+    </div>
+    <!-- Stats -->
+    <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-gray-900 p-5 rounded-xl border-l-4 border-cyan-400">
+        <p class="text-xs text-gray-400 uppercase tracking-wide mb-1">Segmentation Accuracy</p>
+        <h3 class="text-3xl font-bold text-cyan-400">99.4%</h3>
+        <div class="mt-3 h-1.5 bg-gray-700 rounded-full overflow-hidden">
+          <div class="h-full bg-cyan-400" style="width:99.4%"></div>
+        </div>
+      </div>
+      <div class="bg-gray-900 p-5 rounded-xl border-l-4 border-purple-400">
+        <p class="text-xs text-gray-400 uppercase tracking-wide mb-1">Total Segments</p>
+        <h3 class="text-3xl font-bold text-purple-400">14,802</h3>
+        <p class="text-xs text-gray-500 mt-2">+240 this week</p>
+      </div>
+      <div class="bg-gray-900 p-5 rounded-xl border-l-4 border-green-400">
+        <p class="text-xs text-gray-400 uppercase tracking-wide mb-1">Platform XP</p>
+        <h3 class="text-3xl font-bold text-green-400">84,200</h3>
+        <div class="mt-3 h-1.5 bg-gray-700 rounded-full overflow-hidden">
+          <div class="h-full bg-gradient-to-r from-purple-400 to-purple-600" style="width:65%"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Badges -->
+    <section>
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="text-xl font-bold">🏅 Medical Badges</h2>
+        <button class="text-xs text-cyan-400 hover:text-cyan-300">View Gallery</button>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-gray-900 rounded-xl p-4 flex flex-col items-center text-center gap-2">
+          <div class="w-14 h-14 rounded-full bg-gray-800 flex items-center justify-center text-3xl">🧠</div>
+          <p class="font-bold text-sm">Neural Master</p>
+          <p class="text-xs text-gray-400">1,000 Brain Scans</p>
+        </div>
+        <div class="bg-gray-900 rounded-xl p-4 flex flex-col items-center text-center gap-2">
+          <div class="w-14 h-14 rounded-full bg-gray-800 flex items-center justify-center text-3xl">❤️</div>
+          <p class="font-bold text-sm">Cardio Precision</p>
+          <p class="text-xs text-gray-400">99% Valve Accuracy</p>
+        </div>
+        <div class="bg-gray-900 rounded-xl p-4 flex flex-col items-center text-center gap-2">
+          <div class="w-14 h-14 rounded-full bg-gray-800 flex items-center justify-center text-3xl">🧬</div>
+          <p class="font-bold text-sm">DNA Weaver</p>
+          <p class="text-xs text-gray-400">Sequence Completion</p>
+        </div>
+        <div class="bg-gray-900 rounded-xl p-4 flex flex-col items-center text-center gap-2 opacity-40 border border-dashed border-gray-700">
+          <div class="w-14 h-14 rounded-full bg-gray-800 flex items-center justify-center text-3xl">🔒</div>
+          <p class="font-bold text-sm">Radiology Pro</p>
+          <p class="text-xs text-gray-500">Locked</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Activity -->
+    <section>
+      <h2 class="text-xl font-bold mb-5">🕐 Recent Activity</h2>
+      <div class="space-y-3">
+        <div class="bg-gray-900 p-4 rounded-xl flex items-center gap-4">
+          <img alt="MRI" class="w-12 h-12 object-cover rounded" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuOkN8A1v3pONKAoRDKSwIjVBlY39mSBXZDOBHNwSy7BktQ-8IShbj0mYPD_-XJlhABzhozrDHJMchyW8c-pdikrFT334SNK-2ibDKXmaNDD3VCIlyYNwKmpLTHHvHdXju70DaKXtVXnHb2NcbehQzbT4NnDb6pNvWpMFzm9XANK8kbHHJIiYs4WiwsR5M46V6uZn87MPGyiyTj8T3R6LaLWQtWFs9OzyT18qGgfPmCb2Lai_8jEAxJVw8l4k8zbOTURs8nqSMmRo"/>
+          <div class="flex-1">
+            <h4 class="text-sm font-bold">Cerebral Cortex #892</h4>
+            <p class="text-xs text-gray-500 uppercase">Validated by Alpha-System</p>
+          </div>
+          <div class="text-right">
+            <p class="text-xs font-bold text-green-400">+450 XP</p>
+            <p class="text-[10px] text-gray-500">2h ago</p>
+          </div>
+        </div>
+        <div class="bg-gray-900 p-4 rounded-xl flex items-center gap-4">
+          <img alt="CT" class="w-12 h-12 object-cover rounded" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClb41q2w0BM5mWSvHDhin4P1SXdD5y1ydmPW0LDSrGisaSZgEG-r-aLJ4L1lXC4LTkWGI76IAk6T8_wH0t8rA_nc8u0k7FFVloOHBrxFwZNxafNeZ0RqD41P8Zv8NT9DMCp4HlkRaYGpX9PDlThqGs5hvZd4FT-l_1wkp85bYWmpR9TJ_S0hQtyv74N-KZPs_2xBqF8Jhf-ByG1iticpfZBj1zQ3katq0t9Kn9IyG4IOX3f31kyypwKb4kYvEcYt8mOivnacD2QCk"/>
+          <div class="flex-1">
+            <h4 class="text-sm font-bold">Pulmonary Nodule Map</h4>
+            <p class="text-xs text-gray-500 uppercase">Multi-Pass Complete</p>
+          </div>
+          <div class="text-right">
+            <p class="text-xs font-bold text-green-400">+820 XP</p>
+            <p class="text-[10px] text-gray-500">5h ago</p>
+          </div>
+        </div>
+        <div class="bg-gray-900 p-4 rounded-xl flex items-center gap-4">
+          <img alt="X-Ray" class="w-12 h-12 object-cover rounded" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcq6jOj7ukLockau62_nmdTCEseY0D00z0Et2du-s-R80zTrquPUHUMtByW3txsHo5CfnqsnFKjuE2LWhu20VCea7_Ue9dT_GPGwmuqMcJxnnavinaBHmkjC72RraiQdIxkguKuZ1xQ2VP41aO0TUz2xNbkkpFMElohNcoCET4tQXtgd8G1AgEd5TTkBO_VM_YTiGFBDCsCLTHG8jqTuaDAgQ1wxmSaIUw7N5pRiI4J8ipwbDf-dPvdlZwgtnzus7W91rl9TY_-I4"/>
+          <div class="flex-1">
+            <h4 class="text-sm font-bold">Fracture Density Set</h4>
+            <p class="text-xs text-gray-500 uppercase">Batch Processing</p>
+          </div>
+          <div class="text-right">
+            <p class="text-xs font-bold text-green-400">+120 XP</p>
+            <p class="text-[10px] text-gray-500">Yesterday</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="bg-gray-950 border-t border-gray-800 py-10 px-8">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-4 max-w-5xl mx-auto">
+    <span class="text-gray-500 font-bold">MED-SEG</span>
+    <div class="flex gap-6">
+      <a class="text-gray-500 hover:text-cyan-400 text-xs uppercase tracking-widest" href="#">Privacy Policy</a>
+      <a class="text-gray-500 hover:text-cyan-400 text-xs uppercase tracking-widest" href="#">Institutional Access</a>
+    </div>
+    <span class="text-gray-500 text-xs uppercase tracking-widest">© 2026 ALL RIGHTS RESERVED.</span>
+  </div>
+</footer>
+</body>
+</html>
