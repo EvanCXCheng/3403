@@ -2,47 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta content="width=device-width, initial-scale=1.0" name = "viewport"/>
   <title>Login | MED-SEG ALPHA</title>
-  <script src="External Sheets/general.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+  <script>
+    function toggleMode() {
+      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+    if (localStorage.getItem('theme') !== 'light') {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
 </head>
-<body>
-  <nav>
-    <strong>MED-SEG ALPHA</strong>
-    <div>
-      <a href="homepage.html">Home</a>
-      <a href="leaderboard.html">Leaderboard</a>
-      <a href="profile.html">Profile</a>
-      <button onclick="toggleMode()">Toggle Dark/Light Mode</button>
-    </div>
+
+<body class="bg-gray-950 text-gray-200 min-h-screen">
+  <nav class="bg-gray-900 px-8 h-16 flex items-center justify-between border-b border-gray-800">
+    <span class="text-xl font-bold text-cyan-400">MED-SEG ALPHA</span>
+    <button onclick="toggleMode()" class="text-gray-400 hover:text-gray-200 border border-gray-600 px-3 py-1 rounded text-xs">Toggle Mode</button>
   </nav>
 
-  <main class="login-page">
-    <section class="login-panel">
-      <h1>Sign In</h1>
-      <p class="login-subtext">
-        Access your MED-SEG ALPHA account.
-      </p>
+  <main class="pt-20 pb-25 px-8 max-w-5xl mx-auto space-y-10">
+      <div class="flex flex-col items-center gap-3">
+        <p> Welcome to MED-SEG-ALPHA! Have an account? </p>
+      </div>
 
-      <form class="login-form" action="#" method="post">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="example@domain.com" />
-
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter password" />
-
-        <div class="login-row">
-          <label class="checkbox-row">
-            <input type="checkbox" name="remember" />
-            <span>Remember me</span>
-          </label>
-          <a href="#" class="muted-link">Forgot password?</a>
-        </div>
-
-        <button type="submit" class="btn-primary login-btn">Sign In</button>
-        <button type="button" class="btn-secondary">Create Account</button>
+      <form id = "user" class = "flex flex-col items-center gap-6" return false;">
+        <input id = "username" type="text" placeholder="Username or Email Address" class="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
+        <input id = "userpassword" type="password" placeholder="Password" class="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
+        <span class = "flex items-center gap-4">
+          <button class="px-7 py-2 bg-cyan-400 text-gray-950 font-bold rounded hover:brightness-110" type="submit">SIGN IN</button>
+          <button class = "text-gray-200 font-bold rounded hover:text-cyan-400" </button>Forgot password?</button>
+        </span>
       </form>
-    </section>
+
+      <br>
+
+      <div class="flex flex-col items-center gap-3">
+        <p> Don't have an account? Register instead: </p>
+      </div>
+
+      <form id = "new" class = "flex flex-col items-center gap-6" return false;">
+        <input id = "newname"type="text" placeholder="Username or Email Address" class="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
+        <input id = "newpassword" type="password" placeholder="Password" class="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
+        <span class = "flex items-center gap-4">
+          <button class="px-7 py-2 bg-cyan-400 text-gray-950 font-bold rounded hover:brightness-110" type="submit">REGISTER</button>
+        </span>
+      </form>
   </main>
+
+  <script src="External Sheets/login.js"></script>
+
+  <footer class="bg-gray-950 border-t border-gray-800 py-10 px-8 mt-20">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 max-w-5xl mx-auto">
+      <span class="text-gray-500 font-bold">MED-SEG</span>
+      <div class="flex gap-6">
+        <a class="text-gray-500 hover:text-cyan-400 text-xs uppercase tracking-widest" href="#">Privacy Policy</a>
+        <a class="text-gray-500 hover:text-cyan-400 text-xs uppercase tracking-widest" href="#">Institutional Access</a>
+      </div>
+      <span class="text-gray-500 text-xs uppercase tracking-widest">© 2026 ALL RIGHTS RESERVED.</span>
+    </div>
+  </footer>
+
 </body>
 </html>
