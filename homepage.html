@@ -8,16 +8,6 @@
 <script>
   tailwind.config = { darkMode: 'class' }
 </script>
-<script>
-  function toggleMode() {
-    document.documentElement.classList.toggle('dark');
-    const isDark = document.documentElement.classList.contains('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  }
-  if (localStorage.getItem('theme') !== 'light') {
-    document.documentElement.classList.add('dark');
-  }
-</script>
 </head>
 
 <body class="bg-gray-950 text-gray-200 min-h-screen">
@@ -27,7 +17,6 @@
     <a class="text-cyan-400 border-b border-cyan-400 pb-0.5" href="homepage.html">Home</a>
     <a class="text-gray-400 hover:text-gray-200" href="leaderboard.html">Leaderboard</a>
     <a class="text-gray-400 hover:text-gray-200" href="profile.html">Profile</a>
-    <button onclick="toggleMode()" class="text-gray-400 hover:text-gray-200 border border-gray-600 px-3 py-1 rounded text-xs">Toggle Mode</button>
   </div>
 </nav>
 

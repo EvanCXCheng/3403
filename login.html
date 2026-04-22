@@ -8,22 +8,11 @@
   <script>
     tailwind.config = { darkMode: 'class' }
   </script>
-  <script>
-    function toggleMode() {
-      document.documentElement.classList.toggle('dark');
-      const isDark = document.documentElement.classList.contains('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    }
-    if (localStorage.getItem('theme') !== 'light') {
-      document.documentElement.classList.add('dark');
-    }
-  </script>
 </head>
 
 <body class="bg-gray-950 text-gray-200 min-h-screen">
   <nav class="bg-gray-900 px-8 h-16 flex items-center justify-between border-b border-gray-800">
     <span class="text-xl font-bold text-cyan-400">MED-SEG ALPHA</span>
-    <button onclick="toggleMode()" class="text-gray-400 hover:text-gray-200 border border-gray-600 px-3 py-1 rounded text-xs">Toggle Mode</button>
   </nav>
 
   <main class="pt-20 pb-25 px-8 max-w-5xl mx-auto space-y-10">
