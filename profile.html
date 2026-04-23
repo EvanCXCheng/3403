@@ -25,29 +25,15 @@
     }
   }
 </script>
-<script>
-  function toggleMode() {
-    document.documentElement.classList.toggle('dark');
-    const isDark = document.documentElement.classList.contains('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  }
-  if (localStorage.getItem('theme') !== 'light') {
-    document.documentElement.classList.add('dark');
-  }
-</script>
-<style>
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
-</style>
 </head>
-<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary">
-<header class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] h-20 flex justify-between items-center px-8">
-  <div class="flex items-center gap-8">
-    <span class="text-2xl font-bold text-primary font-headline tracking-tight">MED-SEG ALPHA</span>
-    <nav class="hidden md:flex gap-6">
-      <a class="text-on-surface-variant hover:text-on-surface transition-colors font-headline" href="#">Home</a>
-      <a class="text-on-surface-variant hover:text-on-surface transition-colors font-headline" href="#">Leaderboard</a>
-      <a class="text-primary border-b-2 border-primary pb-1 font-headline" href="#">Profile</a>
-    </nav>
+
+<body class="bg-gray-950 text-gray-200 min-h-screen">
+<nav class="bg-gray-900 px-8 h-16 flex items-center justify-between border-b border-gray-800">
+  <span class="text-xl font-bold text-cyan-400">MED-SEG ALPHA</span>
+  <div class="flex items-center gap-6 text-sm">
+    <a class="text-cyan-400 border-b border-cyan-400 pb-0.5" href="homepage.html">Home</a>
+    <a class="text-gray-400 hover:text-gray-200" href="leaderboard.html">Leaderboard</a>
+    <a class="text-gray-400 hover:text-gray-200" href="profile.html">Profile</a>
   </div>
   <div class="flex items-center gap-4">
     <button onclick="toggleMode()" class="text-on-surface-variant hover:text-on-surface border border-outline-variant/30 px-3 py-1 rounded text-xs font-label">Toggle Mode</button>
