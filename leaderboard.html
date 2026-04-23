@@ -1,222 +1,393 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
-<head>
+<html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Leaderboard | MED-SEG ALPHA</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        colors: {
-          "primary": "#3cd7ff", "secondary": "#cdbdff", "tertiary": "#00e475",
-          "surface": "#0b1326", "surface-bright": "#31394d",
-          "surface-container": "#171f33", "surface-container-low": "#131b2e",
-          "surface-container-high": "#222a3d", "surface-container-highest": "#2d3449",
-          "on-surface": "#dae2fd", "on-surface-variant": "#bec8cc",
-          "outline-variant": "#3e484c", "primary-container": "#007b95",
-          "on-primary": "#003642", "secondary-container": "#5203d5",
-          "error": "#ffb4ab",
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-error": "#690005",
+                  "on-primary-fixed": "#001f27",
+                  "primary": "#3cd7ff",
+                  "surface-bright": "#31394d",
+                  "secondary": "#cdbdff",
+                  "on-tertiary-fixed": "#00210b",
+                  "secondary-container": "#5203d5",
+                  "on-primary-container": "#ebf9ff",
+                  "inverse-surface": "#dae2fd",
+                  "primary-fixed": "#b4ebff",
+                  "primary-container": "#007b95",
+                  "on-tertiary": "#003918",
+                  "surface-container": "#171f33",
+                  "on-tertiary-fixed-variant": "#005226",
+                  "surface": "#0b1326",
+                  "surface-container-high": "#222a3d",
+                  "on-primary": "#003642",
+                  "secondary-fixed-dim": "#cdbdff",
+                  "on-surface-variant": "#bec8cc",
+                  "surface-container-highest": "#2d3449",
+                  "secondary-fixed": "#e8deff",
+                  "surface-variant": "#2d3449",
+                  "on-secondary-fixed-variant": "#4f00d0",
+                  "tertiary-container": "#008240",
+                  "surface-container-low": "#131b2e",
+                  "on-secondary": "#370096",
+                  "on-tertiary-container": "#dcffde",
+                  "outline-variant": "#3e484c",
+                  "surface-dim": "#0b1326",
+                  "background": "#0b1326",
+                  "tertiary": "#00e475",
+                  "error": "#ffb4ab",
+                  "inverse-on-surface": "#283044",
+                  "surface-container-lowest": "#060e20",
+                  "primary-fixed-dim": "#3cd7ff",
+                  "on-secondary-container": "#c0acff",
+                  "inverse-primary": "#00677e",
+                  "on-background": "#dae2fd",
+                  "on-surface": "#dae2fd",
+                  "on-primary-fixed-variant": "#004e5f",
+                  "on-secondary-fixed": "#20005f",
+                  "outline": "#889296",
+                  "surface-tint": "#3cd7ff",
+                  "error-container": "#93000a",
+                  "on-error-container": "#ffdad6",
+                  "tertiary-fixed": "#62ff96",
+                  "tertiary-fixed-dim": "#00e475"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.125rem",
+                  "lg": "0.25rem",
+                  "xl": "0.5rem",
+                  "full": "0.75rem"
+          },
+          "fontFamily": {
+                  "headline": ["Space Grotesk"],
+                  "body": ["Manrope"],
+                  "label": ["Inter"]
+          }
         },
-        fontFamily: { "headline": ["Space Grotesk"], "body": ["Manrope"], "label": ["Inter"] }
-      }
+      },
     }
-  }
-</script>
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-nav {
+      background: rgba(11, 19, 38, 0.6);
+      backdrop-filter: blur(20px);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #131b2e;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #3cd7ff;
+      border-radius: 10px;
+    }
+  </style>
 </head>
-
-<body class="bg-gray-950 text-gray-200 min-h-screen">
-<nav class="bg-gray-900 px-8 h-16 flex items-center justify-between border-b border-gray-800">
-  <span class="text-xl font-bold text-cyan-400">MED-SEG ALPHA</span>
-  <div class="flex items-center gap-6 text-sm">
-    <a class="text-cyan-400 border-b border-cyan-400 pb-0.5" href="homepage.html">Home</a>
-    <a class="text-gray-400 hover:text-gray-200" href="leaderboard.html">Leaderboard</a>
-    <a class="text-gray-400 hover:text-gray-200" href="profile.html">Profile</a>
-  </div>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-8 h-20 bg-[#0b1326]/60 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-700 bg-clip-text text-transparent font-['Space_Grotesk'] tracking-tight">MED-SEG ALPHA</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1 font-['Space_Grotesk'] tracking-tight" href="#">Leaderboard</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#">Profile</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-white/5 transition-all duration-300 ease-in-out text-slate-400">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-white/5 transition-all duration-300 ease-in-out text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full border border-primary/20 overflow-hidden">
+<img alt="User clinical profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqWICMsdFEqZ2H-lO_pUgoXmj_8rDkj2vV4tQtnlWndVuwrusy-dGd7XIfHqa0Ifh4e-4sjJRbS2mW0by5tkoDBpoAlKZOixAhTM8HmoE2t3TbVjNY0rZUU2JzgbpnOUBZ_zstKkcc_HuZFF-lx3PuHobn5-pb9_boLGs2q6ApO75AXDNEx01cCd3LioAncjDXBZLsioYRKt-a_rXV8uzU4sDq9iOPq_Kf5_FMm4pFQ0uDnMGIYtIeD2voArlVS0IQXRQJsUXlQXw"/>
+</div>
+</div>
 </nav>
-
 <main class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto min-h-screen">
-  <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-    <div>
-      <h1 class="font-headline text-5xl font-bold tracking-tight text-on-surface mb-2">Global Ranking</h1>
-      <p class="text-on-surface-variant font-label uppercase tracking-widest text-sm">Season 04: The Neural Network Challenge</p>
-    </div>
-    <div class="bg-surface-container-high rounded-xl p-1 flex items-center border border-outline-variant/20">
-      <button class="px-6 py-2 rounded-lg bg-surface-bright text-primary font-bold text-sm">GLOBAL</button>
-      <button class="px-6 py-2 text-on-surface-variant hover:text-on-surface font-bold text-sm">INSTITUTIONAL</button>
-      <button class="px-6 py-2 text-on-surface-variant hover:text-on-surface font-bold text-sm">FRIENDS</button>
-    </div>
-  </header>
-
-  <!-- Your standing -->
-  <section class="mb-12">
-    <div class="bg-surface-container-high rounded-xl border-l-4 border-secondary p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-8">
-      <div class="flex items-center gap-5">
-        <div class="relative">
-          <div class="w-16 h-16 rounded-full border-2 border-secondary overflow-hidden">
-            <img alt="Your Avatar" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyq46Y2C7cXphyal-gskknSlsGoordUK0Z7yB1Gask6Pz59wSkC04eK9jtqC5cmsqRRoiyyvbrfHyA_tQkHtpAbKOUi7DJlIDxZ0q218iS4dcaBEUW943s5hdCRXVaN_2p-os4GYIvmc8NHmlWe6zPlaojP02qMNdJc6un6HCBTJWlfXx4pbmGBipbXrEAFXxFLMpnpErMBuba8_X0xbgPicrBTffF7Ei0ItNUO3ths8hFaIS2Z01_dPPlZE-ReBXcaLndFPfEX-Y"/>
-          </div>
-          <div class="absolute -bottom-1 -right-1 bg-secondary text-on-secondary w-7 h-7 rounded-full flex items-center justify-center font-headline font-bold text-xs">14</div>
-        </div>
-        <div>
-          <span class="text-secondary font-headline text-xs font-bold uppercase tracking-wider">Your Current Standing</span>
-          <h2 class="text-2xl font-headline font-bold">Dr. Maverick_Alpha</h2>
-          <div class="flex gap-4 mt-1 text-sm">
-            <span class="flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-tertiary text-base" style="font-variation-settings:'FILL' 1;">stars</span> 12,450 XP</span>
-            <span class="flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings:'FILL' 1;">biotech</span> 98.2% Accuracy</span>
-          </div>
-        </div>
-      </div>
-      <div class="w-full md:w-64">
-        <div class="flex justify-between text-xs mb-1">
-          <span class="text-on-surface-variant uppercase">Next Rank: Tier 3 Master</span>
-          <span class="text-secondary">550 XP Left</span>
-        </div>
-        <div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
-          <div class="h-full bg-gradient-to-r from-secondary to-secondary-container w-3/4"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Table -->
-  <div class="bg-surface-container-low rounded-xl overflow-hidden mb-12">
-    <table class="w-full text-left border-collapse">
-      <thead>
-        <tr class="bg-surface-container-high/50 text-on-surface-variant font-label text-xs uppercase tracking-[0.2em]">
-          <th class="py-6 px-8">Rank</th>
-          <th class="py-6 px-4">Segmenter</th>
-          <th class="py-6 px-4 text-center">Score (XP)</th>
-          <th class="py-6 px-4 text-center">Accuracy Rate</th>
-          <th class="py-6 px-4 text-center">Cases Solved</th>
-          <th class="py-6 px-8 text-right">Trend</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-outline-variant/10">
-        <tr class="hover:bg-white/5 transition-colors">
-          <td class="py-6 px-8"><div class="w-10 h-10 rounded-lg bg-yellow-500/10 text-yellow-400 flex items-center justify-center"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">military_tech</span></div></td>
-          <td class="py-6 px-4"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high"><img alt="Top Player" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1_llpmTESCnFQd_G9uziWLEMSsLSWU8y9rR-3DsLzvaNzR_fk8GVQaGeN2n90nLnsaetU5qngIwMD_t4rYBkZG2o66HpPk8Y0vAwiawxSOHe93qXPekZB0ZVBBjiTiiNbvvSGZQjDrUS1tuMQ3ylRI7yso0P4tbw-y1iFyMEyEYrEQmrOnMPfkbIldpyOwKAe7CQvgb95jYN2mo6dBWpzt2pZwnoTKvBJUWNCOWOqUwAPyeUtQQWT3IP3oL-OrRe-SW53kJo1UGg"/></div><span class="font-headline font-medium text-lg">Neuro_Elite</span></div></td>
-          <td class="py-6 px-4 text-center"><span class="font-headline font-bold text-primary">42,980</span></td>
-          <td class="py-6 px-4 text-center"><span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20 text-sm font-bold">99.8%</span></td>
-          <td class="py-6 px-4 text-center text-on-surface-variant font-label">1,204</td>
-          <td class="py-6 px-8 text-right"><span class="material-symbols-outlined text-tertiary">trending_up</span></td>
-        </tr>
-        <tr class="hover:bg-white/5 transition-colors">
-          <td class="py-6 px-8"><div class="w-10 h-10 rounded-lg bg-slate-300/10 text-slate-300 flex items-center justify-center"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">military_tech</span></div></td>
-          <td class="py-6 px-4"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high"><img alt="Silver Player" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY7yKl1duyvszNZtUDCgcDxRiNojZgn0MBlff_a8lhIQoIG-E8ToLLQFRZBWgAO4zZdQ1xJEoL8ThP-sEQ5HeaosHCKZIWCowY3pRaycX7FgSjJ2jE07NRzdkYoZUBjZf2j3BCRG3zceOOADFPs-3S0ceunq45804sNbuh9IhKzOx3hjOZHxw-zqsrRiSIc9yPP0_YYVSLPjAvlI_E4YwRrdV5Sf-DsYIz8fPSEh23US4Efz-0CQldCnf8Ax9727Hu2oZfUsc5bU0"/></div><span class="font-headline font-medium text-lg">PulseVector</span></div></td>
-          <td class="py-6 px-4 text-center"><span class="font-headline font-bold text-primary">38,120</span></td>
-          <td class="py-6 px-4 text-center"><span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20 text-sm font-bold">99.4%</span></td>
-          <td class="py-6 px-4 text-center text-on-surface-variant font-label">988</td>
-          <td class="py-6 px-8 text-right"><span class="material-symbols-outlined text-tertiary">trending_up</span></td>
-        </tr>
-        <tr class="hover:bg-white/5 transition-colors">
-          <td class="py-6 px-8"><div class="w-10 h-10 rounded-lg bg-orange-700/10 text-orange-500 flex items-center justify-center"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">military_tech</span></div></td>
-          <td class="py-6 px-4"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high"><img alt="Bronze Player" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf0Kd4d0Yx4fj35Q-up0T2g5rzBiGboIg_EQpOWCmlHlWPEQICEbWb9khNg-Ig_bOdmWcb56sd7aCYP8FzKwX33RWujYI0LCfUO5Diow2k9Y12Hqhy9Y-FaF2FeMm6OE9e0qNiF1OB1joGZAcD3DfO3qF_w1d-RipclhqsLVcy7Znu5Rf1jvOdyQKG5lURYVBngJvFGOQnu80fMtJbEbhKSFM6wDMacBUHihkRjD12iPiyMmESsbwIXkFsrbgYRLHmc1N2nXpZsRg"/></div><span class="font-headline font-medium text-lg">Synapse_RX</span></div></td>
-          <td class="py-6 px-4 text-center"><span class="font-headline font-bold text-primary">35,440</span></td>
-          <td class="py-6 px-4 text-center"><span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20 text-sm font-bold">98.9%</span></td>
-          <td class="py-6 px-4 text-center text-on-surface-variant font-label">842</td>
-          <td class="py-6 px-8 text-right"><span class="material-symbols-outlined text-on-surface-variant/50">remove</span></td>
-        </tr>
-        <tr class="hover:bg-white/5 transition-colors">
-          <td class="py-6 px-8 text-center"><span class="font-headline font-bold text-on-surface-variant">4</span></td>
-          <td class="py-6 px-4"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high"><img alt="Player 4" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4ix1-0Ens-NF4wZXyrmLDeYHDiq3C_A6kL9BxGDf1YPKZZcAbxD5NP_X2jx48vAMzyeJqn1IFm2n5Oa8FhBHZAqUzyZ-0o9EHG_378qIn7EmtV-xPqjKpJyVxQtgrzJqwSSVnJ1ehDVW9wvXJ5xece7kCcz--_5_dUywRR2GaX4cILvopBYuY4DKO36oh9ijDwxJZMSGNpDbqwXIOUTQwTtGExLOhba9QMfwx3RhubBUmuUJklOf_ETyya-pFfcFcyF0jBu3oVdM"/></div><span class="font-headline font-medium text-lg">BioHacker_01</span></div></td>
-          <td class="py-6 px-4 text-center font-headline font-bold">29,800</td>
-          <td class="py-6 px-4 text-center"><span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-bold">97.2%</span></td>
-          <td class="py-6 px-4 text-center text-on-surface-variant font-label">715</td>
-          <td class="py-6 px-8 text-right"><span class="material-symbols-outlined text-tertiary">trending_up</span></td>
-        </tr>
-        <tr class="hover:bg-white/5 transition-colors">
-          <td class="py-6 px-8 text-center"><span class="font-headline font-bold text-on-surface-variant">5</span></td>
-          <td class="py-6 px-4"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high"><img alt="Player 5" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmWs-1nAfLolBD4yKV5i3newSjp3xoaWDwGjMYqfSihpBs7XBzcpvN1Ep-rC-OpGkQRvq_a-orYp1sgAhd8Kr_SVm4tUVDLhrouIUCaXy81G_wrWp9YQYOS5tQ5REX4zrfl3yGqE4l7-MiUpuTE0T_jDg11kPTtajrpI6OMIzdUDoZgeis1F_25U8SIkx4QQJfFvDdiiX7353SkW3dQdXM0qHG2MJmWoCWyFhLAXF0szcC7PCbNPKQpSq_pi6vYVadbL6B1A5oMQs"/></div><span class="font-headline font-medium text-lg">CortexMapper</span></div></td>
-          <td class="py-6 px-4 text-center font-headline font-bold">27,550</td>
-          <td class="py-6 px-4 text-center"><span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-bold">96.8%</span></td>
-          <td class="py-6 px-4 text-center text-on-surface-variant font-label">640</td>
-          <td class="py-6 px-8 text-right"><span class="material-symbols-outlined text-error">trending_down</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Challenges -->
-  <section id="challenges">
-    <div class="flex items-center justify-between mb-6">
-      <div>
-        <h2 class="font-headline text-3xl font-bold text-on-surface mb-1">Active Challenges</h2>
-        <p class="text-on-surface-variant font-label text-sm uppercase tracking-widest">Complete specialized tasks to boost your ranking</p>
-      </div>
-      <a class="text-primary hover:brightness-110 transition-colors font-headline font-bold text-sm" href="#">VIEW ALL CHALLENGES</a>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-surface-container-high rounded-xl border-l-4 border-secondary p-6 flex flex-col justify-between hover:border-primary transition-all duration-300">
-        <div>
-          <div class="flex justify-between items-start mb-4">
-            <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
-              <span class="material-symbols-outlined">psychology</span>
-            </div>
-            <span class="bg-tertiary/10 text-tertiary border border-tertiary/20 px-3 py-1 rounded-full text-xs font-bold uppercase">XP: +2,500</span>
-          </div>
-          <h3 class="text-xl font-headline font-bold mb-2">Neural Pathway Precision</h3>
-          <p class="text-on-surface-variant text-sm mb-6">Segment 50 intricate neural fiber tracks with an average accuracy above 98.5% in 24 hours.</p>
-        </div>
-        <div class="flex items-center justify-between">
-          <span class="text-xs text-on-surface-variant font-label">124 Participants</span>
-          <button class="bg-primary text-on-primary px-5 py-2 rounded-lg font-headline font-bold text-sm hover:brightness-110">START NOW</button>
-        </div>
-      </div>
-      <div class="bg-surface-container-high rounded-xl border-l-4 border-secondary p-6 flex flex-col justify-between hover:border-primary transition-all duration-300">
-        <div>
-          <div class="flex justify-between items-start mb-4">
-            <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
-              <span class="material-symbols-outlined">pulse_alert</span>
-            </div>
-            <span class="bg-tertiary/10 text-tertiary border border-tertiary/20 px-3 py-1 rounded-full text-xs font-bold uppercase">XP: +1,800</span>
-          </div>
-          <h3 class="text-xl font-headline font-bold mb-2">Cardiac Valve Mapping</h3>
-          <p class="text-on-surface-variant text-sm mb-6">Identify micro-calcifications in cardiac valve ultrasound sequences. Requires high-speed precision.</p>
-        </div>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary text-lg">timer</span>
-            <span class="text-xs text-on-surface-variant font-label">4h 12m left</span>
-          </div>
-          <button class="bg-primary text-on-primary px-5 py-2 rounded-lg font-headline font-bold text-sm hover:brightness-110">RESUME</button>
-        </div>
-      </div>
-      <div class="bg-surface-container-high rounded-xl border-l-4 border-secondary p-6 flex flex-col justify-between hover:border-primary transition-all duration-300">
-        <div>
-          <div class="flex justify-between items-start mb-4">
-            <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
-              <span class="material-symbols-outlined">visibility</span>
-            </div>
-            <span class="bg-tertiary/10 text-tertiary border border-tertiary/20 px-3 py-1 rounded-full text-xs font-bold uppercase">XP: +3,200</span>
-          </div>
-          <h3 class="text-xl font-headline font-bold mb-2">Retinal Layer Scan</h3>
-          <p class="text-on-surface-variant text-sm mb-6">Master the segmentation of OCT retinal layers in rare pathology cases. Expert level difficulty.</p>
-        </div>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-tertiary text-lg" style="font-variation-settings:'FILL' 1;">check_circle</span>
-            <span class="text-xs text-tertiary font-bold uppercase tracking-wider font-label">COMPLETED</span>
-          </div>
-          <button class="bg-surface-bright text-on-surface-variant px-5 py-2 rounded-lg font-headline font-bold text-sm cursor-not-allowed">LOCKED</button>
-        </div>
-      </div>
-    </div>
-  </section>
+<header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-headline text-5xl font-bold tracking-tight text-on-surface mb-2">Global Ranking</h1>
+<p class="text-on-surface-variant font-label uppercase tracking-widest text-sm">Season 04: The Neural Network Challenge</p>
+</div>
+<div class="bg-surface-container-high rounded-xl p-1 flex items-center border border-outline-variant/20">
+<button class="px-6 py-2 rounded-lg bg-surface-bright text-primary font-bold text-sm transition-all">GLOBAL</button>
+<button class="px-6 py-2 rounded-lg text-on-surface-variant hover:text-on-surface font-bold text-sm transition-all">INSTITUTIONAL</button>
+<button class="px-6 py-2 rounded-lg text-on-surface-variant hover:text-on-surface font-bold text-sm transition-all">FRIENDS</button>
+</div>
+</header>
+<section class="mb-12">
+<div class="relative bg-surface-container-high rounded-xl overflow-hidden border-l-4 border-secondary p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="flex items-center gap-6">
+<div class="relative">
+<div class="w-20 h-20 rounded-full border-2 border-secondary p-1">
+<img alt="Your Avatar" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyq46Y2C7cXphyal-gskknSlsGoordUK0Z7yB1Gask6Pz59wSkC04eK9jtqC5cmsqRRoiyyvbrfHyA_tQkHtpAbKOUi7DJlIDxZ0q218iS4dcaBEUW943s5hdCRXVaN_2p-os4GYIvmc8NHmlWe6zPlaojP02qMNdJc6un6HCBTJWlfXx4pbmGBipbXrEAFXxFLMpnpErMBuba8_X0xbgPicrBTffF7Ei0ItNUO3ths8hFaIS2Z01_dPPlZE-ReBXcaLndFPfEX-Y"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-secondary text-on-secondary w-8 h-8 rounded-full flex items-center justify-center font-headline font-bold text-sm shadow-lg">14</div>
+</div>
+<div>
+<span class="text-secondary font-headline text-sm font-bold uppercase tracking-wider">Your Current Standing</span>
+<h2 class="text-2xl md:text-3xl font-headline font-bold">Dr. Maverick_Alpha</h2>
+<div class="flex gap-4 mt-2">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary text-lg" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-label text-sm text-on-surface">12,450 XP</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">biotech</span>
+<span class="font-label text-sm text-on-surface">98.2% Accuracy</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end gap-2 w-full md:w-auto">
+<div class="flex justify-between w-full md:w-64 mb-1">
+<span class="text-xs font-label text-on-surface-variant uppercase">Next Rank: Tier 3 Master</span>
+<span class="text-xs font-label text-secondary">550 XP Left</span>
+</div>
+<div class="w-full md:w-64 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary to-secondary-container w-3/4 shadow-[0_0_8px_rgba(205,189,255,0.4)]"></div>
+</div>
+</div>
+</div>
+</section>
+<div class="bg-surface-container-low rounded-xl overflow-hidden mb-16">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high/50 text-on-surface-variant font-label text-xs uppercase tracking-[0.2em]">
+<th class="py-6 px-8">Rank</th>
+<th class="py-6 px-4">Segmenter</th>
+<th class="py-6 px-4 text-center">Score (XP)</th>
+<th class="py-6 px-4 text-center">Accuracy Rate</th>
+<th class="py-6 px-4 text-center">Cases Solved</th>
+<th class="py-6 px-8 text-right">Trend</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="py-6 px-8">
+<div class="flex items-center justify-center w-10 h-10 rounded-lg bg-yellow-500/10 text-yellow-400">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+</td>
+<td class="py-6 px-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high">
+<img alt="Top Player" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1_llpmTESCnFQd_G9uziWLEMSsLSWU8y9rR-3DsLzvaNzR_fk8GVQaGeN2n90nLnsaetU5qngIwMD_t4rYBkZG2o66HpPk8Y0vAwiawxSOHe93qXPekZB0ZVBBjiTiiNbvvSGZQjDrUS1tuMQ3ylRI7yso0P4tbw-y1iFyMEyEYrEQmrOnMPfkbIldpyOwKAe7CQvgb95jYN2mo6dBWpzt2pZwnoTKvBJUWNCOWOqUwAPyeUtQQWT3IP3oL-OrRe-SW53kJo1UGg"/>
+</div>
+<span class="font-headline font-medium text-lg">Neuro_Elite</span>
+</div>
+</td>
+<td class="py-6 px-4 text-center">
+<span class="font-headline font-bold text-primary">42,980</span>
+</td>
+<td class="py-6 px-4 text-center">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-label font-bold text-sm">99.8%</span>
+</div>
+</td>
+<td class="py-6 px-4 text-center font-label text-on-surface-variant">1,204</td>
+<td class="py-6 px-8 text-right">
+<span class="material-symbols-outlined text-tertiary">trending_up</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="py-6 px-8">
+<div class="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-300/10 text-slate-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+</td>
+<td class="py-6 px-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high">
+<img alt="Silver Player" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY7yKl1duyvszNZtUDCgcDxRiNojZgn0MBlff_a8lhIQoIG-E8ToLLQFRZBWgAO4zZdQ1xJEoL8ThP-sEQ5HeaosHCKZIWCowY3pRaycX7FgSjJ2jE07NRzdkYoZUBjZf2j3BCRG3zceOOADFPs-3S0ceunq45804sNbuh9IhKzOx3hjOZHxw-zqsrRiSIc9yPP0_YYVSLPjAvlI_E4YwRrdV5Sf-DsYIz8fPSEh23US4Efz-0CQldCnf8Ax9727Hu2oZfUsc5bU0"/>
+</div>
+<span class="font-headline font-medium text-lg">PulseVector</span>
+</div>
+</td>
+<td class="py-6 px-4 text-center">
+<span class="font-headline font-bold text-primary">38,120</span>
+</td>
+<td class="py-6 px-4 text-center">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span class="font-label font-bold text-sm">99.4%</span>
+</div>
+</td>
+<td class="py-6 px-4 text-center font-label text-on-surface-variant">988</td>
+<td class="py-6 px-8 text-right">
+<span class="material-symbols-outlined text-tertiary">trending_up</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="py-6 px-8">
+<div class="flex items-center justify-center w-10 h-10 rounded-lg bg-orange-700/10 text-orange-500">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+</td>
+<td class="py-6 px-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high">
+<img alt="Bronze Player" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf0Kd4d0Yx4fj35Q-up0T2g5rzBiGboIg_EQpOWCmlHlWPEQICEbWb9khNg-Ig_bOdmWcb56sd7aCYP8FzKwX33RWujYI0LCfUO5Diow2k9Y12Hqhy9Y-FaF2FeMm6OE9e0qNiF1OB1joGZAcD3DfO3qF_w1d-RipclhqsLVcy7Znu5Rf1jvOdyQKG5lURYVBngJvFGOQnu80fMtJbEbhKSFM6wDMacBUHihkRjD12iPiyMmESsbwIXkFsrbgYRLHmc1N2nXpZsRg"/>
+</div>
+<span class="font-headline font-medium text-lg">Synapse_RX</span>
+</div>
+</td>
+<td class="py-6 px-4 text-center">
+<span class="font-headline font-bold text-primary">35,440</span>
+</td>
+<td class="py-6 px-4 text-center">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span class="font-label font-bold text-sm">98.9%</span>
+</div>
+</td>
+<td class="py-6 px-4 text-center font-label text-on-surface-variant">842</td>
+<td class="py-6 px-8 text-right">
+<span class="material-symbols-outlined text-on-surface-variant/50">remove</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="py-6 px-8 text-center">
+<span class="font-headline font-bold text-on-surface-variant">4</span>
+</td>
+<td class="py-6 px-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high">
+<img alt="Player 4" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4ix1-0Ens-NF4wZXyrmLDeYHDiq3C_A6kL9BxGDf1YPKZZcAbxD5NP_X2jx48vAMzyeJqn1IFm2n5Oa8FhBHZAqUzyZ-0o9EHG_378qIn7EmtV-xPqjKpJyVxQtgrzJqwSSVnJ1ehDVW9wvXJ5xece7kCcz--_5_dUywRR2GaX4cILvopBYuY4DKO36oh9ijDwxJZMSGNpDbqwXIOUTQwTtGExLOhba9QMfwx3RhubBUmuUJklOf_ETyya-pFfcFcyF0jBu3oVdM"/>
+</div>
+<span class="font-headline font-medium text-lg">BioHacker_01</span>
+</div>
+</td>
+<td class="py-6 px-4 text-center font-headline font-bold text-on-surface">29,800</td>
+<td class="py-6 px-4 text-center">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+<span class="font-label font-bold text-sm">97.2%</span>
+</div>
+</td>
+<td class="py-6 px-4 text-center font-label text-on-surface-variant">715</td>
+<td class="py-6 px-8 text-right">
+<span class="material-symbols-outlined text-tertiary">trending_up</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="py-6 px-8 text-center">
+<span class="font-headline font-bold text-on-surface-variant">5</span>
+</td>
+<td class="py-6 px-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high">
+<img alt="Player 5" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmWs-1nAfLolBD4yKV5i3newSjp3xoaWDwGjMYqfSihpBs7XBzcpvN1Ep-rC-OpGkQRvq_a-orYp1sgAhd8Kr_SVm4tUVDLhrouIUCaXy81G_wrWp9YQYOS5tQ5REX4zrfl3yGqE4l7-MiUpuTE0T_jDg11kPTtajrpI6OMIzdUDoZgeis1F_25U8SIkx4QQJfFvDdiiX7353SkW3dQdXM0qHG2MJmWoCWyFhLAXF0szcC7PCbNPKQpSq_pi6vYVadbL6B1A5oMQs"/>
+</div>
+<span class="font-headline font-medium text-lg">CortexMapper</span>
+</div>
+</td>
+<td class="py-6 px-4 text-center font-headline font-bold text-on-surface">27,550</td>
+<td class="py-6 px-4 text-center">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+<span class="font-label font-bold text-sm">96.8%</span>
+</div>
+</td>
+<td class="py-6 px-4 text-center font-label text-on-surface-variant">640</td>
+<td class="py-6 px-8 text-right">
+<span class="material-symbols-outlined text-error">trending_down</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="challenges">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="font-headline text-3xl font-bold tracking-tight text-on-surface mb-1">Active Challenges</h2>
+<p class="text-on-surface-variant font-label text-sm uppercase tracking-widest">Complete specialized tasks to boost your ranking</p>
+</div>
+<a class="text-primary hover:text-primary-fixed-dim transition-colors font-headline font-bold text-sm" href="#">VIEW ALL CHALLENGES</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-surface-container-high rounded-xl border-l-4 border-secondary p-6 flex flex-col justify-between hover:border-primary transition-all duration-300">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<span class="bg-tertiary/10 text-tertiary border border-tertiary/20 px-3 py-1 rounded-full text-xs font-bold font-label tracking-wider uppercase">XP: +2,500</span>
+</div>
+<h3 class="text-xl font-headline font-bold mb-2">Neural Pathway Precision</h3>
+<p class="text-on-surface-variant text-sm line-clamp-2 mb-6">Segment 50 intricate neural fiber tracks with an average accuracy above 98.5% in 24 hours.</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-high bg-surface-container-highest flex items-center justify-center text-[10px] font-bold">124 Participants</div>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-headline font-bold text-sm hover:brightness-110 transition-all">START NOW</button>
+</div>
+</div>
+<div class="bg-surface-container-high rounded-xl border-l-4 border-secondary p-6 flex flex-col justify-between hover:border-primary transition-all duration-300">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">pulse_alert</span>
+</div>
+<span class="bg-tertiary/10 text-tertiary border border-tertiary/20 px-3 py-1 rounded-full text-xs font-bold font-label tracking-wider uppercase">XP: +1,800</span>
+</div>
+<h3 class="text-xl font-headline font-bold mb-2">Cardiac Valve Mapping</h3>
+<p class="text-on-surface-variant text-sm line-clamp-2 mb-6">Identify micro-calcifications in cardiac valve ultrasound sequences. Requires high-speed precision.</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">timer</span>
+<span class="text-xs font-label text-on-surface-variant">4h 12m left</span>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-headline font-bold text-sm hover:brightness-110 transition-all">RESUME</button>
+</div>
+</div>
+<div class="bg-surface-container-high rounded-xl border-l-4 border-secondary p-6 flex flex-col justify-between hover:border-primary transition-all duration-300">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">visibility</span>
+</div>
+<span class="bg-tertiary/10 text-tertiary border border-tertiary/20 px-3 py-1 rounded-full text-xs font-bold font-label tracking-wider uppercase">XP: +3,200</span>
+</div>
+<h3 class="text-xl font-headline font-bold mb-2">Retinal Layer Scan</h3>
+<p class="text-on-surface-variant text-sm line-clamp-2 mb-6">Master the segmentation of OCT retinal layers in rare pathology cases. Expert level difficulty.</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-xs font-label text-tertiary font-bold uppercase tracking-wider">COMPLETED</span>
+</div>
+<button class="bg-surface-bright text-on-surface-variant px-6 py-2 rounded-lg font-headline font-bold text-sm cursor-not-allowed">LOCKED</button>
+</div>
+</div>
+</div>
+</section>
 </main>
-
-<footer class="bg-surface border-t border-outline-variant/10 py-12 px-8">
-  <div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
-    <span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">© 2026 ALL RIGHTS RESERVED.</span>
-    <div class="flex gap-8">
-      <a class="text-on-surface-variant hover:text-primary transition-colors font-label text-xs uppercase tracking-widest" href="#">Privacy Policy</a>
-      <a class="text-on-surface-variant hover:text-primary transition-colors font-label text-xs uppercase tracking-widest" href="#">Institutional Access</a>
-    </div>
-  </div>
+<footer class="bg-[#0b1326] border-t border-slate-800/20 py-12 px-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
+<span class="text-slate-500 font-['Manrope'] text-xs uppercase tracking-widest">© 2026 ALL RIGHTS RESERVED.</span>
+<div class="flex gap-8">
+<a class="text-slate-500 hover:text-cyan-400 transition-colors font-['Manrope'] text-xs uppercase tracking-widest opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-cyan-400 transition-colors font-['Manrope'] text-xs uppercase tracking-widest opacity-80 hover:opacity-100" href="#">Institutional Access</a>
+</div>
+</div>
 </footer>
-</body>
-</html>
+
+</body></html>
