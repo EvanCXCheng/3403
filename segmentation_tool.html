@@ -87,6 +87,14 @@
         .medical-crosshair {
             cursor: crosshair;
         }
+        #drawCanvas {
+        touch-action: none; 
+        }
+        .tool-active {
+            background: #b4ebff !important;
+            color: #001f27 !important;
+            box-shadow: 0 0 15px rgba(60, 215, 255, 0.4);
+        }
     </style>
 </head>
 <body class="bg-surface text-on-surface font-body min-h-screen flex flex-col overflow-hidden">
@@ -114,13 +122,13 @@
 <main class="flex-1 mt-20 flex overflow-hidden">
 <aside class="w-20 bg-surface-container-low flex flex-col items-center py-8 gap-6 z-40">
 <div class="flex flex-col gap-4">
-<button class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary-fixed text-on-primary-fixed shadow-[0_0_15px_rgba(60,215,255,0.4)] transition-all">
+<button id = "brush_tool" class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary-fixed text-on-primary-fixed shadow-[0_0_15px_rgba(60,215,255,0.4)] transition-all">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">brush</span>
 </button>
-<button class="w-12 h-12 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-highest transition-all">
+<button id = "polyline_tool" class="w-12 h-12 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-highest transition-all">
 <span class="material-symbols-outlined">polyline</span>
 </button>
-<button class="w-12 h-12 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-highest transition-all">
+<button id = "eraser_tool" class="w-12 h-12 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-highest transition-all">
 <span class="material-symbols-outlined">ink_eraser</span>
 </button>
 <div class="h-px w-8 bg-outline-variant/30 my-2"></div>
@@ -130,22 +138,29 @@
 <button class="w-12 h-12 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-highest transition-all">
 <span class="material-symbols-outlined">pan_tool</span>
 </button>
-<button class="w-12 h-12 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-highest transition-all">
+<button id = "undo_tool" class="w-12 h-12 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-highest transition-all">
 <span class="material-symbols-outlined">undo</span>
 </button>
 </div>
 </aside>
 <section class="flex-1 relative bg-surface-container-lowest overflow-hidden flex items-center justify-center group p-4">
 <div class="relative w-full h-full max-w-5xl max-h-[819px] rounded-xl overflow-hidden shadow-2xl border border-outline-variant/10 medical-crosshair">
-<img alt="High-resolution CT scan of abdominal cavity" class="w-full h-full object-cover opacity-80" data-alt="Detailed monochrome CT scan slice of a human abdomen showing internal organs like liver and kidneys with clinical digital overlays" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlIhwMcEDqBcOvAgCS_HEvhw5U6C9rT5_ZnOoVOZzKjTkZpYmi5rz-wK9yeie2Oj1ZK8GhTHRDIZmN8Bz8JLSEIbOOdIMy78qJVr6CJQV7H0nRpU8h0uAbrp167rB6GUKbJdt6VFGDikSJQ7hztAkrAika3hSvMH1VBcYA-zN3F9IhSzQyg6t0OfSGG73gt3W9WKalSgBPCFSI_4sKYpUg0p_cqsAf98xUN8_s59W1eI2IuxeX_QN6aoInntT7Hio27JbVVCotfvw"/>
-<svg class="absolute inset-0 pointer-events-none w-full h-full" viewbox="0 0 1000 1000">
-<path d="M400,300 Q450,280 500,310 T600,350 T550,450 T450,480 T350,400 Z" fill="rgba(60, 215, 255, 0.2)" stroke="#3cd7ff" stroke-dasharray="4 2" stroke-width="2"></path>
-<circle cx="500" cy="310" fill="#3cd7ff" r="4"></circle>
-<circle cx="600" cy="350" fill="#3cd7ff" r="4"></circle>
-</svg>
+<img
+alt="High-resolution CT scan of abdominal cavity"
+class="w-full h-full object-cover opacity-80"
+src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlIhwMcEDqBcOvAgCS_HEvhw5U6C9rT5_ZnOoVOZzKjTkZpYmi5rz-wK9yeie2Oj1ZK8GhTHRDIZmN8Bz8JLSEIbOOdIMy78qJVr6CJQV7H0nRpU8h0uAbrp167rB6GUKbJdt6VFGDikSJQ7hztAkrAika3hSvMH1VBcYA-zN3F9IhSzQyg6t0OfSGG73gt3W9WKalSgBPCFSI_4sKYpUg0p_cqsAf98xUN8_s59W1eI2IuxeX_QN6aoInntT7Hio27JbVVCotfvw"
+/>
+<!-- Canvas element used here for the segmentation tool mask-->
+<canvas id="drawCanvas" class="absolute inset-0 w-full h-full z-10"></canvas> 
 <div class="absolute top-4 left-4 glass-panel px-4 py-2 rounded-lg border border-white/10 flex items-center gap-3">
 <div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
 <span class="text-xs font-label uppercase tracking-widest text-primary-fixed">Active Canvas: MRI_SEC_882</span>
+</div>
+<div class="absolute bottom-4 right-4 flex gap-2">
+<div class="glass-panel px-3 py-1.5 rounded-lg border border-white/5 text-[10px] font-label text-on-surface-variant">X: 1042.4</div>
+<div class="glass-panel px-3 py-1.5 rounded-lg border border-white/5 text-[10px] font-label text-on-surface-variant">Y: 892.1</div>
+<div class="glass-panel px-3 py-1.5 rounded-lg border border-white/5 text-[10px] font-label text-on-surface-variant">Z: 12.0mm</div>
+</div>
 </div>
 <div class="absolute bottom-4 right-4 flex gap-2">
 <div class="glass-panel px-3 py-1.5 rounded-lg border border-white/5 text-[10px] font-label text-on-surface-variant">X: 1042.4</div>
@@ -191,7 +206,7 @@
 </div>
 </div>
 <div class="pt-6 mt-auto space-y-3">
-<button class="w-full py-4 rounded-xl bg-tertiary text-on-tertiary font-headline font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,228,117,0.3)] hover:brightness-110 transition-all">
+<button id = "submit_analysis" class="w-full py-4 rounded-xl bg-tertiary text-on-tertiary font-headline font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,228,117,0.3)] hover:brightness-110 transition-all">
 <span class="material-symbols-outlined">check_circle</span>
                     Submit Analysis
                 </button>
@@ -209,5 +224,6 @@
 <a class="text-slate-500 hover:text-cyan-400 transition-colors font-['Manrope'] text-xs uppercase tracking-widest" href="#">Institutional Access</a>
 </div>
 </div>
+<script src="External Sheets/drawing.js"></script>
 </footer>
 </body></html>
