@@ -93,9 +93,9 @@
 <div class="flex items-center gap-8">
 <span class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-700 bg-clip-text text-transparent font-headline tracking-tight">MED-SEG ALPHA</span>
 <nav class="hidden md:flex gap-6">
-<a class="text-slate-400 hover:text-slate-200 transition-colors font-headline" href="#">Home</a>
-<a class="text-slate-400 hover:text-slate-200 transition-colors font-headline" href="#">Leaderboard</a>
-<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1 font-headline" href="#">Profile</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-headline" href="{{ url_for('index') }}">Home</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-headline" href="{{ url_for('leaderboard') }}">Leaderboard</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1 font-headline" href="{{ url_for('profile_default') }}">Profile</a>
 </nav>
 </div>
 <div class="flex items-center gap-4">
@@ -117,12 +117,12 @@
 <div class="relative group w-48 h-48 mx-auto lg:mx-0">
 <div class="absolute -inset-1 bg-gradient-to-tr from-primary to-secondary rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
 <div class="relative w-full h-full bg-surface-container-low rounded-xl overflow-hidden">
-<img alt="User Avatar" class="w-full h-full object-cover" data-alt="High-detail medical professional avatar with a focused gaze, subtle cybernetic holographic interface overlays on skin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwkuY2xbL_hE-6lloyVmgXWZPa8MrCpHFPdK_nepmL1lDRHibhFrkDjCHRFG-gRzj7mF_ss_Q_68Sgv0VnGbKu8g5OKSemMBubJVqvwyli1ok-aL9txO5vcqlbMzdJxg8UHqSnd1tR2n1PA52GtU7U6fjdwUuIl3HGAJEMgDyShAMhcGv9Ks_pP6aXN6AgvshmjGQsqM3xchW1vATamciWQeV4sK5CaVpcV6I0oVO5xnpAbR1eNFl_g-CJzyqKQJDSpJyPE9a3EDs"/>
+<img alt="User Avatar" class="w-full h-full object-cover" src="{{ user.avatar }}"/>
 </div>
 </div>
 <div class="text-center lg:text-left space-y-2">
-<h1 class="text-4xl font-headline font-bold text-on-surface tracking-tight">DR. ELARA VANCE</h1>
-<p class="text-secondary font-headline uppercase tracking-widest text-sm">Level 42 Lead Pathologist</p>
+<h1 class="text-4xl font-headline font-bold text-on-surface tracking-tight">{{ user.name }}</h1>
+<p class="text-secondary font-headline uppercase tracking-widest text-sm">{{ user.level }}</p>
 </div>
 </div>
 <!-- Gamified Stats Cards -->
@@ -130,23 +130,23 @@
 <div class="bg-surface-container-high p-6 rounded-xl relative overflow-hidden group">
 <div class="absolute top-0 left-0 w-1 h-full bg-primary shadow-[0_0_8px_#3cd7ff]"></div>
 <p class="text-on-surface-variant text-xs font-label uppercase tracking-tighter mb-1">Segmentation Accuracy</p>
-<h3 class="text-3xl font-headline font-bold text-primary">99.4%</h3>
+<h3 class="text-3xl font-headline font-bold text-primary">{{ user.accuracy }}</h3>
 <div class="mt-4 h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-primary" style="width: 99.4%"></div>
+<div class="h-full bg-primary" style="width: {{ user.accuracy }}"></div>
 </div>
 </div>
 <div class="bg-surface-container-high p-6 rounded-xl relative overflow-hidden group">
 <div class="absolute top-0 left-0 w-1 h-full bg-secondary shadow-[0_0_8px_#cdbdff]"></div>
 <p class="text-on-surface-variant text-xs font-label uppercase tracking-tighter mb-1">Total Segments</p>
-<h3 class="text-3xl font-headline font-bold text-secondary">14,802</h3>
-<p class="text-[10px] text-on-surface-variant mt-2">+240 this week</p>
+<h3 class="text-3xl font-headline font-bold text-secondary">{{ user.segments }}</h3>
+<p class="text-[10px] text-on-surface-variant mt-2">{{ user.weekly_segments }}</p>
 </div>
 <div class="bg-surface-container-high p-6 rounded-xl relative overflow-hidden group">
 <div class="absolute top-0 left-0 w-1 h-full bg-tertiary shadow-[0_0_8px_#00e475]"></div>
 <p class="text-on-surface-variant text-xs font-label uppercase tracking-tighter mb-1">Platform XP</p>
-<h3 class="text-3xl font-headline font-bold text-tertiary">84,200</h3>
+<h3 class="text-3xl font-headline font-bold text-tertiary">{{ user.xp }}</h3>
 <div class="mt-4 h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-gradient-to-r from-secondary to-secondary-container" style="width: 65%"></div>
+<div class="h-full bg-gradient-to-r from-secondary to-secondary-container" style="width: {{ user.xp_progress }}"></div>
 </div>
 </div>
 </div>
