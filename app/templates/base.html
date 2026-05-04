@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+        "colors": {
+                "on-error": "#690005",
+                "on-primary-fixed": "#001f27",
+                "primary": "#3cd7ff",
+                "surface-bright": "#31394d",
+                "secondary": "#cdbdff",
+                "on-tertiary-fixed": "#00210b",
+                "secondary-container": "#5203d5",
+                "on-primary-container": "#ebf9ff",
+                "inverse-surface": "#dae2fd",
+                "primary-fixed": "#b4ebff",
+                "primary-container": "#007b95",
+                "on-tertiary": "#003918",
+                "surface-container": "#171f33",
+                "on-tertiary-fixed-variant": "#005226",
+                "surface": "#0b1326",
+                "surface-container-high": "#222a3d",
+                "on-primary": "#003642",
+                "secondary-fixed-dim": "#cdbdff",
+                "on-surface-variant": "#bec8cc",
+                "surface-container-highest": "#2d3449",
+                "secondary-fixed": "#e8deff",
+                "surface-variant": "#2d3449",
+                "on-secondary-fixed-variant": "#4f00d0",
+                "tertiary-container": "#008240",
+                "surface-container-low": "#131b2e",
+                "on-secondary": "#370096",
+                "on-tertiary-container": "#dcffde",
+                "outline-variant": "#3e484c",
+                "surface-dim": "#0b1326",
+                "background": "#0b1326",
+                "tertiary": "#00e475",
+                "error": "#ffb4ab",
+                "inverse-on-surface": "#283044",
+                "surface-container-lowest": "#060e20",
+                "primary-fixed-dim": "#3cd7ff",
+                "on-secondary-container": "#c0acff",
+                "inverse-primary": "#00677e",
+                "on-background": "#dae2fd",
+                "on-surface": "#dae2fd",
+                "on-primary-fixed-variant": "#004e5f",
+                "on-secondary-fixed": "#20005f",
+                "outline": "#889296",
+                "surface-tint": "#3cd7ff",
+                "error-container": "#93000a",
+                "on-error-container": "#ffdad6",
+                "tertiary-fixed": "#62ff96",
+                "tertiary-fixed-dim": "#00e475"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "fontFamily": {
+                "headline": ["Space Grotesk"],
+                "body": ["Manrope"],
+                "label": ["Inter"]
+        }
+        },
+    },
+    }
+</script>
+{% block headers %}{% endblock %}
+
+</head>
+{% block body_class %}{%endblock %}
+<nav class="fixed top-0 w-full z-50 bg-[#0b1326]/60 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex justify-between items-center px-8 h-20 w-full">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-700 bg-clip-text text-transparent font-headline tracking-tight">MED-SEG ALPHA</span>
+<div class="hidden md:flex gap-6">
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-headline" href="{{ url_for('index') }}">Home</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-headline" href="{{ url_for('leaderboard') }}">Leaderboard</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-headline" href="{{ url_for('profile_default') }}">Profile</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:bg-white/5 rounded-xl transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-400 hover:bg-white/5 rounded-xl transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden">
+<img alt="User clinical profile" data-alt="Close-up portrait of a professional medical doctor in dark blue scrubs, clinical and high-tech setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArMWHE5MWSkSKwYdp41QPaGY7BcgHyTAODBGvisM2UhcXmRmKYddZ9IH3eP6kjHnEXhzHGhFyEO0jYWReZVp6Wt5ZAbnUpOQn562CSvtbDvXWAh7ZyEdp7329vXN4dVnkvhPJDcKP_yVEfk9iZHaXgk9dxRush6UslPtj79R9NQ5-LO8adaEqKVe88jq0pe0qsChPFOVeGWF9Mqx04j6tW5-B9MUn3lj6Do1bR1-bkO5xmageewpaMFTb5HPS4DPGP_tBZuw9QMOM"/>
+</div>
+</div>
+</nav>
+{% block content %}{% endblock %}
+<!-- Footer -->
+<footer class="bg-[#0b1326] border-t border-slate-800/20 w-full py-12 px-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
+<div class="flex flex-col gap-2 items-center md:items-start">
+<span class="text-slate-500 font-headline font-bold text-xl">MED-SEG</span>
+<p class="text-slate-500 font-body text-xs uppercase tracking-widest">© 2026 ALL RIGHTS RESERVED.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-slate-500 hover:text-cyan-400 transition-colors font-body text-xs uppercase tracking-widest" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-cyan-400 transition-colors font-body text-xs uppercase tracking-widest" href="#">Institutional Access</a>
+</div>
+</div>
+</footer>
+</body>
+</html>
