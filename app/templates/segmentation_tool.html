@@ -94,9 +94,9 @@
 <div class="flex items-center gap-8">
 <span class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-700 bg-clip-text text-transparent font-headline tracking-tight">MED-SEG ALPHA</span>
 <div class="hidden md:flex gap-6">
-<a class="text-slate-400 hover:text-slate-200 transition-colors font-headline" href="#">Home</a>
-<a class="text-slate-400 hover:text-slate-200 transition-colors font-headline" href="#">Leaderboard</a>
-<a class="text-slate-400 hover:text-slate-200 transition-colors font-headline" href="#">Profile</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-headline" href="{{ url_for('index') }}">Home</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-headline" href="{{ url_for('leaderboard') }}">Leaderboard</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-headline" href="{{ url_for('profile_default') }}">Profile</a>
 </div>
 </div>
 <div class="flex items-center gap-4">

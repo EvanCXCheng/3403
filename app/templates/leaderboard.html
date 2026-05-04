@@ -100,9 +100,9 @@
 <div class="flex items-center gap-8">
 <span class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-700 bg-clip-text text-transparent font-['Space_Grotesk'] tracking-tight">MED-SEG ALPHA</span>
 <div class="hidden md:flex items-center gap-6">
-<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#">Home</a>
-<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1 font-['Space_Grotesk'] tracking-tight" href="#">Leaderboard</a>
-<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="#">Profile</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="{{ url_for('index') }}">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1 font-['Space_Grotesk'] tracking-tight" href="{{ url_for('leaderboard') }}">Leaderboard</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-['Space_Grotesk'] tracking-tight" href="{{ url_for('profile_default') }}">Profile</a>
 </div>
 </div>
 <div class="flex items-center gap-4">
