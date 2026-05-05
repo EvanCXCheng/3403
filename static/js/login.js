@@ -1,38 +1,87 @@
 'use strict';
 
-const loginForm = document.getElementById('user');
+const loginForm    = document.getElementById('user');
 const registerForm = document.getElementById('new');
 
-loginForm.addEventListener('submit', (e) => {
+// ── Login ──────────────────────────────────────────────────────────────────────
+loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const username = document.getElementById('username').value.trim();
-  const password = document.getElementById('userpassword').value;
-  // POST login will be wired to Flask in Step 3
-  console.log('Login attempt:', username);
+  clearErrors();
+
+  const data = new FormData(loginForm);
+  data.append('action', 'login');
+
+  const json = await postForm(data);
+
+  if (json.ok) {
+    window.location.href = json.redirect;
+  } else if (json.error) {
+    showError('login_error', json.error);
+  } else if (json.errors) {
+    mapErrors(json.errors, { email: 'login_error', password: 'login_error' });
+  }
 });
 
-registerForm.addEventListener('submit', (e) => {
+// ── Register ───────────────────────────────────────────────────────────────────
+registerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  clearErrors();
 
-  const email = document.getElementById('newname').value.trim();
+  // Client-side validation before hitting the server
+  const email    = document.getElementById('newname').value.trim();
   const password = document.getElementById('newpassword').value;
 
   if (!isValidEmail(email)) {
-    document.getElementById('email_error').textContent = 'Please enter a valid email address.';
+    showError('email_error', 'Please enter a valid email address.');
     return;
   }
-  document.getElementById('email_error').textContent = '';
-
   if (!isValidPassword(password)) {
-    document.getElementById('password_error').textContent =
-      'Password must contain uppercase, lowercase, a number, and be 8+ characters.';
+    showError('password_error',
+      'Password must be 8+ characters and include uppercase, lowercase, and a number.');
     return;
   }
-  document.getElementById('password_error').textContent = '';
 
-  // POST register will be wired to Flask in Step 3
-  console.log('Register attempt:', email);
+  const data = new FormData(registerForm);
+  data.append('action', 'register');
+
+  const json = await postForm(data);
+
+  if (json.ok) {
+    window.location.href = json.redirect;
+  } else if (json.error) {
+    showError('email_error', json.error);
+  } else if (json.errors) {
+    mapErrors(json.errors, { email: 'email_error', password: 'password_error' });
+  }
 });
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+async function postForm(formData) {
+  try {
+    const res = await fetch('/login', { method: 'POST', body: formData });
+    return await res.json();
+  } catch {
+    return { ok: false, error: 'Network error — please try again.' };
+  }
+}
+
+function showError(id, message) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = message;
+}
+
+function clearErrors() {
+  ['login_error', 'email_error', 'password_error'].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = '';
+  });
+}
+
+function mapErrors(errors, fieldMap) {
+  for (const [field, msg] of Object.entries(errors)) {
+    showError(fieldMap[field] || 'login_error', msg);
+  }
+}
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);

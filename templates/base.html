@@ -53,10 +53,15 @@
        class="{{ 'text-cyan-400 border-b border-cyan-400 pb-0.5' if request.endpoint == 'index' else 'text-gray-400 hover:text-gray-200' }}">Home</a>
     <a href="{{ url_for('leaderboard') }}"
        class="{{ 'text-cyan-400 border-b border-cyan-400 pb-0.5' if request.endpoint == 'leaderboard' else 'text-gray-400 hover:text-gray-200' }}">Leaderboard</a>
-    <a href="{{ url_for('profile') }}"
-       class="{{ 'text-cyan-400 border-b border-cyan-400 pb-0.5' if request.endpoint == 'profile' else 'text-gray-400 hover:text-gray-200' }}">Profile</a>
-    <a href="{{ url_for('login') }}"
-       class="{{ 'text-cyan-400 border-b border-cyan-400 pb-0.5' if request.endpoint == 'login' else 'text-gray-400 hover:text-gray-200' }}">Login</a>
+    {% if current_user.is_authenticated %}
+      <a href="{{ url_for('profile') }}"
+         class="{{ 'text-cyan-400 border-b border-cyan-400 pb-0.5' if request.endpoint == 'profile' else 'text-gray-400 hover:text-gray-200' }}">Profile</a>
+      <span class="text-gray-500 text-xs">{{ current_user.username }}</span>
+      <a href="{{ url_for('logout') }}" class="text-gray-400 hover:text-gray-200">Logout</a>
+    {% else %}
+      <a href="{{ url_for('login') }}"
+         class="{{ 'text-cyan-400 border-b border-cyan-400 pb-0.5' if request.endpoint == 'login' else 'text-gray-400 hover:text-gray-200' }}">Login</a>
+    {% endif %}
   </div>
 </nav>
 
