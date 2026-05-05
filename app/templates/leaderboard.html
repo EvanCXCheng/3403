@@ -85,136 +85,71 @@
 </tr>
 </thead>
 <tbody class="divide-y divide-outline-variant/10">
+{% for player in players %}
 <tr class="hover:bg-white/5 transition-colors">
+
 <td class="py-6 px-8">
+{% if loop.index == 1 %}
 <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-yellow-500/10 text-yellow-400">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">military_tech</span>
 </div>
-</td>
-<td class="py-6 px-4">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high">
-<img alt="Top Player" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1_llpmTESCnFQd_G9uziWLEMSsLSWU8y9rR-3DsLzvaNzR_fk8GVQaGeN2n90nLnsaetU5qngIwMD_t4rYBkZG2o66HpPk8Y0vAwiawxSOHe93qXPekZB0ZVBBjiTiiNbvvSGZQjDrUS1tuMQ3ylRI7yso0P4tbw-y1iFyMEyEYrEQmrOnMPfkbIldpyOwKAe7CQvgb95jYN2mo6dBWpzt2pZwnoTKvBJUWNCOWOqUwAPyeUtQQWT3IP3oL-OrRe-SW53kJo1UGg"/>
-</div>
-<span class="font-headline font-medium text-lg">Neuro_Elite</span>
-</div>
-</td>
-<td class="py-6 px-4 text-center">
-<span class="font-headline font-bold text-primary">42,980</span>
-</td>
-<td class="py-6 px-4 text-center">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20">
-<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
-<span class="font-label font-bold text-sm">99.8%</span>
-</div>
-</td>
-<td class="py-6 px-4 text-center font-label text-on-surface-variant">1,204</td>
-<td class="py-6 px-8 text-right">
-<span class="material-symbols-outlined text-tertiary">trending_up</span>
-</td>
-</tr>
-<tr class="hover:bg-white/5 transition-colors">
-<td class="py-6 px-8">
+{% elif loop.index == 2 %}
 <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-300/10 text-slate-300">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">military_tech</span>
 </div>
-</td>
-<td class="py-6 px-4">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high">
-<img alt="Silver Player" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY7yKl1duyvszNZtUDCgcDxRiNojZgn0MBlff_a8lhIQoIG-E8ToLLQFRZBWgAO4zZdQ1xJEoL8ThP-sEQ5HeaosHCKZIWCowY3pRaycX7FgSjJ2jE07NRzdkYoZUBjZf2j3BCRG3zceOOADFPs-3S0ceunq45804sNbuh9IhKzOx3hjOZHxw-zqsrRiSIc9yPP0_YYVSLPjAvlI_E4YwRrdV5Sf-DsYIz8fPSEh23US4Efz-0CQldCnf8Ax9727Hu2oZfUsc5bU0"/>
-</div>
-<span class="font-headline font-medium text-lg">PulseVector</span>
-</div>
-</td>
-<td class="py-6 px-4 text-center">
-<span class="font-headline font-bold text-primary">38,120</span>
-</td>
-<td class="py-6 px-4 text-center">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20">
-<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
-<span class="font-label font-bold text-sm">99.4%</span>
-</div>
-</td>
-<td class="py-6 px-4 text-center font-label text-on-surface-variant">988</td>
-<td class="py-6 px-8 text-right">
-<span class="material-symbols-outlined text-tertiary">trending_up</span>
-</td>
-</tr>
-<tr class="hover:bg-white/5 transition-colors">
-<td class="py-6 px-8">
+{% elif loop.index == 3 %}
 <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-orange-700/10 text-orange-500">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">military_tech</span>
 </div>
+{% else %}
+<div class="text-center">
+<span class="font-headline font-bold text-on-surface-variant">{{ loop.index }}</span>
+</div>
+{% endif %}
 </td>
+
 <td class="py-6 px-4">
 <div class="flex items-center gap-4">
 <div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high">
-<img alt="Bronze Player" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf0Kd4d0Yx4fj35Q-up0T2g5rzBiGboIg_EQpOWCmlHlWPEQICEbWb9khNg-Ig_bOdmWcb56sd7aCYP8FzKwX33RWujYI0LCfUO5Diow2k9Y12Hqhy9Y-FaF2FeMm6OE9e0qNiF1OB1joGZAcD3DfO3qF_w1d-RipclhqsLVcy7Znu5Rf1jvOdyQKG5lURYVBngJvFGOQnu80fMtJbEbhKSFM6wDMacBUHihkRjD12iPiyMmESsbwIXkFsrbgYRLHmc1N2nXpZsRg"/>
+<img alt="{{ player.username }} avatar" class="w-full h-full object-cover" src="{{ player.avatar }}">
 </div>
-<span class="font-headline font-medium text-lg">Synapse_RX</span>
+<span class="font-headline font-medium text-lg">{{ player.username }}</span>
 </div>
 </td>
+
 <td class="py-6 px-4 text-center">
-<span class="font-headline font-bold text-primary">35,440</span>
+<span class="font-headline font-bold text-primary">{{ player.xp }}</span>
 </td>
+
 <td class="py-6 px-4 text-center">
+{% if loop.index <= 3 %}
 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20">
 <span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
-<span class="font-label font-bold text-sm">98.9%</span>
+<span class="font-label font-bold text-sm">{{ player.accuracy }}</span>
 </div>
-</td>
-<td class="py-6 px-4 text-center font-label text-on-surface-variant">842</td>
-<td class="py-6 px-8 text-right">
-<span class="material-symbols-outlined text-on-surface-variant/50">remove</span>
-</td>
-</tr>
-<tr class="hover:bg-white/5 transition-colors">
-<td class="py-6 px-8 text-center">
-<span class="font-headline font-bold text-on-surface-variant">4</span>
-</td>
-<td class="py-6 px-4">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high">
-<img alt="Player 4" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4ix1-0Ens-NF4wZXyrmLDeYHDiq3C_A6kL9BxGDf1YPKZZcAbxD5NP_X2jx48vAMzyeJqn1IFm2n5Oa8FhBHZAqUzyZ-0o9EHG_378qIn7EmtV-xPqjKpJyVxQtgrzJqwSSVnJ1ehDVW9wvXJ5xece7kCcz--_5_dUywRR2GaX4cILvopBYuY4DKO36oh9ijDwxJZMSGNpDbqwXIOUTQwTtGExLOhba9QMfwx3RhubBUmuUJklOf_ETyya-pFfcFcyF0jBu3oVdM"/>
-</div>
-<span class="font-headline font-medium text-lg">BioHacker_01</span>
-</div>
-</td>
-<td class="py-6 px-4 text-center font-headline font-bold text-on-surface">29,800</td>
-<td class="py-6 px-4 text-center">
+{% else %}
 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
-<span class="font-label font-bold text-sm">97.2%</span>
+<span class="font-label font-bold text-sm">{{ player.accuracy }}</span>
 </div>
+{% endif %}
 </td>
-<td class="py-6 px-4 text-center font-label text-on-surface-variant">715</td>
+
+<td class="py-6 px-4 text-center font-label text-on-surface-variant">
+{{ player.cases_solved }}
+</td>
+
 <td class="py-6 px-8 text-right">
-<span class="material-symbols-outlined text-tertiary">trending_up</span>
-</td>
-</tr>
-<tr class="hover:bg-white/5 transition-colors">
-<td class="py-6 px-8 text-center">
-<span class="font-headline font-bold text-on-surface-variant">5</span>
-</td>
-<td class="py-6 px-4">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high">
-<img alt="Player 5" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmWs-1nAfLolBD4yKV5i3newSjp3xoaWDwGjMYqfSihpBs7XBzcpvN1Ep-rC-OpGkQRvq_a-orYp1sgAhd8Kr_SVm4tUVDLhrouIUCaXy81G_wrWp9YQYOS5tQ5REX4zrfl3yGqE4l7-MiUpuTE0T_jDg11kPTtajrpI6OMIzdUDoZgeis1F_25U8SIkx4QQJfFvDdiiX7353SkW3dQdXM0qHG2MJmWoCWyFhLAXF0szcC7PCbNPKQpSq_pi6vYVadbL6B1A5oMQs"/>
-</div>
-<span class="font-headline font-medium text-lg">CortexMapper</span>
-</div>
-</td>
-<td class="py-6 px-4 text-center font-headline font-bold text-on-surface">27,550</td>
-<td class="py-6 px-4 text-center">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
-<span class="font-label font-bold text-sm">96.8%</span>
-</div>
-</td>
-<td class="py-6 px-4 text-center font-label text-on-surface-variant">640</td>
-<td class="py-6 px-8 text-right">
+{% if player.trend == "trending_down" %}
 <span class="material-symbols-outlined text-error">trending_down</span>
+{% elif player.trend == "remove" %}
+<span class="material-symbols-outlined text-on-surface-variant/50">remove</span>
+{% else %}
+<span class="material-symbols-outlined text-tertiary">trending_up</span>
+{% endif %}
 </td>
+
 </tr>
+{% endfor %}
 </tbody>
 </table>
 </div>

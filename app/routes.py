@@ -31,7 +31,50 @@ def index():
 
 @app.route('/leaderboard')
 def leaderboard():
-    return render_template('leaderboard.html')
+    players = [
+        {
+            "username": "Neuro_Elite",
+            "xp": "42,980",
+            "accuracy": "99.8%",
+            "cases_solved": "1,204",
+            "trend": "trending_up",
+            "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuB1_llpmTESCnFQd_G9uziWLEMSsLSWU8y9rR-3DsLzvaNzR_fk8GVQaGeN2n90nLnsaetU5qngIwMD_t4rYBkZG2o66HpPk8Y0vAwiawxSOHe93qXPekZB0ZVBBjiTiiNbvvSGZQjDrUS1tuMQ3ylRI7yso0P4tbw-y1iFyMEyEYrEQmrOnMPfkbIldpyOwKAe7CQvgb95jYN2mo6dBWpzt2pZwnoTKvBJUWNCOWOqUwAPyeUtQQWT3IP3oL-OrRe-SW53kJo1UGg"
+        },
+        {
+            "username": "PulseVector",
+            "xp": "38,120",
+            "accuracy": "99.4%",
+            "cases_solved": "988",
+            "trend": "trending_up",
+            "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuDY7yKl1duyvszNZtUDCgcDxRiNojZgn0MBlff_a8lhIQoIG-E8ToLLQFRZBWgAO4zZdQ1xJEoL8ThP-sEQ5HeaosHCKZIWCowY3pRaycX7FgSjJ2jE07NRzdkYoZUBjZf2j3BCRG3zceOOADFPs-3S0ceunq45804sNbuh9IhKzOx3hjOZHxw-zqsrRiSIc9yPP0_YYVSLPjAvlI_E4YwRrdV5Sf-DsYIz8fPSEh23US4Efz-0CQldCnf8Ax9727Hu2oZfUsc5bU0"
+        },
+        {
+            "username": "Synapse_RX",
+            "xp": "35,440",
+            "accuracy": "98.9%",
+            "cases_solved": "842",
+            "trend": "remove",
+            "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuBf0Kd4d0Yx4fj35Q-up0T2g5rzBiGboIg_EQpOWCmlHlWPEQICEbWb9khNg-Ig_bOdmWcb56sd7aCYP8FzKwX33RWujYI0LCfUO5Diow2k9Y12Hqhy9Y-FaF2FeMm6OE9e0qNiF1OB1joGZAcD3DfO3qF_w1d-RipclhqsLVcy7Znu5Rf1jvOdyQKG5lURYVBngJvFGOQnu80fMtJbEbhKSFM6wDMacBUHihkRjD12iPiyMmESsbwIXkFsrbgYRLHmc1N2nXpZsRg"
+        },
+        {
+            "username": "BioHacker_01",
+            "xp": "29,800",
+            "accuracy": "97.2%",
+            "cases_solved": "715",
+            "trend": "trending_up",
+            "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuA4ix1-0Ens-NF4wZXyrmLDeYHDiq3C_A6kL9BxGDf1YPKZZcAbxD5NP_X2jx48vAMzyeJqn1IFm2n5Oa8FhBHZAqUzyZ-0o9EHG_378qIn7EmtV-xPqjKpJyVxQtgrzJqwSSVnJ1ehDVW9wvXJ5xece7kCcz--_5_dUywRR2GaX4cILvopBYuY4DKO36oh9ijDwxJZMSGNpDbqwXIOUTQwTtGExLOhba9QMfwx3RhubBUmuUJklOf_ETyya-pFfcFcyF0jBu3oVdM"
+        },
+        {
+            "username": "CortexMapper",
+            "xp": "27,550",
+            "accuracy": "96.8%",
+            "cases_solved": "640",
+            "trend": "trending_down",
+            "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuCmWs-1nAfLolBD4yKV5i3newSjp3xoaWDwGjMYqfSihpBs7XBzcpvN1Ep-rC-OpGkQRvq_a-orYp1sgAhd8Kr_SVm4tUVDLhrouIUCaXy81G_wrWp9YQYOS5tQ5REX4zrfl3yGqE4l7-MiUpuTE0T_jDg11kPTtajrpI6OMIzdUDoZgeis1F_25U8SIkx4QQJfFvDdiiX7353SkW3dQdXM0qHG2MJmWoCWyFhLAXF0szcC7PCbNPKQpSq_pi6vYVadbL6B1A5oMQs"
+        }
+    ]
+
+    return render_template('leaderboard.html', players=players)
 
 
 @app.route('/profile')
