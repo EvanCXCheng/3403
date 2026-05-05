@@ -1,0 +1,207 @@
+{%extends "base.html" %}
+
+{%block headers %}
+<title>Clinical Segmentation - MED-SEG ALPHA</title>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #0b1326; color: #dae2fd; }
+        .glass-panel { backdrop-filter: blur(20px); border: 1px solid rgba(62, 72, 76, 0.2); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+{%endblock %}
+{%block  body_class %}<body class="selection:bg-primary/30 selection:text-primary">{%endblock %}
+{%block content %}
+<main class="pt-20">
+<section class="relative min-h-[921px] flex items-center px-8 md:px-20 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent z-10"></div>
+<img alt="Homepage background tech body" class="w-full h-full object-cover opacity-40" data-alt="Futuristic tech interface with human body and segmentations" src="https://img.freepik.com/premium-photo/image-is-representation-human-body-with-various-organs-systems-labeled_137441-16626.jpg"/>
+</div>
+<div class="relative z-20 max-w-3xl space-y-8">
+<div class="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel bg-surface-container-low/40 border border-primary/20">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="text-tertiary text-xs font-label font-bold uppercase tracking-widest">Live Research Phase 04</span>
+</div>
+<h1 class="text-6xl md:text-8xl font-headline font-bold text-on-surface leading-tight tracking-tighter">
+                    PRECISION <br/> <span class="text-primary italic">SAVES LIVES.</span>
+</h1>
+<p class="text-lg md:text-xl text-on-surface-variant max-w-xl font-body leading-relaxed">
+                    Enter the frontlines of medical diagnostics. Segment real clinical data, master anatomical structures, and train the next generation of AI surgeons through immersive gameplay.
+                </p>
+<div class="flex flex-col sm:flex-row gap-6 pt-4">
+<a href="{{ url_for('segmentation_tool') }}" class="px-8 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold rounded-lg text-lg flex items-center justify-center gap-2 hover:brightness-110 transition-all shadow-lg shadow-primary/20">
+                PLAY NOW <span class="material-symbols-outlined">play_arrow</span>
+</a>
+</button>
+<button class="px-8 py-4 border border-outline-variant/30 text-on-surface font-headline font-bold rounded-lg text-lg hover:bg-surface-bright transition-all">
+                        OPERATIONS MANUAL
+                    </button>
+</div>
+</div>
+<div class="hidden lg:block absolute right-20 bottom-20 w-80 glass-panel p-6 rounded-xl bg-surface-container-high/60">
+<div class="space-y-4">
+<h3 class="font-headline font-bold text-secondary flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+                        GLOBAL RANKING
+                    </h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center bg-surface-container-lowest/50 p-3 rounded">
+<span class="font-label text-sm">01. Dr_Void</span>
+<span class="text-tertiary font-bold">12,450 XP</span>
+</div>
+<div class="flex justify-between items-center bg-surface-container-lowest/50 p-3 rounded">
+<span class="font-label text-sm">02. NeuroPulse</span>
+<span class="text-tertiary font-bold">11,920 XP</span>
+</div>
+<div class="flex justify-between items-center bg-surface-container-lowest/50 p-3 rounded border-l-4 border-secondary">
+<span class="font-label text-sm text-secondary">03. YOU</span>
+<span class="text-tertiary font-bold">10,800 XP</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 px-8 md:px-20 bg-surface-container-low">
+<div class="grid lg:grid-cols-2 gap-20 items-center max-w-7xl mx-auto">
+<div class="relative aspect-square md:aspect-video lg:aspect-square rounded-2xl overflow-hidden glass-panel">
+<img alt="Segmentation interface" class="w-full h-full object-cover" data-alt="Close-up of a high-tech medical UI showing 3D spinal column segmentation with colorful heatmaps and technical data readouts" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMGu-FMFqFNDZUHamMUgSaByOmnNUmzd6Wbu_LNAPRx7X7w2m4O8ZM7bd3gC-LZrzhB7ZK8hw9qQeh4gLHIvYX66Cqq-fc5N18_hQaV9cWEibRrNOFLRVtjswpCnyt2CAZnxYecwzjysr01ppp_FgDsHEn_ocdu3nEKKykMNuPeNnsnSWXvAx5pz4LGY40O6twa0n2OVHoqbKtYDYMzqnW4jEi9XdJhLiiTi2t-NpoAQBLzTs213XCfJxgP6bTXfIPyqW5ZUE8WFY"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-24 h-24 bg-primary/20 rounded-full border border-primary animate-ping opacity-20"></div>
+<div class="absolute w-64 h-1 bg-primary/40 shadow-[0_0_15px_rgba(60,215,255,0.5)]"></div>
+</div>
+</div>
+<div class="space-y-8">
+<div class="space-y-4">
+<h2 class="text-4xl font-headline font-bold">HOW TO <span class="text-primary">OPERATE</span></h2>
+<div class="w-20 h-1 bg-primary"></div>
+</div>
+<div class="space-y-6">
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center text-primary border border-primary/20">
+<span class="material-symbols-outlined">magnification_small</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-xl mb-1">IDENTIFY ANOMALIES</h4>
+<p class="text-on-surface-variant font-body">Scan cross-sectional slices to find tumors, nodules, or structural irregularities hidden in raw clinical imaging.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center text-secondary border border-secondary/20">
+<span class="material-symbols-outlined">draw</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-xl mb-1">SEGMENT &amp; MAP</h4>
+<p class="text-on-surface-variant font-body">Use precision tools to outline boundaries. Your manual labels help train AI to recognize pathology with sub-millimeter accuracy.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center text-tertiary border border-tertiary/20">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-xl mb-1">VALIDATE RESEARCH</h4>
+<p class="text-on-surface-variant font-body">Submit your segmentation to the consensus pool. High-agreement labels earn clinical credits and boost your worldwide rank.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 px-8 md:px-20 bg-surface">
+<div class="max-w-7xl mx-auto space-y-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-4">
+<span class="font-label font-bold text-secondary uppercase tracking-[0.3em]">Current Assignments</span>
+<h2 class="text-5xl font-headline font-bold">ACTIVE <span class="italic">QUESTS</span></h2>
+</div>
+<div class="flex gap-4">
+<button class="p-3 bg-surface-container-high rounded-full hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-3 bg-surface-container-high rounded-full hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="group bg-surface-container-high rounded-xl overflow-hidden hover:translate-y-[-8px] transition-all duration-300">
+<div class="h-48 relative overflow-hidden">
+<img alt="Lung quest" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Radiological chest X-ray with detailed ribcage and pulmonary structures highlighted in a cool blue and silver color scheme" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmucLtOlI79qVwU99seWCpFrzYGbDZv6IRmCpwUvYAE-QV2H40qF5UhFygO9y5FaRUQaT1y0RtuQWZtWtrBgxBuZRhrhz_nrXsnmTp7YXgogDBSjBFl5xhrghIysOW_jfAvpLtD6AobwhAGSIfxzsFzThLtGq-vysKJoWDDI9-IL4a81Txoea0fg6718lEWMXJQAXoT8X53NH7xkg09zZcj3Cd7wEvhXlkLjBEnA6JpvPfOmcAOXj_V27tW-HXJJ8VM6P00aejsoA"/>
+<div class="absolute top-4 right-4 bg-tertiary/90 text-on-tertiary px-3 py-1 rounded-full text-xs font-bold font-label">HIGH REWARD</div>
+</div>
+<div class="p-8 space-y-4">
+<h3 class="text-2xl font-headline font-bold">Lung Nodule Hunter</h3>
+<p class="text-on-surface-variant font-body text-sm line-clamp-2">Search through high-resolution CT scans to identify and isolate early-stage pulmonary nodules.</p>
+<div class="pt-4 border-t border-outline-variant/10 flex justify-between items-center">
+<div class="space-y-1">
+<span class="block text-[10px] text-slate-500 font-label uppercase">Difficulty</span>
+<div class="flex gap-1">
+<div class="w-4 h-1 bg-tertiary rounded-full"></div>
+<div class="w-4 h-1 bg-tertiary rounded-full"></div>
+<div class="w-4 h-1 bg-surface-container-highest rounded-full"></div>
+</div>
+</div>
+<a href="{{ url_for('segmentation_tool') }}" class="text-primary font-headline font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                                    DEPLOY <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<div class="group bg-surface-container-high rounded-xl overflow-hidden hover:translate-y-[-8px] transition-all duration-300">
+<div class="h-48 relative overflow-hidden">
+<img alt="Brain quest" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Intricate MRI brain scan cross-section showing white and gray matter with digital measurement overlays in a dark medical setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHr3xqr7ZVRIHpM_OLd7VEHZe7AyWzJ4B718tpdGgnlWCSuRXijut4saGNuWRxb0nHRHPb9Xtpf4KF24u8gWnrhC7Bwv477wCyatQhpr914xQUWhjBkqm50mBwwZVj-sNvi50HJVzuVwwBQLZTEAKIHrnBhYR3b4QoQ5X6zNfBbcKnlL20SaswBuGPmJoiBaKDE9rffTjziX7mvp8rJXWsS5czI1s5pXrHRaWrZqWhjWiIcffpwMc337qZOUpGDKYZ7w52wTJ7kNw"/>
+<div class="absolute top-4 right-4 bg-secondary/90 text-on-secondary px-3 py-1 rounded-full text-xs font-bold font-label">ELITE</div>
+</div>
+<div class="p-8 space-y-4">
+<h3 class="text-2xl font-headline font-bold">Brain Scan Specialist</h3>
+<p class="text-on-surface-variant font-body text-sm line-clamp-2">Complex white-matter tractography segmentation. Requires anatomical mastery of the cerebral cortex.</p>
+<div class="pt-4 border-t border-outline-variant/10 flex justify-between items-center">
+<div class="space-y-1">
+<span class="block text-[10px] text-slate-500 font-label uppercase">Difficulty</span>
+<div class="flex gap-1">
+<div class="w-4 h-1 bg-tertiary rounded-full"></div>
+<div class="w-4 h-1 bg-tertiary rounded-full"></div>
+<div class="w-4 h-1 bg-tertiary rounded-full"></div>
+</div>
+</div>
+<a href="{{ url_for('segmentation_tool') }}" class="text-primary font-headline font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                                    DEPLOY <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<div class="group bg-surface-container-high rounded-xl overflow-hidden hover:translate-y-[-8px] transition-all duration-300">
+<div class="h-48 relative overflow-hidden">
+<img alt="Cardiac quest" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Detailed heart ultrasound and anatomical diagram showing valve movement and blood flow vectors in glowing green and red hues" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKsEj4ebtJSiuVc1U-1DAO1ZAd7wwIFvCHQPz4PkTKsQIUp3sOOQyiP_J-YUiQ9f_REp3FNxmT-ON90Q7faqy8XlXvYd5KTEaocA1tta61CGcP2Iq4JlPbLR4fsTjdEfVmoi84H8ncH-iCFxIICdlC8c3WLkDE8c2Z-_bi6jZZUBabzTnFejUyOILQrd7_5IRFyjBt7VhQm14alxQsXgoTME_KHqNM2ahzLWqX8pYB_Rfvg_Ue7XFhn_slAqAzoynO9E8VVqlX8Xk"/>
+<div class="absolute top-4 right-4 bg-primary/90 text-on-primary px-3 py-1 rounded-full text-xs font-bold font-label">TRAINING</div>
+</div>
+<div class="p-8 space-y-4">
+<h3 class="text-2xl font-headline font-bold">Cardiac Rhythm Mapper</h3>
+<p class="text-on-surface-variant font-body text-sm line-clamp-2">Map the left ventricle across cardiac cycles. Essential for calculating ejection fraction in AI models.</p>
+<div class="pt-4 border-t border-outline-variant/10 flex justify-between items-center">
+<div class="space-y-1">
+<span class="block text-[10px] text-slate-500 font-label uppercase">Difficulty</span>
+<div class="flex gap-1">
+<div class="w-4 h-1 bg-tertiary rounded-full"></div>
+<div class="w-4 h-1 bg-surface-container-highest rounded-full"></div>
+<div class="w-4 h-1 bg-surface-container-highest rounded-full"></div>
+</div>
+</div>
+<a href="{{ url_for('segmentation_tool') }}" class="text-primary font-headline font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                                    DEPLOY <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 px-8 md:px-20 bg-surface-container-lowest">
+<div class="max-w-4xl mx-auto text-center space-y-10">
+<div class="space-y-4">
+<h2 class="text-5xl font-headline font-bold text-on-surface">CONTRIBUTE TO <span class="text-tertiary">SCIENCE</span></h2>
+<p class="text-on-surface-variant text-xl font-body">Your contributions aren't just for high scores. Every accurate segmentation improves clinical workflows in 14 partner hospitals worldwide.</p>
+</div>
+</div>
+</section>
+</main>
+{%endblock %}
