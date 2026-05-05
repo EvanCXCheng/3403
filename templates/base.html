@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>{% block title %}MED-SEG ALPHA | Clinical Segmentation Gaming{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#3cd7ff",
+            "secondary": "#cdbdff",
+            "tertiary": "#00e475",
+            "surface": "#0b1326",
+            "surface-bright": "#31394d",
+            "surface-container": "#171f33",
+            "surface-container-low": "#131b2e",
+            "surface-container-high": "#222a3d",
+            "surface-container-highest": "#2d3449",
+            "surface-container-lowest": "#060e20",
+            "on-surface": "#dae2fd",
+            "on-surface-variant": "#bec8cc",
+            "outline-variant": "#3e484c",
+            "outline": "#889296",
+            "primary-container": "#007b95",
+            "on-primary": "#003642",
+            "on-tertiary": "#003918",
+            "secondary-container": "#5203d5",
+            "error": "#ffb4ab",
+          },
+          fontFamily: {
+            "headline": ["Space Grotesk"],
+            "body": ["Manrope"],
+            "label": ["Inter"]
+          }
+        }
+      }
+    }
+  </script>
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-gray-950 text-gray-200 min-h-screen {% block body_class %}{% endblock %}">
+
+<nav class="bg-gray-900 px-8 h-16 flex items-center justify-between border-b border-gray-800 shrink-0">
+  <a href="{{ url_for('index') }}" class="text-xl font-bold text-cyan-400">MED-SEG ALPHA</a>
+  <div class="flex items-center gap-6 text-sm">
+    <a href="{{ url_for('index') }}"
+       class="{{ 'text-cyan-400 border-b border-cyan-400 pb-0.5' if request.endpoint == 'index' else 'text-gray-400 hover:text-gray-200' }}">Home</a>
+    <a href="{{ url_for('leaderboard') }}"
+       class="{{ 'text-cyan-400 border-b border-cyan-400 pb-0.5' if request.endpoint == 'leaderboard' else 'text-gray-400 hover:text-gray-200' }}">Leaderboard</a>
+    <a href="{{ url_for('profile') }}"
+       class="{{ 'text-cyan-400 border-b border-cyan-400 pb-0.5' if request.endpoint == 'profile' else 'text-gray-400 hover:text-gray-200' }}">Profile</a>
+    <a href="{{ url_for('login') }}"
+       class="{{ 'text-cyan-400 border-b border-cyan-400 pb-0.5' if request.endpoint == 'login' else 'text-gray-400 hover:text-gray-200' }}">Login</a>
+  </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+{% block footer %}
+<footer class="bg-surface border-t border-outline-variant/10 py-12 px-8">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
+    <div class="text-on-surface-variant font-headline font-bold text-xl">MED-SEG <span class="text-outline-variant">ALPHA</span></div>
+    <div class="flex gap-8">
+      <a class="text-on-surface-variant hover:text-primary transition-colors font-label text-xs uppercase tracking-widest" href="#">Privacy Policy</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors font-label text-xs uppercase tracking-widest" href="#">Institutional Access</a>
+    </div>
+    <div class="text-on-surface-variant font-label text-xs uppercase tracking-widest opacity-60">© 2026 ALL RIGHTS RESERVED.</div>
+  </div>
+</footer>
+{% endblock %}
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Login | MED-SEG ALPHA{% endblock %}
+
+{% block content %}
+<main class="pt-20 pb-24 px-8 max-w-5xl mx-auto space-y-10">
+  <div class="flex flex-col items-center gap-3">
+    <p>Welcome to MED-SEG-ALPHA! Have an account?</p>
+  </div>
+
+  <form id="user" class="flex flex-col items-center gap-6" method="POST" action="{{ url_for('login') }}">
+    <input id="username" name="username" type="text" placeholder="Username or Email Address"
+           class="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
+    <input id="userpassword" name="password" type="password" placeholder="Password"
+           class="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
+    <span class="flex items-center gap-4">
+      <button class="px-7 py-2 bg-cyan-400 text-gray-950 font-bold rounded hover:brightness-110" type="submit">SIGN IN</button>
+      <button class="text-gray-200 font-bold rounded hover:text-cyan-400" type="button">Forgot password?</button>
+    </span>
+  </form>
+
+  <br/>
+
+  <div class="flex flex-col items-center gap-3">
+    <p>Don't have an account? Register instead:</p>
+  </div>
+
+  <form id="new" class="flex flex-col items-center gap-6" method="POST" action="{{ url_for('login') }}">
+    <input id="newname" name="email" type="text" placeholder="Email Address"
+           class="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
+    <p id="email_error" class="text-red-400 text-sm"></p>
+    <input id="newpassword" name="new_password" type="password" placeholder="Password"
+           class="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
+    <p id="password_error" class="text-red-400 text-sm"></p>
+    <span class="flex items-center gap-4">
+      <button class="px-7 py-2 bg-cyan-400 text-gray-950 font-bold rounded hover:brightness-110" type="submit">REGISTER</button>
+    </span>
+  </form>
+</main>
+{% endblock %}
+
+{% block footer %}
+<footer class="bg-gray-950 border-t border-gray-800 py-10 px-8 mt-20">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-4 max-w-5xl mx-auto">
+    <span class="text-gray-500 font-bold">MED-SEG</span>
+    <div class="flex gap-6">
+      <a class="text-gray-500 hover:text-cyan-400 text-xs uppercase tracking-widest" href="#">Privacy Policy</a>
+      <a class="text-gray-500 hover:text-cyan-400 text-xs uppercase tracking-widest" href="#">Institutional Access</a>
+    </div>
+    <span class="text-gray-500 text-xs uppercase tracking-widest">© 2026 ALL RIGHTS RESERVED.</span>
+  </div>
+</footer>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}

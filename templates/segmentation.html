@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Segmentation Tool | MED-SEG ALPHA{% endblock %}
+
+{% block body_class %}flex flex-col{% endblock %}
+
+{% block content %}
+<div class="flex flex-1 overflow-hidden">
+  <!-- Toolbar -->
+  <aside class="w-16 bg-gray-900 border-r border-gray-800 flex flex-col items-center py-6 gap-3 shrink-0">
+    <button id="tool-brush" class="w-11 h-11 rounded-lg bg-cyan-400 text-gray-950 font-bold flex items-center justify-center text-xs active-tool" title="Brush (B)">B</button>
+    <button id="tool-polyline" class="w-11 h-11 rounded-lg bg-gray-800 text-gray-400 hover:bg-gray-700 flex items-center justify-center text-xs" title="Polyline (P)">P</button>
+    <button id="tool-eraser" class="w-11 h-11 rounded-lg bg-gray-800 text-gray-400 hover:bg-gray-700 flex items-center justify-center text-xs" title="Eraser (E)">E</button>
+    <div class="w-8 h-px bg-gray-700 my-1"></div>
+    <button id="tool-zoom" class="w-11 h-11 rounded-lg bg-gray-800 text-gray-400 hover:bg-gray-700 flex items-center justify-center" title="Zoom In (+)">+</button>
+    <button id="tool-pan" class="w-11 h-11 rounded-lg bg-gray-800 text-gray-400 hover:bg-gray-700 flex items-center justify-center text-sm" title="Pan">✋</button>
+    <button id="tool-undo" class="w-11 h-11 rounded-lg bg-gray-800 text-gray-400 hover:bg-gray-700 flex items-center justify-center" title="Undo (Ctrl+Z)">↩</button>
+  </aside>
+
+  <!-- Canvas -->
+  <section class="flex-1 bg-gray-950 relative overflow-hidden flex items-center justify-center">
+    <canvas id="seg-canvas" class="max-w-full max-h-full"></canvas>
+    <img id="scan-image" alt="CT Scan" class="absolute max-w-full max-h-full object-contain opacity-80 pointer-events-none"
+         src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlIhwMcEDqBcOvAgCS_HEvhw5U6C9rT5_ZnOoVOZzKjTkZpYmi5rz-wK9yeie2Oj1ZK8GhTHRDIZmN8Bz8JLSEIbOOdIMy78qJVr6CJQV7H0nRpU8h0uAbrp167rB6GUKbJdt6VFGDikSJQ7hztAkrAika3hSvMH1VBcYA-zN3F9IhSzQyg6t0OfSGG73gt3W9WKalSgBPCFSI_4sKYpUg0p_cqsAf98xUN8_s59W1eI2IuxeX_QN6aoInntT7Hio27JbVVCotfvw"/>
+    <div class="absolute top-4 left-4 bg-gray-900/80 px-3 py-1.5 rounded text-xs text-cyan-400 font-mono">
+      Active Canvas: <span id="canvas-id">MRI_SEC_882</span>
+    </div>
+    <div class="absolute bottom-4 right-4 flex gap-2 text-xs font-mono text-gray-400">
+      <span class="bg-gray-900/80 px-2 py-1 rounded">X: <span id="coord-x">0.0</span></span>
+      <span class="bg-gray-900/80 px-2 py-1 rounded">Y: <span id="coord-y">0.0</span></span>
+      <span class="bg-gray-900/80 px-2 py-1 rounded">Z: 12.0mm</span>
+    </div>
+  </section>
+
+  <!-- Info Panel -->
+  <aside class="w-72 bg-gray-900 border-l border-gray-800 flex flex-col p-5 gap-6 shrink-0">
+    <div>
+      <h2 class="text-xs text-gray-400 uppercase tracking-widest mb-3">Current Objective</h2>
+      <div class="bg-gray-800 border-l-4 border-purple-400 p-4 rounded-r-lg text-sm">
+        Segment the <strong class="text-cyan-400">hepatic liver mass</strong> and identify potential arterial vascularization points.
+      </div>
+    </div>
+
+    <div>
+      <div class="flex justify-between text-xs mb-2">
+        <span class="text-gray-400 uppercase tracking-widest">Task Progress</span>
+        <span id="progress-pct" class="text-purple-400 font-bold">0%</span>
+      </div>
+      <div class="h-2.5 bg-gray-700 rounded-full overflow-hidden">
+        <div id="progress-bar" class="h-full bg-purple-400 transition-all duration-300" style="width:0%"></div>
+      </div>
+      <p class="text-[10px] text-gray-500 mt-1.5 italic">Estimated precision: <span id="dice-score">—</span> Dice Coefficient</p>
+    </div>
+
+    <div>
+      <h3 class="text-xs text-gray-400 uppercase tracking-widest mb-3">Clinical Data Points</h3>
+      <div class="space-y-2 text-sm">
+        <div class="flex justify-between py-1.5 border-b border-gray-800">
+          <span class="text-gray-500">Patient ID</span>
+          <span class="font-mono">#PX-9921</span>
+        </div>
+        <div class="flex justify-between py-1.5 border-b border-gray-800">
+          <span class="text-gray-500">Scan Date</span>
+          <span class="font-mono">2024-10-24</span>
+        </div>
+        <div class="flex justify-between py-1.5">
+          <span class="text-gray-500">Tissue Type</span>
+          <span class="font-mono text-green-400">Malignant Suspect</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-auto space-y-2">
+      <button id="btn-submit" class="w-full py-3 rounded-lg bg-green-500 text-gray-950 font-bold uppercase text-sm hover:brightness-110">✓ Submit Analysis</button>
+      <button id="btn-review" class="w-full py-2.5 rounded-lg border border-gray-600 text-gray-400 font-bold uppercase text-xs hover:bg-gray-800">Request Review</button>
+    </div>
+  </aside>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="bg-gray-950 border-t border-gray-800 py-4 px-8 shrink-0">
+  <div class="flex justify-between items-center max-w-5xl mx-auto text-xs text-gray-500 uppercase tracking-widest">
+    <span>© 2026 ALL RIGHTS RESERVED.</span>
+    <div class="flex gap-6">
+      <a class="hover:text-cyan-400" href="#">Privacy Policy</a>
+      <a class="hover:text-cyan-400" href="#">Institutional Access</a>
+    </div>
+  </div>
+</footer>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/segmentation.js') }}"></script>
+{% endblock %}
