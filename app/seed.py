@@ -3,10 +3,19 @@ Seed the database with demo data.
 Run once after `flask db upgrade`:  python seed.py
 Safe to re-run — skips if data already exists.
 """
+import os
+import sys
+
+# Allow running as a script from the repo root.
+ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
 from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash
-from app import app, db
-from models import Badge, MedicalImage, Challenge, User, Segmentation, UserBadge, ChallengeEntry
+from app.app import app
+from app import db
+from app.models import Badge, MedicalImage, Challenge, User, Segmentation, UserBadge, ChallengeEntry
 
 
 def seed():

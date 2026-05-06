@@ -23,6 +23,6 @@ class RegisterForm(FlaskForm):
 
     def validate_email(self, field):
         # Imported here to avoid circular import at module load time
-        from models import User
+        from app.models import User
         if User.query.filter_by(email=field.data.lower()).first():
             raise ValidationError('Email already registered.')

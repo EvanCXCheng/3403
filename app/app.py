@@ -1,16 +1,17 @@
 from flask import Flask, render_template, redirect, url_for, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_wtf.csrf import CSRFProtect
 from werkzeug.security import generate_password_hash, check_password_hash
-from config import Config
+from app.config import Config
+from app import db
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
 
-db       = SQLAlchemy(app)
-migrate  = Migrate(app, db)
+db.init_app(app)
+migrate = Migrate(app, db)
 csrf     = CSRFProtect(app)
 
 login_manager = LoginManager(app)
@@ -20,7 +21,7 @@ login_manager.login_message = 'Please log in to access this page.'
 
 @login_manager.user_loader
 def load_user(user_id):
-    from models import User
+    from app.models import User
     return User.query.get(int(user_id))
 
 
@@ -28,7 +29,7 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('homepage.html')
 
 
 @app.route('/leaderboard')
@@ -40,8 +41,8 @@ def leaderboard():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    from forms import LoginForm, RegisterForm
-    from models import User
+    from app.forms import LoginForm, RegisterForm
+    from app.models import User
 
     if current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -116,7 +117,7 @@ def segmentation():
 
 
 # Models must be imported after db is defined so Flask-Migrate can find them
-import models  # noqa: E402, F401
+import app.models as models  # noqa: E402, F401
 
 
 if __name__ == '__main__':
