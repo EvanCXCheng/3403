@@ -120,7 +120,29 @@ def logout():
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html')
+    from app.models import Segmentation, UserBadge
+
+    recent_segmentations = (
+        Segmentation.query
+        .filter_by(user_id=current_user.id)
+        .order_by(Segmentation.submitted_at.desc())
+        .limit(3)
+        .all()
+    )
+
+    earned_badges = (
+        UserBadge.query
+        .filter_by(user_id=current_user.id)
+        .limit(3)
+        .all()
+    )
+
+    return render_template(
+        'profile.html',
+        user=current_user,
+        recent_segmentations=recent_segmentations,
+        earned_badges=earned_badges
+    )
 
 
 @app.route('/segmentation')
