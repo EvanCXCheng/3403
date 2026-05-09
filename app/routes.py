@@ -35,6 +35,7 @@ def index():
 
 
 @app.route('/leaderboard')
+@login_required
 def leaderboard():
     return render_template('leaderboard.html')
 
