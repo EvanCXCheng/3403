@@ -94,19 +94,72 @@ function updateProgress() {
   document.getElementById('progress-bar').style.width = pct + '%';
   document.getElementById('progress-pct').textContent = pct + '%';
   if (pct > 0) {
-    const dice = (0.70 + pct / 1000).toFixed(2);
-    document.getElementById('dice-score').textContent = dice;
+    document.getElementById('dice-score').textContent = pct + '%';
   }
 }
 
 // ── Submit ─────────────────────────────────────────────────────────────────────
-document.getElementById('btn-submit').addEventListener('click', () => {
+document.getElementById('btn-submit').addEventListener('click', async () => {
   if (strokeCount === 0) {
     alert('Please draw at least one annotation before submitting.');
     return;
   }
-  const timeSpent = startTime ? Math.floor((Date.now() - startTime) / 1000) : 0;
+
+  const scanImg = document.getElementById('scan-image');
+  const canvasRect = canvas.getBoundingClientRect();
+  const imgRect    = scanImg.getBoundingClientRect();
+
+  // Position of the rendered image relative to the canvas element
+  const scaleX = canvas.width  / canvasRect.width;
+  const scaleY = canvas.height / canvasRect.height;
+  const imgOffsetX  = (imgRect.left  - canvasRect.left)  * scaleX;
+  const imgOffsetY  = (imgRect.top   - canvasRect.top)   * scaleY;
+  const imgDisplayW = imgRect.width  * scaleX;
+  const imgDisplayH = imgRect.height * scaleY;
+
   const mask = canvas.toDataURL('image/png');
-  console.log('Submitting segmentation', { strokes: strokeCount, timeSpent, mask });
-  // AJAX submission to be wired in step 6
+
+  const btnSubmit = document.getElementById('btn-submit');
+  btnSubmit.disabled = true;
+  btnSubmit.textContent = 'Submitting…';
+
+  try {
+    const resp = await fetch(SUBMIT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': CSRF_TOKEN,
+      },
+      body: JSON.stringify({
+        image_id:      IMAGE_ID,
+        mask:          mask,
+        img_offset_x:  imgOffsetX,
+        img_offset_y:  imgOffsetY,
+        img_display_w: imgDisplayW,
+        img_display_h: imgDisplayH,
+      }),
+    });
+
+    const result = await resp.json();
+    if (result.ok) {
+      const accuracyPct = (result.dice_score * 100).toFixed(1) + '%';
+      document.getElementById('dice-score').textContent = accuracyPct;
+      document.getElementById('progress-pct').textContent = '100%';
+      document.getElementById('progress-bar').style.width = '100%';
+      alert(
+        `Submitted!\n` +
+        `Accuracy: ${accuracyPct}\n` +
+        `XP awarded: +${result.xp_awarded}\n` +
+        `Overall accuracy: ${result.accuracy_pct}%`
+      );
+    } else {
+      alert('Submission failed: ' + (result.error || 'Unknown error'));
+    }
+  } catch (err) {
+    alert('Network error — please try again.');
+    console.error(err);
+  } finally {
+    btnSubmit.disabled = false;
+    btnSubmit.textContent = '✓ Submit Analysis';
+  }
 });

@@ -21,9 +21,9 @@
   <section class="flex-1 bg-gray-950 relative overflow-hidden flex items-center justify-center">
     <canvas id="seg-canvas" class="max-w-full max-h-full"></canvas>
     <img id="scan-image" alt="CT Scan" class="absolute max-w-full max-h-full object-contain opacity-80 pointer-events-none"
-         src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlIhwMcEDqBcOvAgCS_HEvhw5U6C9rT5_ZnOoVOZzKjTkZpYmi5rz-wK9yeie2Oj1ZK8GhTHRDIZmN8Bz8JLSEIbOOdIMy78qJVr6CJQV7H0nRpU8h0uAbrp167rB6GUKbJdt6VFGDikSJQ7hztAkrAika3hSvMH1VBcYA-zN3F9IhSzQyg6t0OfSGG73gt3W9WKalSgBPCFSI_4sKYpUg0p_cqsAf98xUN8_s59W1eI2IuxeX_QN6aoInntT7Hio27JbVVCotfvw"/>
+         src="{{ url_for('static', filename=image.filename) }}"/>
     <div class="absolute top-4 left-4 bg-gray-900/80 px-3 py-1.5 rounded text-xs text-cyan-400 font-mono">
-      Active Canvas: <span id="canvas-id">MRI_SEC_882</span>
+      Active Canvas: <span id="canvas-id">IMG_{{ '%04d' % image.id }}</span>
     </div>
     <div class="absolute bottom-4 right-4 flex gap-2 text-xs font-mono text-gray-400">
       <span class="bg-gray-900/80 px-2 py-1 rounded">X: <span id="coord-x">0.0</span></span>
@@ -37,7 +37,7 @@
     <div>
       <h2 class="text-xs text-gray-400 uppercase tracking-widest mb-3">Current Objective</h2>
       <div class="bg-gray-800 border-l-4 border-purple-400 p-4 rounded-r-lg text-sm">
-        Segment the <strong class="text-cyan-400">hepatic liver mass</strong> and identify potential arterial vascularization points.
+        {{ image.objective }}
       </div>
     </div>
 
@@ -49,23 +49,23 @@
       <div class="h-2.5 bg-gray-700 rounded-full overflow-hidden">
         <div id="progress-bar" class="h-full bg-purple-400 transition-all duration-300" style="width:0%"></div>
       </div>
-      <p class="text-[10px] text-gray-500 mt-1.5 italic">Estimated precision: <span id="dice-score">—</span> Dice Coefficient</p>
+      <p class="text-[10px] text-gray-500 mt-1.5 italic">Accuracy: <span id="dice-score">—</span></p>
     </div>
 
     <div>
       <h3 class="text-xs text-gray-400 uppercase tracking-widest mb-3">Clinical Data Points</h3>
       <div class="space-y-2 text-sm">
         <div class="flex justify-between py-1.5 border-b border-gray-800">
-          <span class="text-gray-500">Patient ID</span>
-          <span class="font-mono">#PX-9921</span>
+          <span class="text-gray-500">Image ID</span>
+          <span class="font-mono">#{{ '%04d' % image.id }}</span>
         </div>
         <div class="flex justify-between py-1.5 border-b border-gray-800">
-          <span class="text-gray-500">Scan Date</span>
-          <span class="font-mono">2024-10-24</span>
+          <span class="text-gray-500">Modality</span>
+          <span class="font-mono">{{ image.modality }}</span>
         </div>
         <div class="flex justify-between py-1.5">
-          <span class="text-gray-500">Tissue Type</span>
-          <span class="font-mono text-green-400">Malignant Suspect</span>
+          <span class="text-gray-500">Organ</span>
+          <span class="font-mono text-green-400">{{ image.organ }}</span>
         </div>
       </div>
     </div>
@@ -91,5 +91,10 @@
 {% endblock %}
 
 {% block scripts %}
+<script>
+  const IMAGE_ID = {{ image.id }};
+  const SUBMIT_URL = "{{ url_for('submit_segmentation') }}";
+  const CSRF_TOKEN = "{{ csrf_token() }}";
+</script>
 <script src="{{ url_for('static', filename='js/segmentation.js') }}"></script>
 {% endblock %}

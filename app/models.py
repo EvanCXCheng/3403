@@ -39,6 +39,10 @@ class MedicalImage(db.Model):
     difficulty = db.Column(db.Integer, default=1)             # 1 easy → 3 hard
     description = db.Column(db.Text)
     objective   = db.Column(db.Text)
+    # Groups related slices; 1 = liver CT series, future series get higher IDs
+    series_id  = db.Column(db.Integer, nullable=True)
+    # Relative path from static/ to the ground-truth mask PNG
+    ground_truth_path = db.Column(db.String(256), nullable=True)
 
     segmentations = db.relationship('Segmentation', backref='image', lazy=True)
 
@@ -56,6 +60,8 @@ class Segmentation(db.Model):
     submitted_at = db.Column(db.DateTime, default=datetime.utcnow)
     # pending → awaiting consensus validation; validated → score finalised
     status       = db.Column(db.String(32), default='pending')
+    # Relative path from static/ to the user's submitted mask PNG
+    mask_path    = db.Column(db.String(256), nullable=True)
 
     def __repr__(self):
         return f'<Segmentation user={self.user_id} image={self.image_id} dice={self.dice_score}>'
