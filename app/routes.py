@@ -44,7 +44,10 @@ def index():
 @app.route('/leaderboard')
 @login_required
 def leaderboard():
-    return render_template('leaderboard.html')
+    from app.models import User
+
+    players = User.query.order_by(User.xp.desc()).limit(10).all()
+    return render_template('leaderboard.html', players=players)
 
 
 # ── Auth routes ────────────────────────────────────────────────────────────────
