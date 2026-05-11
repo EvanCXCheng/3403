@@ -77,20 +77,26 @@
         <h2 class="text-5xl font-headline font-bold mt-2">ACTIVE <em>QUESTS</em></h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for quest in quests %}
         <div class="bg-surface-container-high rounded-xl overflow-hidden hover:translate-y-[-4px] transition-all duration-300">
-          <div class="h-48 overflow-hidden">
-            <img alt="Lung quest" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmucLtOlI79qVwU99seWCpFrzYGbDZv6IRmCpwUvYAE-QV2H40qF5UhFygO9y5FaRUQaT1y0RtuQWZtWtrBgxBuZRhrhz_nrXsnmTp7YXgogDBSjBFl5xhrghIysOW_jfAvpLtD6AobwhAGSIfxzsFzThLtGq-vysKJoWDDI9-IL4a81Txoea0fg6718lEWMXJQAXoT8X53NH7xkg09zZcj3Cd7wEvhXlkLjBEnA6JpvPfOmcAOXj_V27tW-HXJJ8VM6P00aejsoA"/>
+          <div class="h-48 overflow-hidden bg-surface-container-highest flex items-center justify-center">
+            {% if quest.thumbnail %}
+            <img alt="{{ quest.name }}" class="w-full h-full object-cover"
+                 src="{{ url_for('static', filename=quest.thumbnail) }}"/>
+            {% else %}
+            <span class="material-symbols-outlined text-5xl text-on-surface-variant">{{ quest.icon }}</span>
+            {% endif %}
           </div>
           <div class="p-6 space-y-3">
-            <h3 class="text-xl font-headline font-bold">Lung Nodule Hunter</h3>
-            <p class="text-on-surface-variant font-body text-sm">Search through high-resolution CT scans to identify and isolate early-stage pulmonary nodules.</p>
+            <h3 class="text-xl font-headline font-bold">{{ quest.name }}</h3>
+            <p class="text-on-surface-variant font-body text-sm">{{ quest.description }}</p>
             <div class="flex justify-between items-center pt-2 border-t border-outline-variant/10">
               <div>
                 <span class="block text-[10px] text-on-surface-variant uppercase">Difficulty</span>
                 <div class="flex gap-1 mt-1">
-                  <div class="w-4 h-1 bg-tertiary rounded-full"></div>
-                  <div class="w-4 h-1 bg-tertiary rounded-full"></div>
-                  <div class="w-4 h-1 bg-surface-container-highest rounded-full"></div>
+                  {% for i in range(3) %}
+                  <div class="w-4 h-1 rounded-full {{ 'bg-tertiary' if i < quest.difficulty else 'bg-surface-container-highest' }}"></div>
+                  {% endfor %}
                 </div>
               </div>
               <a href="{{ url_for('segmentation') }}" class="text-primary font-headline font-bold text-sm flex items-center gap-1">
@@ -99,50 +105,9 @@
             </div>
           </div>
         </div>
-        <div class="bg-surface-container-high rounded-xl overflow-hidden hover:translate-y-[-4px] transition-all duration-300">
-          <div class="h-48 overflow-hidden">
-            <img alt="Brain quest" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHr3xqr7ZVRIHpM_OLd7VEHZe7AyWzJ4B718tpdGgnlWCSuRXijut4saGNuWRxb0nHRHPb9Xtpf4KF24u8gWnrhC7Bwv477wCyatQhpr914xQUWhjBkqm50mBwwZVj-sNvi50HJVzuVwwBQLZTEAKIHrnBhYR3b4QoQ5X6zNfBbcKnlL20SaswBuGPmJoiBaKDE9rffTjziX7mvp8rJXWsS5czI1s5pXrHRaWrZqWhjWiIcffpwMc337qZOUpGDKYZ7w52wTJ7kNw"/>
-          </div>
-          <div class="p-6 space-y-3">
-            <h3 class="text-xl font-headline font-bold">Brain Scan Specialist</h3>
-            <p class="text-on-surface-variant font-body text-sm">Complex white-matter tractography segmentation. Requires anatomical mastery of the cerebral cortex.</p>
-            <div class="flex justify-between items-center pt-2 border-t border-outline-variant/10">
-              <div>
-                <span class="block text-[10px] text-on-surface-variant uppercase">Difficulty</span>
-                <div class="flex gap-1 mt-1">
-                  <div class="w-4 h-1 bg-tertiary rounded-full"></div>
-                  <div class="w-4 h-1 bg-tertiary rounded-full"></div>
-                  <div class="w-4 h-1 bg-tertiary rounded-full"></div>
-                </div>
-              </div>
-              <a href="{{ url_for('segmentation') }}" class="text-primary font-headline font-bold text-sm flex items-center gap-1">
-                DEPLOY <span class="material-symbols-outlined text-sm">arrow_forward</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="bg-surface-container-high rounded-xl overflow-hidden hover:translate-y-[-4px] transition-all duration-300">
-          <div class="h-48 overflow-hidden">
-            <img alt="Cardiac quest" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKsEj4ebtJSiuVc1U-1DAO1ZAd7wwIFvCHQPz4PkTKsQIUp3sOOQyiP_J-YUiQ9f_REp3FNxmT-ON90Q7faqy8XlXvYd5KTEaocA1tta61CGcP2Iq4JlPbLR4fsTjdEfVmoi84H8ncH-iCFxIICdlC8c3WLkDE8c2Z-_bi6jZZUBabzTnFejUyOILQrd7_5IRFyjBt7VhQm14alxQsXgoTME_KHqNM2ahzLWqX8pYB_Rfvg_Ue7XFhn_slAqAzoynO9E8VVqlX8Xk"/>
-          </div>
-          <div class="p-6 space-y-3">
-            <h3 class="text-xl font-headline font-bold">Cardiac Rhythm Mapper</h3>
-            <p class="text-on-surface-variant font-body text-sm">Map the left ventricle across cardiac cycles. Essential for calculating ejection fraction in AI models.</p>
-            <div class="flex justify-between items-center pt-2 border-t border-outline-variant/10">
-              <div>
-                <span class="block text-[10px] text-on-surface-variant uppercase">Difficulty</span>
-                <div class="flex gap-1 mt-1">
-                  <div class="w-4 h-1 bg-tertiary rounded-full"></div>
-                  <div class="w-4 h-1 bg-surface-container-highest rounded-full"></div>
-                  <div class="w-4 h-1 bg-surface-container-highest rounded-full"></div>
-                </div>
-              </div>
-              <a href="{{ url_for('segmentation') }}" class="text-primary font-headline font-bold text-sm flex items-center gap-1">
-                DEPLOY <span class="material-symbols-outlined text-sm">arrow_forward</span>
-              </a>
-            </div>
-          </div>
-        </div>
+        {% else %}
+        <p class="text-on-surface-variant col-span-3">No active quests available yet.</p>
+        {% endfor %}
       </div>
     </div>
   </section>

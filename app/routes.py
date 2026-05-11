@@ -34,11 +34,61 @@ users = {
 }
 
 
+# ── Quest helper ───────────────────────────────────────────────────────────────
+
+_MODALITY_ICONS = {
+    'CT':    'radiology',
+    'MRI':   'neurology',
+    'OCT':   'visibility',
+    'X-Ray': 'patient_list',
+}
+
+def get_quests():
+    """Return one quest dict per distinct series_id in MedicalImage."""
+    from app.models import MedicalImage
+    from sqlalchemy import func
+
+    rows = (
+        db.session.query(
+            MedicalImage.series_id,
+            MedicalImage.organ,
+            MedicalImage.modality,
+            MedicalImage.difficulty,
+            func.count(MedicalImage.id).label('total'),
+        )
+        .filter(MedicalImage.series_id.isnot(None))
+        .group_by(MedicalImage.series_id)
+        .order_by(MedicalImage.series_id)
+        .all()
+    )
+
+    quests = []
+    for row in rows:
+        # Use the middle slice as a representative thumbnail
+        mid = MedicalImage.query.filter_by(series_id=row.series_id) \
+                .order_by(MedicalImage.id) \
+                .offset(row.total // 2).first()
+        quests.append({
+            'series_id': row.series_id,
+            'name':      f'{row.organ} {row.modality} Series',
+            'modality':  row.modality,
+            'difficulty': row.difficulty or 1,
+            'total':     row.total,
+            'description': (
+                f'Annotate {row.total} {row.modality} slices of the '
+                f'{row.organ.lower()} to build a complete ground-truth dataset.'
+            ),
+            'thumbnail': mid.filename if mid else None,
+            'icon':      _MODALITY_ICONS.get(row.modality, 'biotech'),
+        })
+    return quests
+
+
 # ── Public routes ──────────────────────────────────────────────────────────────
 
 @app.route('/')
 def index():
-    return render_template('homepage.html')
+    return render_template('homepage.html', quests=get_quests())
 
 
 @app.route('/leaderboard')
@@ -47,7 +97,7 @@ def leaderboard():
     from app.models import User
 
     players = User.query.order_by(User.xp.desc()).limit(10).all()
-    return render_template('leaderboard.html', players=players)
+    return render_template('leaderboard.html', players=players, quests=get_quests())
 
 
 # ── Auth routes ────────────────────────────────────────────────────────────────
