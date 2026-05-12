@@ -208,6 +208,12 @@ def profile():
         status='pending'
     ).all()
 
+    # Pending requests sent by current user
+    sent_requests = Friendship.query.filter_by(
+        requester_id=current_user.id,
+        status='pending'
+    ).all()
+
     # IDs of users already connected/requested either direction
     connected_ids = {current_user.id}
 
@@ -230,6 +236,7 @@ def profile():
         'profile.html',
         friendships=friendships,
         pending_requests=pending_requests,
+        sent_requests=sent_requests,
         suggested_users=suggested_users
 )
 
