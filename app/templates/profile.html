@@ -7,8 +7,10 @@
   <!-- Profile Hero -->
   <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
     <div class="lg:col-span-4 flex flex-col gap-5">
-      <div class="w-44 h-44 mx-auto lg:mx-0 rounded-xl overflow-hidden bg-surface-container-low">
-        <img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwkuY2xbL_hE-6lloyVmgXWZPa8MrCpHFPdK_nepmL1lDRHibhFrkDjCHRFG-gRzj7mF_ss_Q_68Sgv0VnGbKu8g5OKSemMBubJVqvwyli1ok-aL9txO5vcqlbMzdJxg8UHqSnd1tR2n1PA52GtU7U6fjdwUuIl3HGAJEMgDyShAMhcGv9Ks_pP6aXN6AgvshmjGQsqM3xchW1vATamciWQeV4sK5CaVpcV6I0oVO5xnpAbR1eNFl_g-CJzyqKQJDSpJyPE9a3EDs"/>
+      <div class="w-44 h-44 mx-auto lg:mx-0 rounded-xl overflow-hidden bg-surface-container-low flex items-center justify-center">
+        <span class="material-symbols-outlined text-primary text-7xl">
+          person
+        </span>
       </div>
       <div class="text-center lg:text-left">
         <h1 class="text-4xl font-headline font-bold text-on-surface tracking-tight">
@@ -25,7 +27,7 @@
         <p class="text-on-surface-variant text-xs font-label uppercase tracking-tighter mb-1">Segmentation Accuracy</p>
         <h3 class="text-3xl font-headline font-bold text-primary">{{ user.accuracy_pct }}%</h3>
         <div class="mt-4 h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-          <div class="h-full bg-primary w-[{{ user.accuracy_pct }}%]"></div>
+          <div class="h-full bg-primary" style="width: {{ user.accuracy_pct }}%;"></div>
         </div>
       </div>
       <div class="bg-surface-container-high p-6 rounded-xl relative overflow-hidden">
@@ -90,7 +92,11 @@
         {% for segmentation in recent_segmentations %}
         <div class="bg-surface-container-low p-4 rounded-xl flex items-center gap-4 hover:bg-surface-container transition-colors">
           <div class="w-12 h-12 rounded bg-surface-container-highest overflow-hidden flex items-center justify-center">
-            <span class="material-symbols-outlined text-primary">image</span>
+            <img
+              src="{{ url_for('static', filename=segmentation.image.filename) }}"
+              alt="{{ segmentation.image.organ }} {{ segmentation.image.modality }} scan"
+              class="w-full h-full object-cover"
+            />
           </div>
 
           <div class="flex-grow">
@@ -115,5 +121,118 @@
       </div>
     </section>
   </div>
+
+  <!-- Friends Section -->
+<section class="space-y-6">
+  <div class="flex items-center justify-between">
+    <h2 class="text-2xl font-headline font-semibold text-on-surface flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary">group</span>
+      Friends
+    </h2>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- Current Friends -->
+    <div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10">
+      <h3 class="text-lg font-headline font-bold text-on-surface mb-4">Your Friends</h3>
+
+      <div class="space-y-3">
+        {% for friendship in friendships %}
+          <div class="bg-surface-container-high p-4 rounded-lg flex justify-between items-center">
+            <div>
+              {% if friendship.requester_id == current_user.id %}
+                <p class="font-bold text-on-surface">{{ friendship.receiver.username }}</p>
+                <p class="text-xs text-on-surface-variant">{{ friendship.receiver.email }}</p>
+              {% else %}
+                <p class="font-bold text-on-surface">{{ friendship.requester.username }}</p>
+                <p class="text-xs text-on-surface-variant">{{ friendship.requester.email }}</p>
+              {% endif %}
+            </div>
+
+            <span class="text-xs text-tertiary uppercase tracking-widest">Friend</span>
+          </div>
+        {% else %}
+          <p class="text-sm text-on-surface-variant">You have no friends yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Pending Friend Requests -->
+    <div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10">
+      <h3 class="text-lg font-headline font-bold text-on-surface mb-4">Friend Requests</h3>
+
+      <div class="space-y-3">
+        {% for request in pending_requests %}
+          <div class="bg-surface-container-high p-4 rounded-lg space-y-3">
+            <div>
+              <p class="font-bold text-on-surface">{{ request.requester.username }}</p>
+              <p class="text-xs text-on-surface-variant">{{ request.requester.email }}</p>
+              <p class="text-[10px] text-tertiary uppercase tracking-widest mt-1">Incoming request</p>
+            </div>
+
+            <div class="flex gap-2">
+              <form action="{{ url_for('accept_friend_request', friendship_id=request.id) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="px-3 py-2 bg-tertiary text-on-tertiary rounded text-xs font-bold">
+                  Accept
+                </button>
+              </form>
+
+              <form action="{{ url_for('decline_friend_request', friendship_id=request.id) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="px-3 py-2 border border-outline text-on-surface-variant rounded text-xs font-bold">
+                  Decline
+                </button>
+              </form>
+            </div>
+          </div>
+        {% else %}
+          <p class="text-sm text-on-surface-variant">No pending requests.</p>
+        {% endfor %}
+
+    <!-- Outgoing requests -->
+    {% for request in sent_requests %}
+      <div class="bg-surface-container-high p-4 rounded-lg flex justify-between items-center">
+        <div>
+          <p class="font-bold text-on-surface">{{ request.receiver.username }}</p>
+          <p class="text-xs text-on-surface-variant">{{ request.receiver.email }}</p>
+        </div>
+
+        <span class="text-xs text-primary uppercase tracking-widest">Sent</span>
+      </div>
+    {% endfor %}
+
+    {% if not pending_requests and not sent_requests %}
+      <p class="text-sm text-on-surface-variant">No pending requests.</p>
+    {% endif %}
+      </div>
+    </div>
+
+    <!-- Add Friends -->
+    <div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10">
+      <h3 class="text-lg font-headline font-bold text-on-surface mb-4">Add Users</h3>
+
+      <div class="space-y-3">
+        {% for user in suggested_users %}
+          <div class="bg-surface-container-high p-4 rounded-lg flex justify-between items-center">
+            <div>
+              <p class="font-bold text-on-surface">{{ user.username }}</p>
+              <p class="text-xs text-on-surface-variant">{{ user.email }}</p>
+            </div>
+
+            <form action="{{ url_for('send_friend_request', user_id=user.id) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="px-3 py-2 bg-primary text-on-primary rounded text-xs font-bold">
+                Add
+              </button>
+            </form>
+          </div>
+        {% else %}
+          <p class="text-sm text-on-surface-variant">No users available to add.</p>
+        {% endfor %}
+      </div>
+    </div>
+
 </main>
 {% endblock %}

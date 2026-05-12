@@ -7,44 +7,12 @@
   <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
     <div>
       <h1 class="font-headline text-5xl font-bold tracking-tight text-on-surface mb-2">Global Ranking</h1>
-      <p class="text-on-surface-variant font-label uppercase tracking-widest text-sm">Season 04: The Neural Network Challenge</p>
     </div>
     <div class="bg-surface-container-high rounded-xl p-1 flex items-center border border-outline-variant/20">
-      <button id="btn-global" class="px-6 py-2 rounded-lg bg-surface-bright text-primary font-bold text-sm">GLOBAL</button>
-      <button id="btn-friends" class="px-6 py-2 text-on-surface-variant hover:text-on-surface font-bold text-sm">FRIENDS</button>
+      <button data-scope = "global" class="px-6 py-2 rounded-lg bg-surface-bright text-primary font-bold text-sm">GLOBAL</button>
+      <button data-scope = "friends" class="px-6 py-2 text-on-surface-variant hover:text-on-surface font-bold text-sm">FRIENDS</button>
     </div>
   </header>
-
-  <!-- Your standing -->
-  <section class="mb-12">
-    <div class="bg-surface-container-high rounded-xl border-l-4 border-secondary p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-8">
-      <div class="flex items-center gap-5">
-        <div class="relative">
-          <div class="w-16 h-16 rounded-full border-2 border-secondary overflow-hidden">
-            <img alt="Your Avatar" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyq46Y2C7cXphyal-gskknSlsGoordUK0Z7yB1Gask6Pz59wSkC04eK9jtqC5cmsqRRoiyyvbrfHyA_tQkHtpAbKOUi7DJlIDxZ0q218iS4dcaBEUW943s5hdCRXVaN_2p-os4GYIvmc8NHmlWe6zPlaojP02qMNdJc6un6HCBTJWlfXx4pbmGBipbXrEAFXxFLMpnpErMBuba8_X0xbgPicrBTffF7Ei0ItNUO3ths8hFaIS2Z01_dPPlZE-ReBXcaLndFPfEX-Y"/>
-          </div>
-          <div class="absolute -bottom-1 -right-1 bg-secondary text-on-secondary w-7 h-7 rounded-full flex items-center justify-center font-headline font-bold text-xs">14</div>
-        </div>
-        <div>
-          <span class="text-secondary font-headline text-xs font-bold uppercase tracking-wider">Your Current Standing</span>
-          <h2 class="text-2xl font-headline font-bold">Dr. Maverick_Alpha</h2>
-          <div class="flex gap-4 mt-1 text-sm">
-            <span class="flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-tertiary text-base" style="font-variation-settings:'FILL' 1;">stars</span> 12,450 XP</span>
-            <span class="flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-primary text-base" style="font-variation-settings:'FILL' 1;">biotech</span> 98.2% Accuracy</span>
-          </div>
-        </div>
-      </div>
-      <div class="w-full md:w-64">
-        <div class="flex justify-between text-xs mb-1">
-          <span class="text-on-surface-variant uppercase">Next Rank: Tier 3 Master</span>
-          <span class="text-secondary">550 XP Left</span>
-        </div>
-        <div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
-          <div class="h-full bg-gradient-to-r from-secondary to-secondary-container w-3/4"></div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Table -->
   <div class="bg-surface-container-low rounded-xl overflow-hidden mb-12">
@@ -56,75 +24,161 @@
           <th class="py-6 px-4 text-center">Score (XP)</th>
           <th class="py-6 px-4 text-center">Accuracy Rate</th>
           <th class="py-6 px-4 text-center">Cases Solved</th>
-          <th class="py-6 px-8 text-right">Trend</th>
         </tr>
       </thead>
-      <tbody id="leaderboard-body" class="divide-y divide-outline-variant/10">
-        {% for player in players %}
-        <tr class="hover:bg-white/5 transition-colors">
 
-          <td class="py-6 px-8">
-            {% if loop.index == 1 %}
-            <div class="w-10 h-10 rounded-lg bg-yellow-500/10 text-yellow-400 flex items-center justify-center">
-              <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">military_tech</span>
-            </div>
-            {% elif loop.index == 2 %}
-            <div class="w-10 h-10 rounded-lg bg-slate-300/10 text-slate-300 flex items-center justify-center">
-              <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">military_tech</span>
-            </div>
-            {% elif loop.index == 3 %}
-            <div class="w-10 h-10 rounded-lg bg-orange-700/10 text-orange-500 flex items-center justify-center">
-              <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">military_tech</span>
-            </div>
-            {% else %}
-            <div class="text-center">
-              <span class="font-headline font-bold text-on-surface-variant">{{ loop.index }}</span>
-            </div>
-            {% endif %}
+          <!-- Global -->
+      <tbody id="tbody-global">
+        <!-- Current user pinned row -->
+         {% if pin_global %}
+        <tr class="ring-1 ring-inset ring-secondary/40 hover:bg-white/5 transition-colors">
+          <td class="py-5 px-8">
+            <span class="font-headline font-bold text-on-surface-variant pl-2">{{ current_user_rank_global }}</span>
           </td>
-
-          <td class="py-6 px-4">
+          <td class="py-5 px-4">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high flex items-center justify-center">
-                <span class="material-symbols-outlined text-primary">person</span>
+                <span class="material-symbols-outlined text-secondary">person</span>
               </div>
-              <span class="font-headline font-medium text-lg">{{ player.username }}</span>
+              <span class="font-headline font-medium text-lg">{{ current_user.username.upper() }}
+                <span class="text-secondary text-xs font-label ml-1">(YOU)</span>
+              </span>
             </div>
           </td>
-
-          <td class="py-6 px-4 text-center">
+          <td class="py-5 px-4 text-center">
+            <span class="font-headline font-bold text-primary">{{ "{:,}".format(current_user.xp) }}</span>
+          </td>
+          <td class="py-5 px-4 text-center">
+            {% if current_user.accuracy_pct > 0 %}
+              <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20 text-sm font-bold">{{ current_user.accuracy_pct }}%</span>
+            {% else %}
+              <span class="text-on-surface-variant text-sm">—</span>
+            {% endif %}
+          </td>
+          <td class="py-5 px-4 text-center text-on-surface-variant font-label">{{ "{:,}".format(current_user.total_segments) }}</td>
+        {% endif %}
+        </tr>
+        {% for player in global_players %}
+        <tr class="hover:bg-white/5 transition-colors {{ 'ring-1 ring-inset ring-secondary/40' if player == current_user }}">
+          <td class="py-5 px-8">
+            {% if loop.index == 1 %}
+              <div class="w-10 h-10 rounded-lg bg-yellow-500/10 text-yellow-400 flex items-center justify-center">
+                <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">military_tech</span>
+              </div>
+            {% elif loop.index == 2 %}
+              <div class="w-10 h-10 rounded-lg bg-slate-300/10 text-slate-300 flex items-center justify-center">
+                <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">military_tech</span>
+              </div>
+            {% elif loop.index == 3 %}
+              <div class="w-10 h-10 rounded-lg bg-orange-700/10 text-orange-500 flex items-center justify-center">
+                <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">military_tech</span>
+              </div>
+            {% else %}
+              <span class="font-headline font-bold text-on-surface-variant pl-2">{{ loop.index }}</span>
+            {% endif %}
+          </td>
+          <td class="py-5 px-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center font-headline font-bold text-primary ">
+                <span class="material-symbols-outlined">person</span>
+              </div>
+              <span class="font-headline font-medium text-lg">{{ player.username.upper() }}
+              </span>
+            </div>
+          </td>
+          <td class="py-5 px-4 text-center">
             <span class="font-headline font-bold text-primary">{{ "{:,}".format(player.xp) }}</span>
           </td>
-
-          <td class="py-6 px-4 text-center">
-            {% if loop.index <= 3 %}
-            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20 text-sm font-bold">
-              {{ player.accuracy_pct }}%
-            </span>
+          <td class="py-5 px-4 text-center">
+            {% if player.accuracy_pct > 0 %}
+              <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20 text-sm font-bold">{{ player.accuracy_pct }}%</span>
             {% else %}
-            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-bold">
-              {{ player.accuracy_pct }}%
-            </span>
+              <span class="text-on-surface-variant text-sm">—</span>
             {% endif %}
           </td>
-
-          <td class="py-6 px-4 text-center text-on-surface-variant font-label">
-            {{ "{:,}".format(player.total_segments) }}
-          </td>
-
-          <td class="py-6 px-8 text-right">
-            {% if loop.index == 3 %}
-            <span class="material-symbols-outlined text-on-surface-variant/50">remove</span>
-            {% elif loop.index == 5 %}
-            <span class="material-symbols-outlined text-error">trending_down</span>
-            {% else %}
-            <span class="material-symbols-outlined text-tertiary">trending_up</span>
-            {% endif %}
-          </td>
-
+          <td class="py-5 px-4 text-center text-on-surface-variant font-label">{{ "{:,}".format(player.total_segments) }}</td>
         </tr>
+        {% else %}
+          <tr><td colspan="5" class="py-10 text-center text-on-surface-variant">No players yet.</td></tr>
         {% endfor %}
       </tbody>
+
+      <!-- Friends -->
+      <tbody id="tbody-friends" class="hidden">
+        <!-- Current user pinned row -->
+        {% if pin_friends %}
+        <tr class="ring-1 ring-inset ring-secondary/40 hover:bg-white/5 transition-colors">
+          <td class="py-5 px-8">
+            <span class="font-headline font-bold text-on-surface-variant pl-2">{{ current_user_rank_friends }}</span>
+          </td>
+          <td class="py-5 px-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high flex items-center justify-center">
+                <span class="material-symbols-outlined text-secondary">person</span>
+              </div>
+              <span class="font-headline font-medium text-lg">{{ current_user.username.upper() }}
+                <span class="text-secondary text-xs font-label ml-1">(YOU)</span>
+              </span>
+            </div>
+          </td>
+          <td class="py-5 px-4 text-center">
+            <span class="font-headline font-bold text-primary">{{ "{:,}".format(current_user.xp) }}</span>
+          </td>
+          <td class="py-5 px-4 text-center">
+            {% if current_user.accuracy_pct > 0 %}
+              <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20 text-sm font-bold">{{ current_user.accuracy_pct }}%</span>
+            {% else %}
+              <span class="text-on-surface-variant text-sm">—</span>
+            {% endif %}
+          </td>
+          <td class="py-5 px-4 text-center text-on-surface-variant font-label">{{ "{:,}".format(current_user.total_segments) }}</td>
+        {% endif %}
+        </tr>
+        {% for player in friend_players %}
+        <tr class="hover:bg-white/5 transition-colors">
+          <td class="py-5 px-8">
+            {% if loop.index == 1 %}
+              <div class="w-10 h-10 rounded-lg bg-yellow-500/10 text-yellow-400 flex items-center justify-center">
+                <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">military_tech</span>
+              </div>
+            {% elif loop.index == 2 %}
+              <div class="w-10 h-10 rounded-lg bg-slate-300/10 text-slate-300 flex items-center justify-center">
+                <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">military_tech</span>
+              </div>
+            {% elif loop.index == 3 %}
+              <div class="w-10 h-10 rounded-lg bg-orange-700/10 text-orange-500 flex items-center justify-center">
+                <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">military_tech</span>
+              </div>
+            {% else %}
+              <span class="font-headline font-bold text-on-surface-variant pl-2">{{ loop.index }}</span>
+            {% endif %}
+          </td>
+          <td class="py-5 px-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center font-headline font-bold text-primary ">
+                <span class="material-symbols-outlined">person</span>
+              </div>
+              <span class="font-headline font-medium text-lg">{{ player.username.upper() }}
+              </span>
+            </div>
+          </td>
+          <td class="py-5 px-4 text-center">
+            <span class="font-headline font-bold text-primary">{{ "{:,}".format(player.xp) }}</span>
+          </td>
+          <td class="py-5 px-4 text-center">
+            {% if player.accuracy_pct > 0 %}
+              <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20 text-sm font-bold">{{ player.accuracy_pct }}%</span>
+            {% else %}
+              <span class="text-on-surface-variant text-sm">—</span>
+            {% endif %}
+          </td>
+          <td class="py-5 px-4 text-center text-on-surface-variant font-label">{{ "{:,}".format(player.total_segments) }}</td>
+        </tr>
+        {% else %}
+          <tr><td colspan="5" class="py-10 text-center text-on-surface-variant">No friends yet — add some from your profile!</td></tr>
+        {% endfor %}
+      </tbody>
+
     </table>
   </div>
 
@@ -138,61 +192,33 @@
       <a class="text-primary hover:brightness-110 transition-colors font-headline font-bold text-sm" href="#">VIEW ALL CHALLENGES</a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for quest in quests %}
       <div class="bg-surface-container-high rounded-xl border-l-4 border-secondary p-6 flex flex-col justify-between hover:border-primary transition-all duration-300">
         <div>
           <div class="flex justify-between items-start mb-4">
             <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
-              <span class="material-symbols-outlined">psychology</span>
+              <span class="material-symbols-outlined">{{ quest.icon }}</span>
             </div>
-            <span class="bg-tertiary/10 text-tertiary border border-tertiary/20 px-3 py-1 rounded-full text-xs font-bold uppercase">XP: +2,500</span>
+            <div class="flex gap-1">
+              {% for i in range(3) %}
+              <div class="w-3 h-1 rounded-full self-center {{ 'bg-primary' if i < quest.difficulty else 'bg-surface-container-highest' }}"></div>
+              {% endfor %}
+            </div>
           </div>
-          <h3 class="text-xl font-headline font-bold mb-2">Neural Pathway Precision</h3>
-          <p class="text-on-surface-variant text-sm mb-6">Segment 50 intricate neural fiber tracks with an average accuracy above 98.5% in 24 hours.</p>
+          <h3 class="text-xl font-headline font-bold mb-2">{{ quest.name }}</h3>
+          <p class="text-on-surface-variant text-sm mb-6">{{ quest.description }}</p>
         </div>
         <div class="flex items-center justify-between">
-          <span class="text-xs text-on-surface-variant font-label">124 Participants</span>
-          <a href="{{ url_for('segmentation') }}" class="bg-primary text-on-primary px-5 py-2 rounded-lg font-headline font-bold text-sm hover:brightness-110">START NOW</a>
+          <span class="text-xs text-on-surface-variant font-label">{{ quest.total }} images</span>
+          <a href="{{ url_for('segmentation') }}" class="bg-primary text-on-primary px-5 py-2 rounded-lg font-headline font-bold text-sm hover:brightness-110">DEPLOY</a>
         </div>
       </div>
-      <div class="bg-surface-container-high rounded-xl border-l-4 border-secondary p-6 flex flex-col justify-between hover:border-primary transition-all duration-300">
-        <div>
-          <div class="flex justify-between items-start mb-4">
-            <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
-              <span class="material-symbols-outlined">pulse_alert</span>
-            </div>
-            <span class="bg-tertiary/10 text-tertiary border border-tertiary/20 px-3 py-1 rounded-full text-xs font-bold uppercase">XP: +1,800</span>
-          </div>
-          <h3 class="text-xl font-headline font-bold mb-2">Cardiac Valve Mapping</h3>
-          <p class="text-on-surface-variant text-sm mb-6">Identify micro-calcifications in cardiac valve ultrasound sequences. Requires high-speed precision.</p>
-        </div>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary text-lg">timer</span>
-            <span class="text-xs text-on-surface-variant font-label">4h 12m left</span>
-          </div>
-          <a href="{{ url_for('segmentation') }}" class="bg-primary text-on-primary px-5 py-2 rounded-lg font-headline font-bold text-sm hover:brightness-110">RESUME</a>
-        </div>
-      </div>
-      <div class="bg-surface-container-high rounded-xl border-l-4 border-secondary p-6 flex flex-col justify-between hover:border-primary transition-all duration-300">
-        <div>
-          <div class="flex justify-between items-start mb-4">
-            <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
-              <span class="material-symbols-outlined">visibility</span>
-            </div>
-            <span class="bg-tertiary/10 text-tertiary border border-tertiary/20 px-3 py-1 rounded-full text-xs font-bold uppercase">XP: +3,200</span>
-          </div>
-          <h3 class="text-xl font-headline font-bold mb-2">Retinal Layer Scan</h3>
-          <p class="text-on-surface-variant text-sm mb-6">Master the segmentation of OCT retinal layers in rare pathology cases. Expert level difficulty.</p>
-        </div>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-tertiary text-lg" style="font-variation-settings:'FILL' 1;">check_circle</span>
-            <span class="text-xs text-tertiary font-bold uppercase tracking-wider font-label">COMPLETED</span>
-          </div>
-          <button class="bg-surface-bright text-on-surface-variant px-5 py-2 rounded-lg font-headline font-bold text-sm cursor-not-allowed" disabled>LOCKED</button>
-        </div>
-      </div>
+      {% else %}
+      <p class="text-on-surface-variant col-span-3">No active quests available yet.</p>
+      {% endfor %}
     </div>
   </section>
 </main>
+
+<script src="{{ url_for('static', filename='js/leaderboard.js') }}"></script>
 {% endblock %}

@@ -9,6 +9,8 @@ from flask_login import login_user, logout_user, login_required, current_user
 from PIL import Image
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, db
+from app.models import User, Friendship, Segmentation, UserBadge
+from sqlalchemy import or_, and_
 
 users = {
     "elara": {
@@ -34,11 +36,61 @@ users = {
 }
 
 
+# ── Quest helper ───────────────────────────────────────────────────────────────
+
+_MODALITY_ICONS = {
+    'CT':    'radiology',
+    'MRI':   'neurology',
+    'OCT':   'visibility',
+    'X-Ray': 'patient_list',
+}
+
+def get_quests():
+    """Return one quest dict per distinct series_id in MedicalImage."""
+    from app.models import MedicalImage
+    from sqlalchemy import func
+
+    rows = (
+        db.session.query(
+            MedicalImage.series_id,
+            MedicalImage.organ,
+            MedicalImage.modality,
+            MedicalImage.difficulty,
+            func.count(MedicalImage.id).label('total'),
+        )
+        .filter(MedicalImage.series_id.isnot(None))
+        .group_by(MedicalImage.series_id)
+        .order_by(MedicalImage.series_id)
+        .all()
+    )
+
+    quests = []
+    for row in rows:
+        # Use the middle slice as a representative thumbnail
+        mid = MedicalImage.query.filter_by(series_id=row.series_id) \
+                .order_by(MedicalImage.id) \
+                .offset(row.total // 2).first()
+        quests.append({
+            'series_id': row.series_id,
+            'name':      f'{row.organ} {row.modality} Series',
+            'modality':  row.modality,
+            'difficulty': row.difficulty or 1,
+            'total':     row.total,
+            'description': (
+                f'Annotate {row.total} {row.modality} slices of the '
+                f'{row.organ.lower()} to build a complete ground-truth dataset.'
+            ),
+            'thumbnail': mid.filename if mid else None,
+            'icon':      _MODALITY_ICONS.get(row.modality, 'biotech'),
+        })
+    return quests
+
+
 # ── Public routes ──────────────────────────────────────────────────────────────
 
 @app.route('/')
 def index():
-    return render_template('homepage.html')
+    return render_template('homepage.html', quests=get_quests())
 
 
 @app.route('/leaderboard')
@@ -46,9 +98,25 @@ def index():
 def leaderboard():
     from app.models import User
 
-    players = User.query.order_by(User.xp.desc()).limit(10).all()
-    return render_template('leaderboard.html', players=players)
+    global_players = User.query.order_by(User.xp.desc()).limit(20).all()
+    current_user_rank = (User.query.filter(User.xp > current_user.xp).count() + 1) if current_user.xp else None
+    friends = Friendship.query.filter(
+        or_(
+            and_(Friendship.requester_id == current_user.id, Friendship.status == 'accepted'),
+            and_(Friendship.receiver_id == current_user.id, Friendship.status == 'accepted')
+        )
+    ).all()
+    friend_ids = {current_user.id}
+    for f in friends:
+        friend_ids.add(f.receiver_id if f.requester_id == current_user.id else f.requester_id)
 
+    friend_players = User.query.filter(User.id.in_(friend_ids)).order_by(User.xp.desc()).all()
+    current_user_rank_global = (User.query.filter(User.xp > current_user.xp).count() + 1) if current_user.xp else None
+    current_user_rank_friends = (User.query.filter(User.xp > current_user.xp, User.id.in_(friend_ids)).count() + 1) if current_user.xp else None
+    pin_global = current_user_rank_global > 3
+    pin_friends = current_user_rank_friends > 3
+    return render_template('leaderboard.html', global_players=global_players, friend_players=friend_players, quests=get_quests(), current_user=current_user, 
+                            current_user_rank_global=current_user_rank_global, current_user_rank_friends=current_user_rank_friends, pin_global=pin_global, pin_friends=pin_friends)
 
 # ── Auth routes ────────────────────────────────────────────────────────────────
 
@@ -120,7 +188,6 @@ def logout():
 @app.route('/profile')
 @login_required
 def profile():
-    from app.models import Segmentation, UserBadge
 
     recent_segmentations = (
         Segmentation.query
@@ -133,17 +200,124 @@ def profile():
     earned_badges = (
         UserBadge.query
         .filter_by(user_id=current_user.id)
+        .order_by(UserBadge.earned_at.desc())
         .limit(3)
         .all()
     )
 
+    # Accepted friendships where current user is either requester or receiver
+    friendships = Friendship.query.filter(
+        or_(
+            and_(
+                Friendship.requester_id == current_user.id,
+                Friendship.status == 'accepted'
+            ),
+            and_(
+                Friendship.receiver_id == current_user.id,
+                Friendship.status == 'accepted'
+            )
+        )
+    ).all()
+
+    # Pending requests sent to current user
+    pending_requests = Friendship.query.filter_by(
+        receiver_id=current_user.id,
+        status='pending'
+    ).all()
+
+    # Pending requests sent by current user
+    sent_requests = Friendship.query.filter_by(
+        requester_id=current_user.id,
+        status='pending'
+    ).all()
+
+    # IDs of users already connected/requested either direction
+    connected_ids = {current_user.id}
+
+    all_friend_records = Friendship.query.filter(
+        or_(
+            Friendship.requester_id == current_user.id,
+            Friendship.receiver_id == current_user.id
+        )
+    ).all()
+
+    for record in all_friend_records:
+        connected_ids.add(record.requester_id)
+        connected_ids.add(record.receiver_id)
+
+    # Users current user can still add
+    suggested_users = User.query.filter(
+        ~User.id.in_(connected_ids)
+    ).all()
     return render_template(
         'profile.html',
         user=current_user,
         recent_segmentations=recent_segmentations,
-        earned_badges=earned_badges
+        earned_badges=earned_badges,
+        friendships=friendships,
+        pending_requests=pending_requests,
+        sent_requests=sent_requests,
+        suggested_users=suggested_users
     )
 
+@app.route('/friend-request/accept/<int:friendship_id>', methods=['POST'])
+@login_required
+def accept_friend_request(friendship_id):
+    friendship = Friendship.query.get_or_404(friendship_id)
+
+    if friendship.receiver_id != current_user.id:
+        return redirect(url_for('profile'))
+
+    friendship.status = 'accepted'
+    db.session.commit()
+
+    return redirect(url_for('profile'))
+
+@app.route('/friend-request/decline/<int:friendship_id>', methods=['POST'])
+@login_required
+def decline_friend_request(friendship_id):
+    friendship = Friendship.query.get_or_404(friendship_id)
+
+    if friendship.receiver_id != current_user.id:
+        return redirect(url_for('profile'))
+
+    db.session.delete(friendship)
+    db.session.commit()
+
+    return redirect(url_for('profile'))
+
+@app.route('/friend-request/send/<int:user_id>', methods=['POST'])
+@login_required
+def send_friend_request(user_id):
+    if user_id == current_user.id:
+        return redirect(url_for('profile'))
+
+    existing = Friendship.query.filter(
+        or_(
+            and_(
+                Friendship.requester_id == current_user.id,
+                Friendship.receiver_id == user_id
+            ),
+            and_(
+                Friendship.requester_id == user_id,
+                Friendship.receiver_id == current_user.id
+            )
+        )
+    ).first()
+
+    if existing:
+        return redirect(url_for('profile'))
+
+    friendship = Friendship(
+        requester_id=current_user.id,
+        receiver_id=user_id,
+        status='pending'
+    )
+
+    db.session.add(friendship)
+    db.session.commit()
+
+    return redirect(url_for('profile'))
 
 @app.route('/segmentation')
 @login_required
