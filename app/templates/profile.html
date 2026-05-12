@@ -187,6 +187,7 @@
             <div>
               <p class="font-bold text-on-surface">{{ request.requester.username }}</p>
               <p class="text-xs text-on-surface-variant">{{ request.requester.email }}</p>
+              <p class="text-[10px] text-tertiary uppercase tracking-widest mt-1">Incoming request</p>
             </div>
 
             <div class="flex gap-2">
@@ -208,6 +209,22 @@
         {% else %}
           <p class="text-sm text-on-surface-variant">No pending requests.</p>
         {% endfor %}
+
+    <!-- Outgoing requests -->
+    {% for request in sent_requests %}
+      <div class="bg-surface-container-high p-4 rounded-lg flex justify-between items-center">
+        <div>
+          <p class="font-bold text-on-surface">{{ request.receiver.username }}</p>
+          <p class="text-xs text-on-surface-variant">{{ request.receiver.email }}</p>
+        </div>
+
+        <span class="text-xs text-primary uppercase tracking-widest">Sent</span>
+      </div>
+    {% endfor %}
+
+    {% if not pending_requests and not sent_requests %}
+      <p class="text-sm text-on-surface-variant">No pending requests.</p>
+    {% endif %}
       </div>
     </div>
 
