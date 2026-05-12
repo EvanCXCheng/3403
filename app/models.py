@@ -129,3 +129,28 @@ class ChallengeEntry(db.Model):
 
     def __repr__(self):
         return f'<ChallengeEntry user={self.user_id} challenge={self.challenge_id}>'
+
+class Friendship(db.Model):
+    __tablename__ = 'friendship'
+
+    id = db.Column(db.Integer, primary_key=True)
+    requester_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    receiver_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    status = db.Column(db.String(20), default='pending', nullable=False) #allows for pending, accepted, rejected
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    requester = db.relationship(
+        'User',
+        foreign_keys=[requester_id],
+        backref='sent_friend_requests'
+    )
+
+    receiver = db.relationship(
+        'User',
+        foreign_keys=[receiver_id],
+        backref='received_friend_requests'
+    )
+
+    __table_args__ = (
+        db.UniqueConstraint('requester_id', 'receiver_id', name='unique_friend_request'), # stops duplicate requests
+    )

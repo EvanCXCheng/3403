@@ -9,6 +9,8 @@ from flask_login import login_user, logout_user, login_required, current_user
 from PIL import Image
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, db
+from app.models import User, Friendship
+from sqlalchemy import or_, and_
 
 users = {
     "elara": {
@@ -120,8 +122,109 @@ def logout():
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html')
+    # Accepted friendships where current user is either requester or receiver
+    friendships = Friendship.query.filter(
+        or_(
+            and_(
+                Friendship.requester_id == current_user.id,
+                Friendship.status == 'accepted'
+            ),
+            and_(
+                Friendship.receiver_id == current_user.id,
+                Friendship.status == 'accepted'
+            )
+        )
+    ).all()
 
+    # Pending requests sent to current user
+    pending_requests = Friendship.query.filter_by(
+        receiver_id=current_user.id,
+        status='pending'
+    ).all()
+
+    # IDs of users already connected/requested either direction
+    connected_ids = {current_user.id}
+
+    all_friend_records = Friendship.query.filter(
+        or_(
+            Friendship.requester_id == current_user.id,
+            Friendship.receiver_id == current_user.id
+        )
+    ).all()
+
+    for record in all_friend_records:
+        connected_ids.add(record.requester_id)
+        connected_ids.add(record.receiver_id)
+
+    # Users current user can still add
+    suggested_users = User.query.filter(
+        ~User.id.in_(connected_ids)
+    ).all()
+    return render_template(
+        'profile.html',
+        friendships=friendships,
+        pending_requests=pending_requests,
+        suggested_users=suggested_users
+)
+
+@app.route('/friend-request/accept/<int:friendship_id>', methods=['POST'])
+@login_required
+def accept_friend_request(friendship_id):
+    friendship = Friendship.query.get_or_404(friendship_id)
+
+    if friendship.receiver_id != current_user.id:
+        return redirect(url_for('profile'))
+
+    friendship.status = 'accepted'
+    db.session.commit()
+
+    return redirect(url_for('profile'))
+
+@app.route('/friend-request/decline/<int:friendship_id>', methods=['POST'])
+@login_required
+def decline_friend_request(friendship_id):
+    friendship = Friendship.query.get_or_404(friendship_id)
+
+    if friendship.receiver_id != current_user.id:
+        return redirect(url_for('profile'))
+
+    db.session.delete(friendship)
+    db.session.commit()
+
+    return redirect(url_for('profile'))
+
+@app.route('/friend-request/send/<int:user_id>', methods=['POST'])
+@login_required
+def send_friend_request(user_id):
+    if user_id == current_user.id:
+        return redirect(url_for('profile'))
+
+    existing = Friendship.query.filter(
+        or_(
+            and_(
+                Friendship.requester_id == current_user.id,
+                Friendship.receiver_id == user_id
+            ),
+            and_(
+                Friendship.requester_id == user_id,
+                Friendship.receiver_id == current_user.id
+            )
+        )
+    ).first()
+
+    if existing:
+        return redirect(url_for('profile'))
+
+    friendship = Friendship(
+        requester_id=current_user.id,
+        receiver_id=user_id,
+        status='pending'
+    )
+
+    db.session.add(friendship)
+    db.session.commit()
+
+    return redirect(url_for('profile'))
 
 @app.route('/segmentation')
 @login_required
