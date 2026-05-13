@@ -13,7 +13,7 @@ These newly created annotations can then be used for:
 
 - **Training or fine‑tuning** medical segmentation models (CNNs, transformers, etc.)
 - **Weakly supervised learning**, since the labels are non‑clinical but still informative
-- **Expanding datasets** for researchers who often lack accessible labelled medical images
+- **Expanding datasets** for researchers who often lack labelled medical images
 - **Potential model testing**, depending on annotation quality
 
 This opens the door to more widely available labelled medical data for machine‑learning researchers.
