@@ -249,6 +249,10 @@ def profile():
     suggested_users = User.query.filter(
         ~User.id.in_(connected_ids)
     ).all()
+    
+    # Current user's worldwide XP rank
+    current_user_rank_global = User.query.filter(User.xp > current_user.xp).count() + 1 if current_user.xp else None
+
     return render_template(
         'profile.html',
         user=current_user,
@@ -257,7 +261,8 @@ def profile():
         friendships=friendships,
         pending_requests=pending_requests,
         sent_requests=sent_requests,
-        suggested_users=suggested_users
+        suggested_users=suggested_users,
+        current_user_rank_global=current_user_rank_global
     )
 
 @app.route('/friend-request/accept/<int:friendship_id>', methods=['POST'])
