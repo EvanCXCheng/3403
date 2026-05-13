@@ -51,37 +51,6 @@
     </div>
   </section>
 
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-    <!-- Badges -->
-    <section class="lg:col-span-7 space-y-5">
-      <div class="flex items-center justify-between">
-        <h2 class="text-xl font-headline font-semibold text-on-surface flex items-center gap-2">
-          <span class="material-symbols-outlined text-secondary" style="font-variation-settings:'FILL' 1;">military_tech</span>
-          Medical Badges
-        </h2>
-        <button class="text-xs text-primary hover:brightness-110 font-label">View Gallery</button>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {% for earned_badge in earned_badges %}
-        <div class="bg-surface-container-low p-4 rounded-xl flex flex-col items-center text-center gap-3 border border-outline-variant/10 hover:bg-surface-container transition-all">
-          <div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center text-primary">
-            <span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1;">
-              {{ earned_badge.badge.icon }}
-            </span>
-          </div>
-          <div>
-            <p class="text-sm font-headline font-bold text-on-surface">{{ earned_badge.badge.name }}</p>
-            <p class="text-[10px] text-on-surface-variant">{{ earned_badge.badge.description }}</p>
-          </div>
-        </div>
-        {% else %}
-        <div class="bg-surface-container-low p-4 rounded-xl text-center border border-outline-variant/10">
-          <p class="text-sm text-on-surface-variant">No badges earned yet.</p>
-        </div>
-        {% endfor %}
-      </div>
-    </section>
-
     <!-- Recent Activity -->
     <section class="lg:col-span-5 space-y-5">
       <h2 class="text-xl font-headline font-semibold text-on-surface flex items-center gap-2">
