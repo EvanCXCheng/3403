@@ -146,7 +146,6 @@ function updateProgress() {
   const pct = Math.min(strokeCount * 5, 100);
   document.getElementById('progress-bar').style.width = pct + '%';
   document.getElementById('progress-pct').textContent = pct + '%';
-  document.getElementById('dice-score').textContent   = pct > 0 ? pct + '%' : '—';
 }
 
 // ── Resize ─────────────────────────────────────────────────────────────────────
@@ -209,7 +208,6 @@ document.getElementById('btn-submit').addEventListener('click', async () => {
     const result = await resp.json();
     if (result.ok) {
       const accuracyPct = (result.dice_score * 100).toFixed(1) + '%';
-      document.getElementById('dice-score').textContent   = accuracyPct;
       document.getElementById('progress-pct').textContent = '100%';
       document.getElementById('progress-bar').style.width = '100%';
       showModal(accuracyPct, result.xp_awarded, result.accuracy_pct);
