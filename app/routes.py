@@ -9,7 +9,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from PIL import Image
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, db
-from app.models import User, Friendship
+from app.models import User, Friendship, Segmentation, UserBadge
 from sqlalchemy import or_, and_
 
 users = {
@@ -188,6 +188,23 @@ def logout():
 @app.route('/profile')
 @login_required
 def profile():
+
+    recent_segmentations = (
+        Segmentation.query
+        .filter_by(user_id=current_user.id)
+        .order_by(Segmentation.submitted_at.desc())
+        .limit(3)
+        .all()
+    )
+
+    earned_badges = (
+        UserBadge.query
+        .filter_by(user_id=current_user.id)
+        .order_by(UserBadge.earned_at.desc())
+        .limit(3)
+        .all()
+    )
+
     # Accepted friendships where current user is either requester or receiver
     friendships = Friendship.query.filter(
         or_(
@@ -234,11 +251,14 @@ def profile():
     ).all()
     return render_template(
         'profile.html',
+        user=current_user,
+        recent_segmentations=recent_segmentations,
+        earned_badges=earned_badges,
         friendships=friendships,
         pending_requests=pending_requests,
         sent_requests=sent_requests,
         suggested_users=suggested_users
-)
+    )
 
 @app.route('/friend-request/accept/<int:friendship_id>', methods=['POST'])
 @login_required
