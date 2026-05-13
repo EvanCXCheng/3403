@@ -85,6 +85,27 @@ def get_quests():
         })
     return quests
 
+# Friendship helper ─────────────────────────────────────────────────────────
+def are_friends(user_one_id, user_two_id):
+    if user_one_id == user_two_id:
+        return True
+
+    friendship = Friendship.query.filter(
+        or_(
+            and_(
+                Friendship.requester_id == user_one_id,
+                Friendship.receiver_id == user_two_id,
+                Friendship.status == 'accepted'
+            ),
+            and_(
+                Friendship.requester_id == user_two_id,
+                Friendship.receiver_id == user_one_id,
+                Friendship.status == 'accepted'
+            )
+        )
+    ).first()
+
+    return friendship is not None
 
 # ── Public routes ──────────────────────────────────────────────────────────────
 
@@ -188,25 +209,43 @@ def logout():
 @app.route('/profile')
 @login_required
 def profile():
+    return redirect(url_for('view_profile', user_id=current_user.id))
+
+@app.route('/profile/<int:user_id>')
+@login_required
+def view_profile(user_id):
+    profile_user = User.query.get_or_404(user_id)
+
+    clickable_profile_ids = {current_user.id}
 
     recent_segmentations = (
         Segmentation.query
-        .filter_by(user_id=current_user.id)
+        .filter_by(user_id=profile_user.id)
         .order_by(Segmentation.submitted_at.desc())
         .limit(3)
         .all()
     )
 
-    earned_badges = (
-        UserBadge.query
-        .filter_by(user_id=current_user.id)
-        .order_by(UserBadge.earned_at.desc())
-        .limit(3)
-        .all()
-    )
+    pending_requests = []
+    sent_requests = []
+    suggested_users = []
 
     # Accepted friendships where current user is either requester or receiver
     friendships = Friendship.query.filter(
+        or_(
+            and_(
+                Friendship.requester_id == profile_user.id,
+                Friendship.status == 'accepted'
+            ),
+            and_(
+                Friendship.receiver_id == profile_user.id,
+                Friendship.status == 'accepted'
+            )
+        )
+    ).all()
+
+    # Profiles the logged-in user is allowed to click into (sort of like a privacy filter for other player profiles)
+    current_user_friendships = Friendship.query.filter(
         or_(
             and_(
                 Friendship.requester_id == current_user.id,
@@ -219,50 +258,57 @@ def profile():
         )
     ).all()
 
-    # Pending requests sent to current user
-    pending_requests = Friendship.query.filter_by(
-        receiver_id=current_user.id,
-        status='pending'
-    ).all()
+    for friendship in current_user_friendships:
+        if friendship.requester_id == current_user.id:
+            clickable_profile_ids.add(friendship.receiver_id)
+        else:
+            clickable_profile_ids.add(friendship.requester_id)
 
-    # Pending requests sent by current user
-    sent_requests = Friendship.query.filter_by(
-        requester_id=current_user.id,
-        status='pending'
-    ).all()
+    if profile_user.id == current_user.id:
+        # Pending requests sent to current user
+        pending_requests = Friendship.query.filter_by(
+            receiver_id=current_user.id,
+            status='pending'
+        ).all()
 
-    # IDs of users already connected/requested either direction
-    connected_ids = {current_user.id}
+        # Pending requests sent by current user
+        sent_requests = Friendship.query.filter_by(
+            requester_id=current_user.id,
+            status='pending'
+        ).all()
 
-    all_friend_records = Friendship.query.filter(
-        or_(
-            Friendship.requester_id == current_user.id,
-            Friendship.receiver_id == current_user.id
-        )
-    ).all()
+        # IDs of users already connected/requested either direction
+        connected_ids = {current_user.id}
 
-    for record in all_friend_records:
-        connected_ids.add(record.requester_id)
-        connected_ids.add(record.receiver_id)
+        all_friend_records = Friendship.query.filter(
+            or_(
+                Friendship.requester_id == current_user.id,
+                Friendship.receiver_id == current_user.id
+            )
+        ).all()
 
-    # Users current user can still add
-    suggested_users = User.query.filter(
-        ~User.id.in_(connected_ids)
-    ).all()
-    
+        for record in all_friend_records:
+            connected_ids.add(record.requester_id)
+            connected_ids.add(record.receiver_id)
+
+        # Users current user can still add
+        suggested_users = User.query.filter(
+            ~User.id.in_(connected_ids)
+        ).all()
+
     # Current user's worldwide XP rank
-    current_user_rank_global = User.query.filter(User.xp > current_user.xp).count() + 1 if current_user.xp else None
+    current_user_rank_global = User.query.filter(User.xp > profile_user.xp).count() + 1 if profile_user.xp else None
 
     return render_template(
         'profile.html',
-        user=current_user,
+        user=profile_user,
         recent_segmentations=recent_segmentations,
-        earned_badges=earned_badges,
         friendships=friendships,
         pending_requests=pending_requests,
         sent_requests=sent_requests,
         suggested_users=suggested_users,
-        current_user_rank_global=current_user_rank_global
+        current_user_rank_global=current_user_rank_global,
+        clickable_profile_ids=clickable_profile_ids
     )
 
 @app.route('/friend-request/accept/<int:friendship_id>', methods=['POST'])
