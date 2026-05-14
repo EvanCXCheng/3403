@@ -120,7 +120,6 @@ def leaderboard():
     from app.models import User
 
     global_players = User.query.order_by(User.xp.desc()).limit(20).all()
-    current_user_rank = (User.query.filter(User.xp > current_user.xp).count() + 1) if current_user.xp else None
     friends = Friendship.query.filter(
         or_(
             and_(Friendship.requester_id == current_user.id, Friendship.status == 'accepted'),
@@ -132,8 +131,8 @@ def leaderboard():
         friend_ids.add(f.receiver_id if f.requester_id == current_user.id else f.requester_id)
 
     friend_players = User.query.filter(User.id.in_(friend_ids)).order_by(User.xp.desc()).all()
-    current_user_rank_global = (User.query.filter(User.xp > current_user.xp).count() + 1) if current_user.xp else None
-    current_user_rank_friends = (User.query.filter(User.xp > current_user.xp, User.id.in_(friend_ids)).count() + 1) if current_user.xp else None
+    current_user_rank_global = User.query.filter(User.xp > (current_user.xp or 0)).count() + 1
+    current_user_rank_friends = User.query.filter(User.xp > (current_user.xp or 0), User.id.in_(friend_ids)).count() + 1
     pin_global = current_user_rank_global > 3
     pin_friends = current_user_rank_friends > 3
     return render_template('leaderboard.html', global_players=global_players, friend_players=friend_players, quests=get_quests(), current_user=current_user, 

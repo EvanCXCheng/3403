@@ -46,7 +46,7 @@
             </div>
           </td>
           <td class="py-5 px-4 text-center">
-            <span class="font-headline font-bold text-primary">{{ "{:,}".format(current_user.xp) }}</span>
+            <span class="font-headline font-bold text-primary">{{ "{:,}".format(current_user.xp or 0) }}</span>
           </td>
           <td class="py-5 px-4 text-center">
             {% if current_user.accuracy_pct > 0 %}
@@ -55,7 +55,7 @@
               <span class="text-on-surface-variant text-sm">—</span>
             {% endif %}
           </td>
-          <td class="py-5 px-4 text-center text-on-surface-variant font-label">{{ "{:,}".format(current_user.total_segments) }}</td>
+          <td class="py-5 px-4 text-center text-on-surface-variant font-label">{{ "{:,}".format(current_user.total_segments or 0) }}</td>
         {% endif %}
         </tr>
         {% for player in global_players %}
@@ -87,7 +87,7 @@
             </div>
           </td>
           <td class="py-5 px-4 text-center">
-            <span class="font-headline font-bold text-primary">{{ "{:,}".format(player.xp) }}</span>
+            <span class="font-headline font-bold text-primary">{{ "{:,}".format(player.xp or 0) }}</span>
           </td>
           <td class="py-5 px-4 text-center">
             {% if player.accuracy_pct > 0 %}
@@ -96,7 +96,7 @@
               <span class="text-on-surface-variant text-sm">—</span>
             {% endif %}
           </td>
-          <td class="py-5 px-4 text-center text-on-surface-variant font-label">{{ "{:,}".format(player.total_segments) }}</td>
+          <td class="py-5 px-4 text-center text-on-surface-variant font-label">{{ "{:,}".format(player.total_segments or 0) }}</td>
         </tr>
         {% else %}
           <tr><td colspan="5" class="py-10 text-center text-on-surface-variant">No players yet.</td></tr>
@@ -122,7 +122,7 @@
             </div>
           </td>
           <td class="py-5 px-4 text-center">
-            <span class="font-headline font-bold text-primary">{{ "{:,}".format(current_user.xp) }}</span>
+            <span class="font-headline font-bold text-primary">{{ "{:,}".format(current_user.xp or 0) }}</span>
           </td>
           <td class="py-5 px-4 text-center">
             {% if current_user.accuracy_pct > 0 %}
@@ -131,7 +131,7 @@
               <span class="text-on-surface-variant text-sm">—</span>
             {% endif %}
           </td>
-          <td class="py-5 px-4 text-center text-on-surface-variant font-label">{{ "{:,}".format(current_user.total_segments) }}</td>
+          <td class="py-5 px-4 text-center text-on-surface-variant font-label">{{ "{:,}".format(current_user.total_segments or 0) }}</td>
         {% endif %}
         </tr>
         {% for player in friend_players %}
@@ -163,7 +163,7 @@
             </div>
           </td>
           <td class="py-5 px-4 text-center">
-            <span class="font-headline font-bold text-primary">{{ "{:,}".format(player.xp) }}</span>
+            <span class="font-headline font-bold text-primary">{{ "{:,}".format(player.xp or 0) }}</span>
           </td>
           <td class="py-5 px-4 text-center">
             {% if player.accuracy_pct > 0 %}
@@ -172,7 +172,7 @@
               <span class="text-on-surface-variant text-sm">—</span>
             {% endif %}
           </td>
-          <td class="py-5 px-4 text-center text-on-surface-variant font-label">{{ "{:,}".format(player.total_segments) }}</td>
+          <td class="py-5 px-4 text-center text-on-surface-variant font-label">{{ "{:,}".format(player.total_segments or 0) }}</td>
         </tr>
         {% else %}
           <tr><td colspan="5" class="py-10 text-center text-on-surface-variant">No friends yet — add some from your profile!</td></tr>
@@ -189,7 +189,6 @@
         <h2 class="font-headline text-3xl font-bold text-on-surface mb-1">Active Challenges</h2>
         <p class="text-on-surface-variant font-label text-sm uppercase tracking-widest">Complete specialized tasks to boost your ranking</p>
       </div>
-      <a class="text-primary hover:brightness-110 transition-colors font-headline font-bold text-sm" href="#">VIEW ALL CHALLENGES</a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {% for quest in quests %}

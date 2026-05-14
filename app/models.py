@@ -22,9 +22,9 @@ class User(UserMixin, db.Model):
     @property
     def accuracy_pct(self):
         """Mean segmentation accuracy as a percentage (0–100)."""
-        if self.total_segments == 0:
+        if not self.total_segments:
             return 0.0
-        return round((self.accuracy_sum / self.total_segments) * 100, 1)
+        return round(((self.accuracy_sum or 0.0) / self.total_segments) * 100, 1)
 
     def __repr__(self):
         return f'<User {self.username}>'
