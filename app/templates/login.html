@@ -2,58 +2,192 @@
 
 {% block title %}Login | MED-SEG ALPHA{% endblock %}
 
+{% block body_class %}bg-surface-container-lowest{% endblock %}
+
 {% block content %}
-<main class="pt-20 pb-24 px-8 max-w-5xl mx-auto space-y-10">
-  <div class="flex flex-col items-center gap-3">
-    <p>Welcome to MED-SEG-ALPHA! Have an account?</p>
-  </div>
+<main class="min-h-[calc(100vh-4rem)] px-6 py-12 md:px-10 lg:px-16">
+  <section class="mx-auto grid max-w-6xl grid-cols-1 overflow-hidden rounded-2xl border border-outline-variant/20 bg-surface shadow-2xl shadow-black/30 lg:grid-cols-[1.05fr_0.95fr]">
+    <div class="relative min-h-[320px] overflow-hidden bg-surface-container-low lg:min-h-[680px]">
+      <div class="absolute inset-0 bg-gradient-to-br from-surface via-surface-container-low to-surface-container-high"></div>
+      <div class="relative flex h-full flex-col justify-between p-8 md:p-10">
+        <a href="{{ url_for('index') }}" class="inline-flex w-fit items-center gap-2 rounded-full border border-primary/30 bg-surface-container-low/80 px-4 py-2 font-label text-xs font-bold uppercase tracking-widest text-primary backdrop-blur">
+          <span class="material-symbols-outlined text-base">biotech</span>
+          MED-SEG ALPHA
+        </a>
 
-  <form id="user" class="flex flex-col items-center gap-6" method="POST" action="{{ url_for('login') }}">
-    {{ login_form.hidden_tag() }}
-    <input id="username" name="email" type="text" placeholder="Username or Email Address"
-           class="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
-    <input id="userpassword" name="password" type="password" placeholder="Password"
-           class="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
-    <p id="login_error" class="text-red-400 text-sm"></p>
-    <span class="flex items-center gap-4">
-      <button class="px-7 py-2 bg-cyan-400 text-gray-950 font-bold rounded hover:brightness-110" type="submit">SIGN IN</button>
-    </span>
-  </form>
+        <div class="max-w-xl space-y-6">
+          <div class="inline-flex items-center gap-3 rounded-full bg-surface-container-high/80 px-4 py-2 backdrop-blur">
+            <span class="h-2 w-2 rounded-full bg-tertiary"></span>
+            <span class="font-label text-xs font-bold uppercase tracking-widest text-tertiary">Research Access Portal</span>
+          </div>
+          <div class="space-y-4">
+            <h1 class="font-headline text-5xl font-bold leading-tight text-on-surface md:text-6xl">
+              Segment faster. Rank higher.
+            </h1>
+            <p class="max-w-lg font-body text-base leading-relaxed text-on-surface-variant">
+              Sign in to continue clinical segmentation quests, track XP, and compare your accuracy with friends.
+            </p>
+          </div>
+        </div>
 
-  <br/>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="rounded-lg border border-primary/20 bg-surface-container-low/80 p-4 backdrop-blur">
+            <p class="font-headline text-2xl font-bold text-primary">CT</p>
+            <p class="mt-1 font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Clinical Data</p>
+          </div>
+          <div class="rounded-lg border border-secondary/20 bg-surface-container-low/80 p-4 backdrop-blur">
+            <p class="font-headline text-2xl font-bold text-secondary">XP</p>
+            <p class="mt-1 font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Live Rank</p>
+          </div>
+          <div class="rounded-lg border border-tertiary/20 bg-surface-container-low/80 p-4 backdrop-blur">
+            <p class="font-headline text-2xl font-bold text-tertiary">AI</p>
+            <p class="mt-1 font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Training</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <div class="flex flex-col items-center gap-3">
-    <p>Don't have an account? Register instead:</p>
-  </div>
+    <div class="flex items-center bg-surface-container-low px-6 py-10 md:px-12">
+      <div class="w-full">
+        <div id="login-section" class="space-y-8">
+          <div class="space-y-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-on-primary">
+              <span class="material-symbols-outlined">login</span>
+            </div>
+            <div>
+              <p class="font-label text-xs font-bold uppercase tracking-widest text-primary">Welcome Back</p>
+              <h2 class="mt-2 font-headline text-4xl font-bold text-on-surface">Sign in</h2>
+              <p class="mt-2 text-sm leading-relaxed text-on-surface-variant">
+                Continue from your latest segmentation assignment.
+              </p>
+            </div>
+          </div>
 
-  <form id="new" class="flex flex-col items-center gap-6" method="POST" action="{{ url_for('login') }}">
-    {{ register_form.hidden_tag() }}
-    <input id="newname" name="email" type="text" placeholder="Email Address"
-           class="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
-    <p id="email_error" class="text-red-400 text-sm"></p>
-    <input id="newpassword" name="password" type="password" placeholder="Password"
-           class="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
-    <p id="password_error" class="text-red-400 text-sm"></p>
-    <span class="flex items-center gap-4">
-      <button class="px-7 py-2 bg-cyan-400 text-gray-950 font-bold rounded hover:brightness-110" type="submit">REGISTER</button>
-    </span>
-  </form>
+          <form id="user" class="space-y-5" method="POST" action="{{ url_for('login') }}">
+            {{ login_form.hidden_tag() }}
+            <input type="hidden" name="action" value="login">
+
+            <label for="username" class="block space-y-2">
+              <span class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">Username or Email</span>
+              <span class="flex items-center gap-3 rounded-lg border border-outline-variant/40 bg-surface-container-high px-4 py-3 text-on-surface transition focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/30">
+                <span class="material-symbols-outlined text-xl text-primary">alternate_email</span>
+                <input id="username" name="email" type="text" placeholder="operator@medseg.dev"
+                  class="w-full border-0 bg-transparent p-0 font-body text-sm text-on-surface placeholder:text-outline focus:ring-0"/>
+              </span>
+            </label>
+
+            <label for="userpassword" class="block space-y-2">
+              <span class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">Password</span>
+              <span class="flex items-center gap-3 rounded-lg border border-outline-variant/40 bg-surface-container-high px-4 py-3 text-on-surface transition focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/30">
+                <span class="material-symbols-outlined text-xl text-primary">lock</span>
+                <input id="userpassword" name="password" type="password" placeholder="Enter password"
+                  class="w-full border-0 bg-transparent p-0 font-body text-sm text-on-surface placeholder:text-outline focus:ring-0"/>
+              </span>
+            </label>
+
+            <p id="login_error" class="min-h-5 text-sm font-semibold text-error"></p>
+
+            <button class="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-headline font-bold text-on-primary transition hover:brightness-110" type="submit">
+              SIGN IN
+              <span class="material-symbols-outlined text-lg">arrow_forward</span>
+            </button>
+          </form>
+
+          <div class="rounded-lg border border-outline-variant/20 bg-surface-container px-4 py-4 text-center">
+            <p class="text-sm text-on-surface-variant">
+              New to the platform?
+              <button id="show-register" type="button" class="font-bold text-primary hover:brightness-110">
+                Create an account
+              </button>
+            </p>
+          </div>
+        </div>
+
+        <div id="register-section" class="hidden space-y-8">
+          <div class="space-y-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-tertiary text-on-tertiary">
+              <span class="material-symbols-outlined">person_add</span>
+            </div>
+            <div>
+              <p class="font-label text-xs font-bold uppercase tracking-widest text-tertiary">Join The Research Phase</p>
+              <h2 class="mt-2 font-headline text-4xl font-bold text-on-surface">Create account</h2>
+              <p class="mt-2 text-sm leading-relaxed text-on-surface-variant">
+                Your username is generated from your email so you can start segmenting immediately.
+              </p>
+            </div>
+          </div>
+
+          <form id="new" class="space-y-5" method="POST" action="{{ url_for('login') }}">
+            {{ register_form.hidden_tag() }}
+            <input type="hidden" name="action" value="register">
+
+            <label for="newname" class="block space-y-2">
+              <span class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">Email Address</span>
+              <span class="flex items-center gap-3 rounded-lg border border-outline-variant/40 bg-surface-container-high px-4 py-3 text-on-surface transition focus-within:border-tertiary focus-within:ring-2 focus-within:ring-tertiary/30">
+                <span class="material-symbols-outlined text-xl text-tertiary">mail</span>
+                <input id="newname" name="email" type="text" placeholder="name@example.com"
+                  class="w-full border-0 bg-transparent p-0 font-body text-sm text-on-surface placeholder:text-outline focus:ring-0"/>
+              </span>
+            </label>
+
+            <label for="newpassword" class="block space-y-2">
+              <span class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">Password</span>
+              <span class="flex items-center gap-3 rounded-lg border border-outline-variant/40 bg-surface-container-high px-4 py-3 text-on-surface transition focus-within:border-tertiary focus-within:ring-2 focus-within:ring-tertiary/30">
+                <span class="material-symbols-outlined text-xl text-tertiary">key</span>
+                <input id="newpassword" name="password" type="password" placeholder="8+ chars, mixed case, number"
+                  class="w-full border-0 bg-transparent p-0 font-body text-sm text-on-surface placeholder:text-outline focus:ring-0"/>
+              </span>
+            </label>
+
+            <div class="rounded-lg border border-outline-variant/20 bg-surface-container px-4 py-3">
+              <p class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Password must include</p>
+              <div class="mt-3 grid grid-cols-1 gap-2 text-xs text-on-surface-variant sm:grid-cols-3">
+                <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span>8 characters</span>
+                <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span>Uppercase</span>
+                <span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span>Number</span>
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <p id="email_error" class="min-h-5 text-sm font-semibold text-error"></p>
+              <p id="password_error" class="min-h-5 text-sm font-semibold text-error"></p>
+            </div>
+
+            <button class="flex w-full items-center justify-center gap-2 rounded-lg bg-tertiary px-6 py-3 font-headline font-bold text-on-tertiary transition hover:brightness-110" type="submit">
+              REGISTER
+              <span class="material-symbols-outlined text-lg">arrow_forward</span>
+            </button>
+          </form>
+
+          <div class="rounded-lg border border-outline-variant/20 bg-surface-container px-4 py-4 text-center">
+            <p class="text-sm text-on-surface-variant">
+              Already have an account?
+              <button id="show-login" type="button" class="font-bold text-primary hover:brightness-110">
+                Sign in
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 {% endblock %}
 
-{% block footer %}
-<footer class="bg-gray-950 border-t border-gray-800 py-10 px-8 mt-20">
-  <div class="flex flex-col md:flex-row justify-between items-center gap-4 max-w-5xl mx-auto">
-    <span class="text-gray-500 font-bold">MED-SEG</span>
-    <div class="flex gap-6">
-      <a class="text-gray-500 hover:text-cyan-400 text-xs uppercase tracking-widest" href="#">Privacy Policy</a>
-      <a class="text-gray-500 hover:text-cyan-400 text-xs uppercase tracking-widest" href="#">Institutional Access</a>
-    </div>
-    <span class="text-gray-500 text-xs uppercase tracking-widest">© 2026 ALL RIGHTS RESERVED.</span>
-  </div>
-</footer>
-{% endblock %}
-
 {% block scripts %}
+<script>
+  const loginSection = document.getElementById("login-section");
+  const registerSection = document.getElementById("register-section");
+
+  document.getElementById("show-register").addEventListener("click", () => {
+    loginSection.classList.add("hidden");
+    registerSection.classList.remove("hidden");
+  });
+
+  document.getElementById("show-login").addEventListener("click", () => {
+    registerSection.classList.add("hidden");
+    loginSection.classList.remove("hidden");
+  });
+</script>
 <script src="{{ url_for('static', filename='js/login.js') }}"></script>
 {% endblock %}
