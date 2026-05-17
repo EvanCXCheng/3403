@@ -35,7 +35,10 @@ def test_leaderboard_redirects_unauthenticated_users(client):
 
 # ── Registration ──────────────────────────────────────────────────────────────
 
-def test_register_with_valid_credentials_succeeds(client):
+def test_register_with_valid_credentials_succeeds(client, db):
+    if User.query.filter_by(email='fresh@example.com').first():
+        db.session.delete(User.query.filter_by(email='fresh@example.com').first())
+        db.session.commit()
     _, data = post_login(client, 'register', 'fresh@example.com', 'ValidPass1!')
     assert data['ok'] is True
     assert 'redirect' in data
@@ -67,15 +70,16 @@ def test_login_with_wrong_password_fails(client):
 
 def test_leaderboard_no_crash_for_new_user_with_zero_xp(client, db):
     """Regression: new users with xp=0 previously caused TypeError (None > 3)."""
-    db.session.add(User(
-        username='zeroxp',
-        email='zeroxp@example.com',
-        password_hash=generate_password_hash('ZeroXP123!'),
-        xp=0,
-        total_segments=0,
-        accuracy_sum=0.0,
-    ))
-    db.session.commit()
+    if not User.query.filter_by(email='zeroxp@example.com').first():
+        db.session.add(User(
+            username='zeroxp',
+            email='zeroxp@example.com',
+            password_hash=generate_password_hash('ZeroXP123!'),
+            xp=0,
+            total_segments=0,
+            accuracy_sum=0.0,
+        ))
+        db.session.commit()
 
     # Log in as the zero-xp user (ignore JSON response — we just need the session)
     client.post('/login', data={
