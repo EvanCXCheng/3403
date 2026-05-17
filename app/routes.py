@@ -290,10 +290,14 @@ def view_profile(user_id):
             connected_ids.add(record.requester_id)
             connected_ids.add(record.receiver_id)
 
-        # Users current user can still add
-        suggested_users = User.query.filter(
-            ~User.id.in_(connected_ids)
-        ).all()
+        # Search users by username
+        user_search = request.args.get('user_search', '').strip()
+
+        if user_search:
+            suggested_users = User.query.filter(
+                User.username.ilike(f"%{user_search}%"),
+                ~User.id.in_(connected_ids)
+            ).all()
 
     # Current user's worldwide XP rank
     current_user_rank_global = User.query.filter(User.xp > profile_user.xp).count() + 1 if profile_user.xp else None
@@ -307,7 +311,8 @@ def view_profile(user_id):
         sent_requests=sent_requests,
         suggested_users=suggested_users,
         current_user_rank_global=current_user_rank_global,
-        clickable_profile_ids=clickable_profile_ids
+        clickable_profile_ids=clickable_profile_ids,
+        user_search=user_search
     )
 
 @app.route('/friend-request/accept/<int:friendship_id>', methods=['POST'])
