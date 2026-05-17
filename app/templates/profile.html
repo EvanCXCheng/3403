@@ -169,7 +169,7 @@
               </div>
             </div>
           {% else %}
-            <p class="text-sm text-on-surface-variant">No pending requests.</p>
+            <p class="text-sm text-on-surface-variant">No incoming friend requests.</p>
           {% endfor %}
 
       <!-- Outgoing requests -->
@@ -185,7 +185,7 @@
       {% endfor %}
 
       {% if not pending_requests and not sent_requests %}
-        <p class="text-sm text-on-surface-variant">No pending requests.</p>
+        <p class="text-sm text-on-surface-variant">No outgoing friend requests.</p>
       {% endif %}
         </div>
       </div>
