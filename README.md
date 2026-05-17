@@ -43,3 +43,12 @@ python Scripts/seed_liver.py
 flask run  
 
 ## Run Tests
+
+### Selenium test only:
+pytest tests/selenium/ -v
+
+### Unit test only:
+pytest tests/ --ignore=tests/selenium -v
+
+### All tests:
+pytest tests/ -v
