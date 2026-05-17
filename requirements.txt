@@ -6,3 +6,6 @@ itsdangerous==2.2.0
 Jinja2==3.1.6
 MarkupSafe==3.0.3
 Werkzeug==3.1.8
+numpy==2.3.0
+pydicom==2.4.2
+pillow==10.4.0
